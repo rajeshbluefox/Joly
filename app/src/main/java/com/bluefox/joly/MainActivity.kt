@@ -15,7 +15,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var callThemesViewModel: CallThemesViewModel
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -25,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         getThemes()
         observers()
+
     }
 
     private fun observers() {
@@ -37,7 +37,6 @@ class MainActivity : AppCompatActivity() {
                 Log.e("Test","No Response")
             }
         }
-
     }
 
     private fun getThemes() {
