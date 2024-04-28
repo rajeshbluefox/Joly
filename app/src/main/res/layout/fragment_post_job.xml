@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_height="match_parent"
+android:padding="16dp">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/dp_12"
+    android:paddingBottom="@dimen/dp_12"
+    tools:context=".clientModule.postJob.PostJobFragment">
+
+    <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_baseline_account_circle_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvJobName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="48dp"
+        android:text="Job Name"
+        app:layout_constraintStart_toStartOf="@+id/etJobName"
+        app:layout_constraintTop_toBottomOf="@+id/profilePic" />
+
+    <EditText
+        android:id="@+id/etJobName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_bg_1"
+        android:hint="Job Name"
+        android:layout_marginTop="4dp"
+        android:imeOptions="actionGo"
+        android:lines="1"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvJobName" />
+
+    <TextView
+        android:id="@+id/tvJobDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Job Description"
+        app:layout_constraintStart_toStartOf="@+id/etJobDescription"
+        app:layout_constraintTop_toBottomOf="@+id/etJobName" />
+
+    <EditText
+        android:id="@+id/etJobDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/et_bg_1"
+        android:hint="JobDescription"
+        android:imeOptions="actionGo"
+        android:lines="1"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@+id/etJobName"
+        app:layout_constraintStart_toStartOf="@+id/etJobName"
+        app:layout_constraintTop_toBottomOf="@+id/tvJobDescription" />
+
+    <TextView
+        android:id="@+id/tvEligibility"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Eligibility"
+        app:layout_constraintStart_toStartOf="@+id/etEligibility"
+        app:layout_constraintTop_toBottomOf="@+id/etJobDescription" />
+
+    <EditText
+        android:id="@+id/etEligibility"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/et_bg_1"
+        android:hint="Eligibility"
+        android:imeOptions="actionGo"
+        android:inputType="number"
+        android:lines="1"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@+id/etJobDescription"
+        app:layout_constraintStart_toStartOf="@+id/etJobDescription"
+        app:layout_constraintTop_toBottomOf="@+id/tvEligibility" />
+
+    <TextView
+        android:id="@+id/tvDeadLineToApply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="DeadLine to Apply"
+        app:layout_constraintStart_toStartOf="@+id/etDeadLineToApply"
+        app:layout_constraintTop_toBottomOf="@+id/etEligibility" />
+
+    <EditText
+        android:id="@+id/etDeadLineToApply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_bg_1"
+        android:layout_marginTop="4dp"
+        android:hint="DeadLine to Apply"
+        android:imeOptions="actionGo"
+        android:lines="1"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@+id/etEligibility"
+        app:layout_constraintStart_toStartOf="@+id/etEligibility"
+        app:layout_constraintTop_toBottomOf="@+id/tvDeadLineToApply" />
+
+    <TextView
+        android:id="@+id/tvSkillsRequired"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="8dp"
+        android:text="Skills Required"
+        app:layout_constraintStart_toStartOf="@+id/etSkillsRequired"
+        app:layout_constraintTop_toBottomOf="@+id/etDeadLineToApply" />
+
+    <EditText
+        android:id="@+id/etSkillsRequired"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/et_bg_1"
+        android:layout_marginTop="2dp"
+        android:hint="Skills Required"
+        android:imeOptions="actionGo"
+        android:lines="1"
+        android:maxLines="1"
+        app:layout_constraintEnd_toEndOf="@+id/etDeadLineToApply"
+        app:layout_constraintStart_toStartOf="@+id/etDeadLineToApply"
+        app:layout_constraintTop_toBottomOf="@+id/tvSkillsRequired"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btSubmit"
+        android:layout_width="@dimen/dp_250"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/button_two"
+        android:text="Post"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_18"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSkillsRequired" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
