@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardCallAnnouncer"
+<layout>
+
+    <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardJobItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_4"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/dp_6"
         app:cardBackgroundColor="#e7f1f8"
         app:cardCornerRadius="@dimen/dp_16"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/tvJobTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -49,9 +47,9 @@
                 android:text="Apr 5"
                 android:textColor="#06286B"
                 android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toBottomOf="@id/tvJobTitle"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView"
-                app:layout_constraintBottom_toBottomOf="@id/textView"/>
+                app:layout_constraintTop_toTopOf="@+id/tvJobTitle" />
 
             <TextView
                 android:id="@+id/textView1"
@@ -62,8 +60,8 @@
                 android:textColor="#06286B"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/textView"
-                app:layout_constraintTop_toBottomOf="@id/textView" />
+                app:layout_constraintStart_toStartOf="@+id/tvJobTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvJobTitle" />
 
             <TextView
                 android:id="@+id/textView2"
@@ -83,4 +81,4 @@
     </androidx.cardview.widget.CardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

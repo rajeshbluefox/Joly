@@ -17,27 +17,43 @@
         android:theme="@style/Theme.Joly"
         tools:targetApi="31">
         <activity
-            android:name=".clientModule.HomeActivity"
+            android:name=".clientModule.viewJob.ViewJobsActivity"
             android:exported="false" />
         <activity
-            android:name=".clientModule.RegisterActivity"
+            android:name=".clientModule.viewJob.ViewJobDetailsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".clientModule.HomeActivity"
             android:exported="true" >
+
+        </activity>
+        <activity
+            android:name=".clientModule.RegisterActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".clientModule.LoginActivity"
+            android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
-
         </activity>
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
 
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
+<!--             <intent-filter> -->
+<!--             <action android:name="android.intent.action.MAIN" /> -->
+<!--                 -->
+<!--             <category android:name="android.intent.category.LAUNCHER" /> -->
+<!--             </intent-filter> -->
         </activity>
     </application>
 

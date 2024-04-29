@@ -1,12 +1,29 @@
 package com.bluefox.joly.clientModule
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.bluefox.joly.R
+import androidx.appcompat.app.AppCompatActivity
+import com.bluefox.joly.databinding.ActivityLoginBinding
+import com.bluefox.joly.zCommonFunctions.CallIntent
 
 class LoginActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityLoginBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        onClickListeners()
+    }
+
+    private fun onClickListeners() {
+        binding.showRegister.setOnClickListener {
+            CallIntent.gotoRegister(this,true,this)
+        }
+
+        binding.btLogin.setOnClickListener {
+            CallIntent.gotoHomeActivity(this,true,this)
+        }
     }
 }

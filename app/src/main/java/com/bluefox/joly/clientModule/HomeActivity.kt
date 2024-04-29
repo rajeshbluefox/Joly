@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.postJob.PostJobFragment
+import com.bluefox.joly.clientModule.profile.ProfileFragment
+import com.bluefox.joly.clientModule.viewJob.ViewJobsFragment
 import com.bluefox.joly.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -11,8 +13,10 @@ class HomeActivity : AppCompatActivity() {
     private lateinit var binding : ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
+        fillViewJob()
         onClickListeners()
     }
 
@@ -33,7 +37,7 @@ class HomeActivity : AppCompatActivity() {
     private fun fillViewJob() {
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.containerFragment, PostJobFragment())
+            .replace(R.id.containerFragment, ViewJobsFragment())
             .commit()
     }
 
@@ -47,7 +51,7 @@ class HomeActivity : AppCompatActivity() {
     private fun fillProfile() {
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.containerFragment, PostJobFragment())
+            .replace(R.id.containerFragment, ProfileFragment())
             .commit()
     }
 
