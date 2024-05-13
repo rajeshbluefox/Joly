@@ -11,7 +11,7 @@
     android:layout_marginHorizontal="@dimen/dp_4"
     android:layout_marginTop="@dimen/dp_6"
     app:cardBackgroundColor="#e7f1f8"
-    app:cardCornerRadius="@dimen/dp_16"
+    app:cardCornerRadius="@dimen/dp_12"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent">
@@ -25,7 +25,7 @@
             android:id="@+id/imageView2"
             android:layout_width="@dimen/dp_48"
             android:layout_height="@dimen/dp_48"
-            android:src="@drawable/baseline_account_box_24"
+            android:src="@drawable/ic_baseline_account_circle_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -33,7 +33,7 @@
             android:id="@+id/tvCompanyName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="8dp"
             android:text="Company Name"
             android:textColor="#06286B"
             android:textSize="@dimen/sp_18"
@@ -41,52 +41,59 @@
             app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="@+id/imageView2" />
 
-        <TextView
-            android:id="@+id/btView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="48dp"
-            android:background="@drawable/bg_tv_spd"
-            android:text="View"
-            android:textColor="#FFFFFF"
-            android:textSize="@dimen/sp_14"
+        <ImageView
+            android:layout_width="@dimen/dp_24"
+            android:layout_height="@dimen/dp_24"
+            android:src="@drawable/baseline_arrow_forward_ios_24"
             app:layout_constraintBottom_toBottomOf="@+id/tvExpectedCharges"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvCompanyName" />
 
-        <ImageView
-            android:id="@+id/icLocation"
-            android:layout_width="18dp"
-            android:layout_height="18dp"
-            android:layout_marginTop="4dp"
-            android:src="@drawable/ic_select_location"
-            app:layout_constraintStart_toStartOf="@+id/tvCompanyName"
-            app:layout_constraintTop_toBottomOf="@+id/tvCompanyName" />
+<!--        <TextView-->
+<!--            android:id="@+id/btView"-->
+<!--            android:paddingVertical="@dimen/dp_4"-->
+<!--            android:paddingHorizontal="@dimen/dp_10"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginEnd="12dp"-->
+<!--            android:background="@drawable/bg_tv_spd"-->
+<!--            android:text="View"-->
+<!--            android:textColor="#FFFFFF"-->
+<!--            android:textSize="@dimen/sp_14"-->
+<!--            app:layout_constraintBottom_toBottomOf="@+id/tvExpectedCharges"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/tvCompanyName" />-->
+
+<!--        <ImageView-->
+<!--            android:id="@+id/icLocation"-->
+<!--            android:layout_width="18dp"-->
+<!--            android:layout_height="18dp"-->
+<!--            android:layout_marginTop="4dp"-->
+<!--            android:src="@drawable/ic_select_location"-->
+<!--            app:layout_constraintStart_toStartOf="@+id/tvCompanyName"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/tvCompanyName" />-->
 
         <TextView
             android:id="@+id/tvLocationName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="Location Name"
+            android:text="Hyderabad Telangana"
             android:textColor="#06286B"
             android:textSize="@dimen/sp_14"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/icLocation"
-            app:layout_constraintStart_toEndOf="@+id/icLocation"
-            app:layout_constraintTop_toTopOf="@+id/icLocation" />
+            app:layout_constraintStart_toStartOf="@+id/tvCompanyName"
+            app:layout_constraintTop_toBottomOf="@+id/tvCompanyName" />
 
         <TextView
             android:id="@+id/tvExpectedCharges"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="Expected charges"
-            android:textColor="#06286B"
+            android:text="Rs.1000 - 2000"
+            android:textColor="#F8020A"
             android:textSize="@dimen/sp_14"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@+id/icLocation"
-            app:layout_constraintTop_toBottomOf="@id/icLocation" />
+            app:layout_constraintStart_toStartOf="@+id/tvLocationName"
+            app:layout_constraintTop_toBottomOf="@id/tvLocationName" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
