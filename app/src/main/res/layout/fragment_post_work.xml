@@ -4,46 +4,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".clientModule.postJob.PostWorkFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/appBarLt"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
-            android:background="#3F51B5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageView
-                android:id="@+id/ivBack"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_12"
-                android:src="@drawable/baseline_arrow_back_36"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvAppBarTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_16"
-                android:text="Post Work"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_22"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -53,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLt"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -126,6 +91,7 @@
                     android:imeOptions="actionGo"
                     android:lines="1"
                     android:maxLines="1"
+                    android:inputType="text"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/tvSelectArea"
                     app:layout_constraintTop_toBottomOf="@+id/tvSelectArea" />
@@ -170,6 +136,7 @@
                     android:layout_marginTop="6dp"
                     android:background="@drawable/et_bg_1"
                     android:hint="Wage Offered"
+                    android:inputType="number"
                     android:imeOptions="actionGo"
                     android:lines="1"
                     android:maxLines="1"

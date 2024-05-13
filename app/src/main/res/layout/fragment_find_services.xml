@@ -9,29 +9,6 @@
     android:layout_height="match_parent"
     tools:context=".clientModule.viewServices.FindServicesFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/appBarLt"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_48"
-        android:background="#3F51B5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tvAppBarTitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Service Providers"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_22"
-            android:layout_marginStart="@dimen/dp_16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvServiceProviders"
@@ -41,7 +18,7 @@
         android:layout_marginTop="@dimen/dp_12"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appBarLt"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
