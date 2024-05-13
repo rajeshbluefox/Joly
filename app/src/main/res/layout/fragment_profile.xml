@@ -9,30 +9,6 @@
         android:layout_height="match_parent"
         tools:context=".clientModule.profile.ProfileFragment">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/appBarLt"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
-            android:background="#3F51B5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/tvAppBarTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/dp_16"
-                android:text="Profile"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_22"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -42,7 +18,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLt"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -92,6 +68,16 @@
                             app:layout_constraintBottom_toBottomOf="@+id/profilePic"
                             app:layout_constraintStart_toStartOf="@+id/tvNumber"
                             app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
+
+                        <ImageView
+                            android:id="@+id/ivEdit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/baseline_edit_36"
+                            android:layout_marginEnd="@dimen/dp_12"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"/>
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
