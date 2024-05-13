@@ -6,6 +6,7 @@ import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.postJob.PostJobFragment
 import com.bluefox.joly.clientModule.profile.ProfileFragment
 import com.bluefox.joly.clientModule.viewJob.ViewJobsFragment
+import com.bluefox.joly.clientModule.viewServices.FindServicesFragment
 import com.bluefox.joly.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -16,7 +17,8 @@ class HomeActivity : AppCompatActivity() {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        fillViewJob()
+//        fillViewJob()
+        fillViewServices()
         onClickListeners()
     }
 
@@ -38,6 +40,13 @@ class HomeActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, ViewJobsFragment())
+            .commit()
+    }
+
+    private fun fillViewServices() {
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.containerFragment, FindServicesFragment())
             .commit()
     }
 
