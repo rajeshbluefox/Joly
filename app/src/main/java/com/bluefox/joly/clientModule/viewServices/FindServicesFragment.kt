@@ -41,7 +41,7 @@ class FindServicesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initServiceProviderDetails()
+        initServiceProviderDetailsRV()
     }
 
     private fun fillDummyList()
@@ -63,15 +63,11 @@ class FindServicesFragment : Fragment() {
         serviceProviderList.add(item3)
         serviceProviderList.add(item4)
 
-
-
-
-
     }
 
     private var serviceProviderList = ArrayList<ServiceProviderDetailsData>()
 
-    private fun initServiceProviderDetails() {
+    private fun initServiceProviderDetailsRV() {
 
         fillDummyList()
         val serviceProviderDetailsAdapter = ServiceProviderDetailsAdapter(
