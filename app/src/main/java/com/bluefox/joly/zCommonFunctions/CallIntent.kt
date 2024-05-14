@@ -7,6 +7,7 @@ import com.bluefox.joly.clientModule.HomeActivity
 import com.bluefox.joly.clientModule.LoginActivity
 import com.bluefox.joly.clientModule.RegisterActivity
 import com.bluefox.joly.clientModule.viewJob.ViewJobDetailsActivity
+import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
 
 object CallIntent {
 
@@ -30,6 +31,13 @@ object CallIntent {
 
     fun gotoHomeActivity(context: Context, killMe: Boolean, activity: Activity) {
         val intent = Intent(context, HomeActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoViewServiceProviderActivity(context: Context, killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, ViewServiceProviderDetailsActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }

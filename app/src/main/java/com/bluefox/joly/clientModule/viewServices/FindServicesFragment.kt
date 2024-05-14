@@ -13,6 +13,7 @@ import com.bluefox.joly.clientModule.viewServices.modelClass.ServiceProviderDeta
 import com.bluefox.joly.clientModule.viewServices.supportFuncation.ServiceProviderDetailsAdapter
 import com.bluefox.joly.databinding.FragmentFindServicesBinding
 import com.bluefox.joly.databinding.FragmentPostWorkBinding
+import com.bluefox.joly.zCommonFunctions.CallIntent
 
 
 class FindServicesFragment : Fragment() {
@@ -91,6 +92,7 @@ class FindServicesFragment : Fragment() {
 
     private fun onServiceProviderClick()
     {
+        CallIntent.gotoViewServiceProviderActivity(requireContext(),false,requireActivity())
 
     }
 

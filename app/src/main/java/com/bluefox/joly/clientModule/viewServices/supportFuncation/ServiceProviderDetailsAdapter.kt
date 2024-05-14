@@ -37,7 +37,11 @@ class ServiceProviderDetailsAdapter(
         val item= serviceProviderList.get(position)
         holder.binding.tvCompanyName.text=item.companyName
 
-        onServiceClicked.invoke()
+        holder.binding.cardServiceProviderDetails.setOnClickListener {
+            onServiceClicked.invoke()
+
+        }
+
 
     }
 

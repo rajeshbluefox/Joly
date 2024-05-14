@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Joly"
         tools:targetApi="31">
         <activity
+            android:name=".clientModule.viewJob.ViewServiceProviderDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".clientModule.viewJob.ViewJobsActivity"
             android:exported="false" />
         <activity
@@ -42,7 +45,6 @@
         <activity
             android:name=".clientModule.LoginActivity"
             android:exported="true">
-
 
 
         </activity>
