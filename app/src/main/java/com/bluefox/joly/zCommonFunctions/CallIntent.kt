@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import com.bluefox.joly.clientModule.HomeActivity
-import com.bluefox.joly.clientModule.LoginActivity
-import com.bluefox.joly.clientModule.RegisterActivity
+import com.bluefox.joly.clientModule.login.LoginActivity
+import com.bluefox.joly.clientModule.login.RegisterActivity
 import com.bluefox.joly.clientModule.viewJob.ViewJobDetailsActivity
 import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
 

@@ -20,7 +20,7 @@ import javax.inject.Singleton
 class AppModule {
 
     @Provides
-    fun provideBaseUrl() = "https://gundasupermarket.com/Caller_Locator_App/"
+    fun provideBaseUrl() = "http://joly.bluefoxsystems.biz/Joly/"
 
 
     @Provides

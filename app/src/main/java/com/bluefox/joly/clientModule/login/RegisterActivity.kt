@@ -1,4 +1,4 @@
-package com.bluefox.joly.clientModule
+package com.bluefox.joly.clientModule.login
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

@@ -91,23 +91,6 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toBottomOf="@+id/etUserName" />
 
-            <EditText
-                android:id="@+id/etCPassword"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_50"
-                android:layout_marginTop="6dp"
-                android:background="@drawable/et_bg_1"
-                android:drawableStart="@drawable/ic_phone_small"
-                android:drawablePadding="10dp"
-                android:hint="Confirm Password"
-                android:inputType="number"
-                android:maxLines="1"
-                android:textColor="@color/black_to_white"
-                android:visibility="gone"
-                app:layout_constraintEnd_toStartOf="@+id/guideline2"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
 
             <ProgressBar
@@ -119,7 +102,7 @@
                 android:progress="0"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/etCPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
             <TextView
                 android:id="@+id/btLogin"
@@ -137,7 +120,7 @@
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/guideline2"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/etCPassword" />
+                app:layout_constraintTop_toBottomOf="@+id/etPassword" />
 
 
             <LinearLayout
