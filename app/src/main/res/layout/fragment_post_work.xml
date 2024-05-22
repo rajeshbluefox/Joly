@@ -11,6 +11,8 @@
 
 
         <ScrollView
+            android:visibility="visible"
+            android:id="@+id/contentLt"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scrollbars="none"
@@ -28,16 +30,44 @@
                 android:padding="@dimen/dp_12">
 
                 <TextView
+                    android:id="@+id/tvWorkName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_16"
+                    android:text="Work Name"
+                    android:textColor="@color/black_to_white"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <EditText
+                    android:id="@+id/etWorkName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:background="@drawable/et_bg_1"
+                    android:hint="Work Name"
+                    android:imeOptions="actionGo"
+                    android:lines="1"
+                    android:maxLines="1"
+                    android:inputType="text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/tvWorkName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvWorkName" />
+
+
+                <TextView
                     android:id="@+id/tvSelCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="@dimen/dp_8"
                     android:text="Select Category"
                     android:textColor="@color/black_to_white"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@id/etWorkName" />
 
                 <Spinner
                     android:id="@+id/spSelectCategory"
@@ -224,6 +254,19 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:lottie_rawRes="@raw/anim_loading"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

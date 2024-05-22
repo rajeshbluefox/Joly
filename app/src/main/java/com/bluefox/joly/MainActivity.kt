@@ -2,10 +2,15 @@ package com.bluefox.joly
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.databinding.ActivityMainBinding
 import com.bluefox.joly.dummy.CallThemesViewModel
+import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,9 +27,25 @@ class MainActivity : AppCompatActivity() {
 
         callThemesViewModel = ViewModelProvider(this)[CallThemesViewModel::class.java]
 
-        getThemes()
-        observers()
 
+        getUserLoginStatus()
+
+//        getThemes()
+//        observers()
+
+    }
+
+    private fun getUserLoginStatus()
+    {
+        Handler(Looper.getMainLooper()).postDelayed({
+               if(UserDetails.getLoginStatus(this))
+               {
+                   SSProfileData.openFrom=0
+                   CallIntent.gotoHomeActivity(this,true,this)
+               }else{
+                   CallIntent.gotoLogin(this,true,this)
+               }
+        }, 2000)
     }
 
     private fun observers() {

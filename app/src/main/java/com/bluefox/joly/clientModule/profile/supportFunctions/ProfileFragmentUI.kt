@@ -6,8 +6,10 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
+import com.bumptech.glide.Glide
 
 
 class ProfileFragmentUI(
@@ -17,8 +19,25 @@ class ProfileFragmentUI(
 
     init {
 
+        setData()
         stopEditing()
         onClickListeners()
+    }
+
+    private fun setData()
+    {
+        binding.tvMobileNumber.text=SSProfileData.mLoginData.phoneNumber
+        binding.etName.setText(SSProfileData.mLoginData.name)
+        binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
+        binding.etDOB.setText(SSProfileData.mLoginData.age)
+        binding.etGender.setText(SSProfileData.mLoginData.gender)
+        binding.etPinCode.setText(SSProfileData.mLoginData.pincode)
+        binding.etAddress.setText(SSProfileData.mLoginData.address)
+
+//        Glide.with(context)
+//            .load(SSProfileData.mLoginData.photo)
+//            .fitCenter()
+//            .into(binding.profilePic)
     }
 
     private fun onClickListeners() {
