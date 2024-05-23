@@ -62,7 +62,8 @@ class PostWorkFragment : Fragment() {
             ssViewModel,
             ::categoriesListResponse,
             ::jobsListResponse,
-            ::onWorkSubmitted
+            ::onWorkSubmitted,
+            onGetWorksResponse = {}
         )
 
         callApis()

@@ -4,6 +4,7 @@ import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
+import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -35,7 +36,7 @@ interface ApiInterface {
 
 
     @Multipart
-    @POST("Products_insert.php")
+    @POST("service_seeker_inser.php")
     suspend fun postSSWork(
         @Part("phone_number") phoneNumber: RequestBody,
         @Part("WorkName") WorkName: RequestBody,
@@ -46,4 +47,10 @@ interface ApiInterface {
     ): PostWorkResponse
 
 //    @Part workImages: MultipartBody.Part
+
+    @FormUrlEncoded
+    @POST("service_seeker_get.php")
+    suspend fun getSSWork(
+        @Field("phone_number") phoneNumber: String
+    ): GetWorkResponse
 }

@@ -6,17 +6,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.postJob.apiFunctions.SSViewModel
+import com.bluefox.joly.clientModule.postJob.apiFunctions.SSapiFunctions
+import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobsData
 import com.bluefox.joly.clientModule.viewJob.supportFunctions.JobsAdapter
+import com.bluefox.joly.clientModule.viewJob.supportFunctions.PostWorkUI
 import com.bluefox.joly.databinding.FragmentViewJobsBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zSharedPreference.UserDetails
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class ViewJobsFragment : Fragment() {
 
     private lateinit var binding: FragmentViewJobsBinding
+
+    private lateinit var sSapiFunctions: SSapiFunctions
+    private lateinit var ssViewModel: SSViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +48,30 @@ class ViewJobsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initJobsRv()
+        initViews()
+    }
+
+    private fun initViews() {
+        ssViewModel = ViewModelProvider(this)[SSViewModel::class.java]
+        sSapiFunctions = SSapiFunctions(
+            requireContext(),
+            viewLifecycleOwner,
+            ssViewModel,
+            onCategoriesResponse = {},
+            onJobsResponse = {},
+            onWorkSubmitted = {},
+            ::onGetWorksResponse
+        )
+
+        getSSWorks()
+    }
+
+    fun getSSWorks() {
+        sSapiFunctions.getSSWorks(UserDetails.getUserMobileNo(requireContext()))
+    }
+
+    fun onGetWorksResponse(worksList: List<PostWorkData>) {
+        initJobsRv(worksList)
     }
 
     private fun fillDummyList() {
@@ -83,10 +117,10 @@ class ViewJobsFragment : Fragment() {
 
     private var jobsList = ArrayList<JobsData>()
 
-    private fun initJobsRv() {
-        fillDummyList()
+    private fun initJobsRv(worksList: List<PostWorkData>) {
+//        fillDummyList()
 
-        val jobsAdapter = JobsAdapter(requireContext(), jobsList, ::onJobClicked)
+        val jobsAdapter = JobsAdapter(requireContext(), worksList, ::onJobClicked)
         binding.rvJobs.apply {
             layoutManager = LinearLayoutManager(
                 context,
@@ -97,7 +131,7 @@ class ViewJobsFragment : Fragment() {
 
     }
 
-    private fun onJobClicked(jobItem: JobsData) {
+    private fun onJobClicked(jobItem: PostWorkData) {
         CallIntent.gotoViewJobDetails(requireContext(), false, requireActivity())
     }
 

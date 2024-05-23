@@ -11,9 +11,9 @@ data class PostWorkData(
     @SerializedName("CategoryId")
     var categoryId: Int? = null,
     @SerializedName("JobId")
-    var jobId: String? = null,
+    var jobId: Int? = null,
     @SerializedName("AreaId")
-    val areaId: String? = null,
+    var areaId: Int? = null,
     @SerializedName("WageOffered")
-    val wageOffered: String? = null
+    var wageOffered: String? = null
 )

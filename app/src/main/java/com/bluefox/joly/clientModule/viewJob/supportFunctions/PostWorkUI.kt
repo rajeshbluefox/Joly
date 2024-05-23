@@ -12,12 +12,14 @@ import com.bluefox.joly.clientModule.postJob.modalClass.JobItem
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.databinding.FragmentPostWorkBinding
+import com.bluefox.joly.zSharedPreference.UserDetails
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
+import kotlin.time.Duration.Companion.milliseconds
 
 class PostWorkUI(
     context: Context,
     binding: FragmentPostWorkBinding,
-    private val onWorkSubmitClicked: (postWorkData:PostWorkData) -> Unit,
+    private val onWorkSubmitClicked: (postWorkData: PostWorkData) -> Unit,
 ) {
     private val mBinding: FragmentPostWorkBinding
     private val mContext: Context
@@ -29,40 +31,69 @@ class PostWorkUI(
         onClickListeners()
     }
 
-    fun showPB()
-    {
-        mBinding.progressBar.visibility=View.VISIBLE
-        mBinding.contentLt.visibility=View.GONE
+    fun showPB() {
+        mBinding.progressBar.visibility = View.VISIBLE
+        mBinding.contentLt.visibility = View.GONE
     }
 
-    fun hidePB()
-    {
-        mBinding.progressBar.visibility=View.GONE
-        mBinding.contentLt.visibility=View.VISIBLE
+    fun hidePB() {
+        mBinding.progressBar.visibility = View.GONE
+        mBinding.contentLt.visibility = View.VISIBLE
     }
 
     private fun onClickListeners() {
 
+        mBinding.btSubmit.setOnClickListener {
+            getDetails()
+        }
 
     }
 
-    fun getDetails()
-    {
-        val nWorkName = getValue(mBinding.etWorkName, "Work Name")
-        val nArea = getValue(mBinding.etSelectArea, "Area")
-        val nWageOffered = getValue(mBinding.etWageOffered, "Wage")
+    private fun getDetails() {
+        val nWorkName = getValue(mBinding.etWorkName)
+        val nArea = getValue(mBinding.etSelectArea)
+        val nWageOffered = getValue(mBinding.etWageOffered)
+
+        if (nWorkName.isEmpty()) {
+            UtilFunctions.showToast(mContext, "Enter WorkName")
+            return
+        }
+
+        if (SSSelectedData.categoryItem.categoryID == "-1") {
+            UtilFunctions.showToast(mContext, "Select Category")
+            return
+        }
+
+        if (SSSelectedData.jobItem.jobId == "-1") {
+            UtilFunctions.showToast(mContext, "Select Job")
+            return
+        }
+
+        if (nArea.isEmpty()) {
+            UtilFunctions.showToast(mContext, "Enter Area")
+            return
+        }
+
+        if (nWageOffered.isEmpty()) {
+            UtilFunctions.showToast(mContext, "Enter Wage Offered")
+            return
+        }
+
+        val postWorkData = PostWorkData()
+        postWorkData.workName = nWorkName
+        postWorkData.categoryId = SSSelectedData.categoryItem.categoryID!!.toInt()
+        postWorkData.jobId = SSSelectedData.jobItem.jobId!!.toInt()
+        postWorkData.areaId = nArea.toInt()
+        postWorkData.wageOffered = nWageOffered
+        postWorkData.phoneNumber=UserDetails.getUserMobileNo(mContext)
+
+        onWorkSubmitClicked.invoke(postWorkData)
 
     }
 
     private var isValidationSuccessfull = true
-    fun getValue(view: EditText, editTextName: String): String {
+    fun getValue(view: EditText): String {
         val nValue = view.text.toString()
-
-        if (nValue.isEmpty()) {
-            isValidationSuccessfull = false
-            UtilFunctions.showToast(mContext, "$editTextName is Missing")
-        }
-
         return nValue
     }
 
@@ -104,6 +135,7 @@ class PostWorkUI(
                 }
             }
     }
+
     fun initJobsSpinner(
         jobList: List<JobItem>
     ) {

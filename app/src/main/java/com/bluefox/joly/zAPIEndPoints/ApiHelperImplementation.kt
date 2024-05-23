@@ -6,6 +6,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
+import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
@@ -51,6 +52,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                 postWorkData.wageOffered.toString()
             )
         )
+    }
+
+    override suspend fun getSSWorks(mobileNo: String): GetWorkResponse {
+        return apiService.getSSWork(mobileNo)
     }
 
 

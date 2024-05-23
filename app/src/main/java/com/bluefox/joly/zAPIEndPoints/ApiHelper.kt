@@ -6,6 +6,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
+import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
 
 
@@ -20,5 +21,7 @@ interface ApiHelper {
     suspend fun getJobs(): GetJobsResponse
 
     suspend fun postWorkData(postWorkData: PostWorkData): PostWorkResponse
+
+    suspend fun getSSWorks(mobileNo: String): GetWorkResponse
 
 }

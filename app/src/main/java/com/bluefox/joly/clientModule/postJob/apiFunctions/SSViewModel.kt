@@ -8,6 +8,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
+import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -70,5 +71,23 @@ class SSViewModel @Inject constructor(
 
     fun getPostWorkResponse(): LiveData<PostWorkResponse> {
         return postWorkResponse
+    }
+
+    private var getWorkResponse = MutableLiveData<GetWorkResponse>()
+
+    fun getSSWork(mobileNo: String) {
+        viewModelScope.launch {
+            getWorkResponse.postValue(
+                ssRepository.getSSWorks(mobileNo)
+            )
+        }
+    }
+
+    fun resetGetSSWorkResponse() {
+        getWorkResponse = MutableLiveData<GetWorkResponse>()
+    }
+
+    fun getSSWorkResponse(): LiveData<GetWorkResponse> {
+        return getWorkResponse
     }
 }

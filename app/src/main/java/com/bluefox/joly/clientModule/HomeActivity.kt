@@ -11,6 +11,7 @@ import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.supportFunctions.LoginUI
 import com.bluefox.joly.clientModule.postJob.PostWorkFragment
 import com.bluefox.joly.clientModule.profile.ProfileFragment
+import com.bluefox.joly.clientModule.viewJob.ViewJobsFragment
 import com.bluefox.joly.clientModule.viewServices.FindServicesFragment
 import com.bluefox.joly.databinding.ActivityHomeBinding
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
@@ -79,7 +80,7 @@ class HomeActivity : AppCompatActivity() {
         binding.tvAppBarTitle.text="Service Providers"
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.containerFragment, FindServicesFragment())
+            .replace(R.id.containerFragment, ViewJobsFragment())
             .commit()
     }
 
