@@ -108,4 +108,13 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:17.1.0")
 
     implementation("com.squareup.moshi:moshi:1.12.0")
+
+//    implementation("com.github.smarteist:autoimageslider:1.3.9")
+
+//    implementation("com.github.smarteist:autoimageslider:1.4.0-appcompat")
+
+    implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
+
+
+
 }

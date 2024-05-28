@@ -10,6 +10,7 @@
         tools:context=".clientModule.viewJob.ViewJobsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
             android:id="@+id/appBarLt"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_48"

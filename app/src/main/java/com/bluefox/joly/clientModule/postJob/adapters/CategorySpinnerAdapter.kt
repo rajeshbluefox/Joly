@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.postJob.modalClass.CategoryItem
 import com.bluefox.joly.clientModule.postJob.modalClass.CategoryListItem
 
 
-class CategorySpinnerAdapter(context: Context, resource: Int, private val items: List<CategoryListItem>) :
-    ArrayAdapter<CategoryListItem>(context, resource, items) {
+class CategorySpinnerAdapter(context: Context, resource: Int, private val items: List<CategoryItem>) :
+    ArrayAdapter<CategoryItem>(context, resource, items) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         return createView(position, convertView, parent)

@@ -12,8 +12,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
+import com.bluefox.joly.clientModule.login.LogoutDialog
 import com.bluefox.joly.clientModule.profile.supportFunctions.ProfileFragmentUI
 import com.bluefox.joly.databinding.FragmentProfileBinding
+import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zSharedPreference.UserDetails
 
 
 class ProfileFragment : Fragment() {
@@ -21,6 +24,8 @@ class ProfileFragment : Fragment() {
     private lateinit var binding: FragmentProfileBinding
 
     private lateinit var profileFragmentUI: ProfileFragmentUI
+
+    private lateinit var logoutDialog: LogoutDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +54,18 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initViews() {
-        profileFragmentUI = ProfileFragmentUI(requireContext(), binding,::onSubmitClicked)
+        profileFragmentUI = ProfileFragmentUI(requireContext(), binding, ::onLogoutClicked)
+
+        logoutDialog = LogoutDialog(layoutInflater, requireContext(), ::logoutLogic)
+    }
+
+    private fun onLogoutClicked() {
+        logoutDialog.openLogoutDialog()
+    }
+
+    private fun logoutLogic() {
+        UserDetails.saveLoginStatus(requireContext(),false)
+        CallIntent.gotoLogin(requireContext(), true, requireActivity())
     }
 
     private fun getKeyHeight(view: View) {

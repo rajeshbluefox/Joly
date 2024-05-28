@@ -72,13 +72,24 @@
 
                         <ImageView
                             android:id="@+id/ivEdit"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/baseline_edit_36"
+                            android:layout_width="@dimen/dp_24"
+                            android:layout_height="@dimen/dp_24"
+                            android:src="@drawable/ic_edit_new"
+                            android:layout_marginEnd="@dimen/dp_12"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toStartOf="@id/ivLogout"/>
+
+                        <ImageView
+                            android:id="@+id/ivLogout"
+                            android:layout_width="@dimen/dp_24"
+                            android:layout_height="@dimen/dp_24"
+                            android:src="@drawable/ic_logout"
                             android:layout_marginEnd="@dimen/dp_12"
                             app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"/>
+
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

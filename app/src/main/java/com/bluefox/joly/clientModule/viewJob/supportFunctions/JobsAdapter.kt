@@ -4,15 +4,18 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
+import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobSelected
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobsData
 import com.bluefox.joly.databinding.ItemViewJobBinding
+import com.bumptech.glide.Glide
 
 
 class JobsAdapter(
     private var context: Context,
-    private var jobsList: ArrayList<JobsData>,
-    private val onJobClicked: (jobItem: JobsData) -> Unit,
+    private var jobsList: List<PostWorkData>,
+    private val onJobClicked: (jobItem: PostWorkData) -> Unit,
 ) :
     RecyclerView.Adapter<JobsAdapter.JobsAdapterViewHolder>() {
 
@@ -37,10 +40,15 @@ class JobsAdapter(
 
         val jobItem = jobsList[position]
 
-        holder.binding.tvJobTitle.text=jobItem.jobName
+        holder.binding.tvJobTitle.text=jobItem.workName
+
+        Glide.with(context)
+            .load(SSProfileData.mLoginData.photo)
+            .fitCenter()
+            .into(holder.binding.profileImage)
 
         holder.binding.cardJobItem.setOnClickListener {
-            JobSelected.jobsData=jobItem
+//            JobSelected.jobsData=jobItem
             onJobClicked.invoke(jobItem)
         }
 

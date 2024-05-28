@@ -1,5 +1,6 @@
 package com.bluefox.joly.clientModule.profile.supportFunctions
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.view.View
@@ -7,10 +8,13 @@ import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
 import com.bluefox.joly.databinding.FragmentProfileBinding
+import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
+import com.bumptech.glide.Glide
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 
@@ -20,12 +24,32 @@ class ProfileFragmentUI(
     private val onSubmitClicked: (sSProfileDetailsData :SSProfileDetailsData) -> Unit,
 
     ) {
+    private val binding: FragmentProfileBinding,
+    private val logoutClicked: () -> Unit
+) {
 
     init {
 
+        setData()
         stopEditing()
         onClickListeners()
         genderOnClickListener()
+    }
+
+    private fun setData()
+    {
+        binding.tvMobileNumber.text=SSProfileData.mLoginData.phoneNumber
+        binding.etName.setText(SSProfileData.mLoginData.name)
+        binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
+        binding.etDOB.setText(SSProfileData.mLoginData.age)
+        binding.etGender.setText(SSProfileData.mLoginData.gender)
+        binding.etPinCode.setText(SSProfileData.mLoginData.pincode)
+        binding.etAddress.setText(SSProfileData.mLoginData.address)
+
+//        Glide.with(context)
+//            .load(SSProfileData.mLoginData.photo)
+//            .fitCenter()
+//            .into(binding.profilePic)
     }
 
     private fun onClickListeners() {
