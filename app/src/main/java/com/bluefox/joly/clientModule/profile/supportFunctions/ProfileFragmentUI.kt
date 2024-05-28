@@ -1,5 +1,6 @@
 package com.bluefox.joly.clientModule.profile.supportFunctions
 
+import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.view.View
@@ -8,13 +9,15 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.databinding.FragmentProfileBinding
+import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bumptech.glide.Glide
 
 
 class ProfileFragmentUI(
     val context: Context,
-    private val binding: FragmentProfileBinding
+    private val binding: FragmentProfileBinding,
+    private val logoutClicked: () -> Unit
 ) {
 
     init {
@@ -46,10 +49,15 @@ class ProfileFragmentUI(
         }
 
         binding.btSubmit.setOnClickListener {
-
             stopEditing()
         }
+
+        binding.ivLogout.setOnClickListener {
+            logoutClicked.invoke()
+        }
     }
+
+
 
     private fun stopEditing() {
         binding.ivEdit.visibility = View.VISIBLE

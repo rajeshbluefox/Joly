@@ -43,9 +43,11 @@ interface ApiInterface {
         @Part("CategoryID") CategoryID: RequestBody,
         @Part("JobTypeID") JobTypeID: RequestBody,
         @Part("AreaID") AreaID: RequestBody,
-        @Part("Wage") Wage: RequestBody
+        @Part("Wage") Wage: RequestBody,
+        @Part photos: List<MultipartBody.Part>
     ): PostWorkResponse
 
+//    @Part photos: MultipartBody.Part
 //    @Part workImages: MultipartBody.Part
 
     @FormUrlEncoded

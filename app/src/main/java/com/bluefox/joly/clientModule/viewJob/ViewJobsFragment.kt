@@ -12,9 +12,10 @@ import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.postJob.apiFunctions.SSViewModel
 import com.bluefox.joly.clientModule.postJob.apiFunctions.SSapiFunctions
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
+import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobsData
+import com.bluefox.joly.clientModule.viewJob.modalClass.SSSelected
 import com.bluefox.joly.clientModule.viewJob.supportFunctions.JobsAdapter
-import com.bluefox.joly.clientModule.viewJob.supportFunctions.PostWorkUI
 import com.bluefox.joly.databinding.FragmentViewJobsBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zSharedPreference.UserDetails
@@ -132,6 +133,7 @@ class ViewJobsFragment : Fragment() {
     }
 
     private fun onJobClicked(jobItem: PostWorkData) {
+        SSSelected.workData=jobItem
         CallIntent.gotoViewJobDetails(requireContext(), false, requireActivity())
     }
 

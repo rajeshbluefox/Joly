@@ -6,6 +6,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
+import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -50,7 +51,8 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
                 postWorkData.wageOffered.toString()
-            )
+            ),
+            SSSelectedData.parts
         )
     }
 

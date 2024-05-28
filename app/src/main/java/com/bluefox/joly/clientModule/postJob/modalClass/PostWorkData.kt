@@ -1,5 +1,6 @@
 package com.bluefox.joly.clientModule.postJob.modalClass
 
+import com.bluefox.joly.clientModule.viewJob.modalClass.WorkPhotoData
 import com.google.gson.annotations.SerializedName
 
 
@@ -15,5 +16,7 @@ data class PostWorkData(
     @SerializedName("AreaId")
     var areaId: Int? = null,
     @SerializedName("WageOffered")
-    var wageOffered: String? = null
+    var wageOffered: String? = null,
+    @SerializedName("Photos")
+    val data: List<WorkPhotoData?>? = null,
 )

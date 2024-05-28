@@ -16,6 +16,19 @@ class LoginViewModel @Inject constructor(
     private val loginRepository: LoginRepository
 ) : ViewModel() {
 
+    private var currentFragment = MutableLiveData<Int>()
+
+    fun setCurrentFragment(currFragment: Int)
+    {
+        currentFragment.value=currFragment
+    }
+
+    fun getFragment(): LiveData<Int>
+    {
+        return currentFragment
+    }
+
+
     private var loginResponse = MutableLiveData<LoginResponse>()
 
     fun validateLogin(loginData: LoginData) {

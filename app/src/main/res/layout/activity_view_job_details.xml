@@ -66,8 +66,31 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/dp_12">
+                android:layout_height="match_parent">
+
+
+                <com.denzcoskun.imageslider.ImageSlider
+                    android:id="@+id/image_slider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    app:iss_auto_cycle="true"
+                    app:iss_period="1000"
+                    app:iss_delay="1000"
+                    app:iss_text_align="CENTER"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_12"
+                    android:paddingHorizontal="@dimen/dp_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/image_slider">
+
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/titleLayout"
@@ -75,10 +98,11 @@
                     android:layout_height="wrap_content"
                     android:background="#e7f1f8"
                     android:padding="@dimen/dp_6"
+                    android:layout_marginTop="@dimen/dp_6"
                     android:paddingVertical="@dimen/dp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toBottomOf="@id/image_slider">
 
                     <TextView
                         android:id="@+id/tvJobTitle"
@@ -229,6 +253,8 @@
                     app:layout_constraintBottom_toBottomOf="@+id/textView12"
                     app:layout_constraintStart_toEndOf="@+id/textView12"
                     app:layout_constraintTop_toTopOf="@id/textView12" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
