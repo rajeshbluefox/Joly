@@ -4,21 +4,28 @@ import android.content.Context
 import android.content.res.Resources
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
+import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
+import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 
 class ProfileFragmentUI(
     val context: Context,
-    private val binding: FragmentProfileBinding
-) {
+    private val binding: FragmentProfileBinding,
+    private val onSubmitClicked: (sSProfileDetailsData :SSProfileDetailsData) -> Unit,
+
+    ) {
 
     init {
 
         stopEditing()
         onClickListeners()
+        genderOnClickListener()
     }
 
     private fun onClickListeners() {
@@ -29,7 +36,62 @@ class ProfileFragmentUI(
         binding.btSubmit.setOnClickListener {
 
             stopEditing()
+            getValues()
         }
+    }
+
+    private fun getValues()
+    {
+
+        val nName = binding.etName.text.toString()
+        val nAadharNum = binding.etAadharNum.text.toString()
+        val nDOB = binding.etDOB.text.toString()
+        val nPinCode = binding.etPinCode.text.toString()
+        val nAddress = binding.etAddress.text.toString()
+
+        if(nName.isEmpty())
+        {
+            UtilFunctions.showToast(context, "Enter Name")
+            return
+        }
+        if (nAadharNum.isEmpty())
+        {
+            UtilFunctions.showToast(context, "Enter AadharNum")
+            return
+        }
+        if (nDOB.isEmpty())
+        {
+            UtilFunctions.showToast(context, "Enter DOB")
+            return
+
+        }
+        if (nPinCode.isEmpty())
+        {
+            UtilFunctions.showToast(context, "Enter PinCode")
+            return
+
+        }
+        if (nAddress.isEmpty())
+        {
+            UtilFunctions.showToast(context, "Enter Address")
+            return
+        }
+        if (nGenderSelected==-1)
+        {
+            UtilFunctions.showToast(context, "Select Gender")
+            return
+        }
+
+        val sSProfileDetailsData = SSProfileDetailsData()
+        sSProfileDetailsData.name= nName
+        sSProfileDetailsData.aadharNumber=nAadharNum
+        sSProfileDetailsData.dateOfBirth=nDOB
+        sSProfileDetailsData.gender=nGenderSelected
+        sSProfileDetailsData.pinCode=nPinCode
+        sSProfileDetailsData.address=nAddress
+
+
+        onSubmitClicked.invoke(sSProfileDetailsData)
     }
 
     private fun stopEditing() {
@@ -39,7 +101,7 @@ class ProfileFragmentUI(
         disableET(binding.ltName)
         disableET(binding.ltAadharNum)
         disableET(binding.ltDOB)
-        disableET(binding.ltGender)
+        disableET(binding.rgGender)
         disableET(binding.ltPinCode)
         disableET(binding.ltAddress)
 
@@ -52,7 +114,7 @@ class ProfileFragmentUI(
         enableET(binding.ltName)
         enableET(binding.ltAadharNum)
         enableET(binding.ltDOB)
-        enableET(binding.ltGender)
+        enableET(binding.rgGender)
         enableET(binding.ltPinCode)
         enableET(binding.ltAddress)
     }
@@ -75,6 +137,25 @@ class ProfileFragmentUI(
 
         params.topMargin = margin
         view.layoutParams = params
+    }
+
+    private var nGenderSelected = -1
+    private fun genderOnClickListener()
+    {
+        binding.rgGender.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rbFemale -> {
+                    nGenderSelected=1
+
+                }
+                R.id.rbMale -> {
+                    nGenderSelected=2
+                }
+                R.id.rbOther -> {
+                    nGenderSelected=0
+                }
+            }
+        }
     }
 
 

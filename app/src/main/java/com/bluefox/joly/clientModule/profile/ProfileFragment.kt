@@ -2,6 +2,7 @@ package com.bluefox.joly.clientModule.profile
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
 import com.bluefox.joly.clientModule.profile.supportFunctions.ProfileFragmentUI
 import com.bluefox.joly.databinding.FragmentProfileBinding
 
@@ -47,7 +49,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initViews() {
-        profileFragmentUI = ProfileFragmentUI(requireContext(), binding)
+        profileFragmentUI = ProfileFragmentUI(requireContext(), binding,::onSubmitClicked)
     }
 
     private fun getKeyHeight(view: View) {
@@ -97,4 +99,11 @@ class ProfileFragment : Fragment() {
             }
         })
     }
+
+
+    private fun onSubmitClicked(sSProfileDetailsData : SSProfileDetailsData)
+    {
+        Log.e("test","Name ${sSProfileDetailsData.name}")
+    }
+
 }

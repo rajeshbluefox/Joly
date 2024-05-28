@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoryData(
     @field:SerializedName("CategoryId")
-    val categoryId: Int? = 0,
+    var categoryId: Int? = 0,
     @field:SerializedName("CategoryName")
     var categoryName: String? = null,
 
