@@ -4,6 +4,8 @@ import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
 import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyData
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
@@ -145,6 +147,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
             ),
             SSSelectedData.registerPhoto!!
         )
+    }
+
+    override suspend fun postSPTestimony(spTestimonyData: SPTestimonyData): SPTestimonyResponse {
+        return apiService.postSPTestimony(spTestimonyData.phoneNumber !!,spTestimonyData.testimony!!,"0"!!)
     }
 
     override suspend fun getCategories(): GetCategoriesResponse {

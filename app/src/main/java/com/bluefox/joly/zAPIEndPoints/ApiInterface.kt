@@ -2,6 +2,7 @@ package com.bluefox.joly.zAPIEndPoints
 
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
 import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
@@ -101,4 +102,14 @@ interface ApiInterface {
     suspend fun getSSWork(
         @Field("phone_number") phoneNumber: String
     ): GetWorkResponse
+
+
+    @FormUrlEncoded
+    @POST("ServiceProvider_Testimonials_insert.php")
+    suspend fun postSPTestimony(
+        @Field("PhoneNumber") phoneNumber: String,
+        @Field("Testimony") testimony: String,
+        @Field("Status") status: String
+
+    ): SPTestimonyResponse
 }
