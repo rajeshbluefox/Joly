@@ -54,7 +54,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initViews() {
-        profileFragmentUI = ProfileFragmentUI(requireContext(), binding, ::onLogoutClicked)
+        profileFragmentUI = ProfileFragmentUI(requireContext(), binding,::onSubmitClicked, ::onLogoutClicked)
 
         logoutDialog = LogoutDialog(layoutInflater, requireContext(), ::logoutLogic)
     }
@@ -121,5 +121,7 @@ class ProfileFragment : Fragment() {
     {
         Log.e("test","Name ${sSProfileDetailsData.name}")
     }
+
+
 
 }

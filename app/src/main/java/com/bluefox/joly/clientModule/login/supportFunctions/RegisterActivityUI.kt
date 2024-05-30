@@ -1,11 +1,9 @@
-package com.bluefox.joly.clientModule.login.supportFuncations
+package com.bluefox.joly.clientModule.login.supportFunctions
 
 import android.content.Context
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
-import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
 import com.bluefox.joly.databinding.ActivityRegisterBinding
-import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 class RegisterActivityUI(

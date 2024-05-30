@@ -1,6 +1,7 @@
 package com.bluefox.joly.zAPIEndPoints
 
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
+import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
@@ -49,6 +50,22 @@ interface ApiInterface {
 
 //    @Part photos: MultipartBody.Part
 //    @Part workImages: MultipartBody.Part
+
+    @Multipart
+    @POST("job_provider_insert.php")
+    suspend fun postRegisterSS(
+        @Part("MobileNo") mobileNo: RequestBody,
+        @Part("Name") name: RequestBody,
+        @Part("Age") age: RequestBody,
+        @Part("Gender") gender: RequestBody,
+        @Part("Address") address: RequestBody,
+        @Part("Pincode") pincode: RequestBody,
+        @Part("Location") location: RequestBody,
+        @Part("AadharNumber") aadharNumber: RequestBody,
+        @Part("Password") password: RequestBody,
+        @Part photos: MultipartBody.Part
+    ): RegistrationResponse
+
 
     @FormUrlEncoded
     @POST("service_seeker_get.php")

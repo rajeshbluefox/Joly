@@ -2,6 +2,8 @@ package com.bluefox.joly.zAPIEndPoints
 
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
+import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
+import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
@@ -15,6 +17,7 @@ interface ApiHelper {
     suspend fun getThemes(): GetThemesResponse
 
     suspend fun validateLogin(loginData: LoginData): LoginResponse
+    suspend fun ssRegister(sSRegistrationDetailsData : SSRegistrationDetailsData): RegistrationResponse
 
     suspend fun getCategories(): GetCategoriesResponse
 

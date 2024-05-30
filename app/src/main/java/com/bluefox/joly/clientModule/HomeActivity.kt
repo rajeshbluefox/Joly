@@ -54,7 +54,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
     private fun initViews()
     {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel,::onLoginResponse)
+        loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel,::onLoginResponse, onRegisterResponse = {})
 
         if(SSProfileData.openFrom==0)
             postValidate()

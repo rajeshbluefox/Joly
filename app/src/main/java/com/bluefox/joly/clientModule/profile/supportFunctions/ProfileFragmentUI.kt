@@ -22,11 +22,10 @@ class ProfileFragmentUI(
     val context: Context,
     private val binding: FragmentProfileBinding,
     private val onSubmitClicked: (sSProfileDetailsData :SSProfileDetailsData) -> Unit,
+    private val logoutClicked: () -> Unit
 
     ) {
-    private val binding: FragmentProfileBinding,
-    private val logoutClicked: () -> Unit
-) {
+
 
     init {
 
@@ -42,7 +41,7 @@ class ProfileFragmentUI(
         binding.etName.setText(SSProfileData.mLoginData.name)
         binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
         binding.etDOB.setText(SSProfileData.mLoginData.age)
-        binding.etGender.setText(SSProfileData.mLoginData.gender)
+//        binding.rgGender.setText(SSProfileData.mLoginData.gender)
         binding.etPinCode.setText(SSProfileData.mLoginData.pincode)
         binding.etAddress.setText(SSProfileData.mLoginData.address)
 
@@ -61,6 +60,10 @@ class ProfileFragmentUI(
 
             stopEditing()
             getValues()
+        }
+
+        binding.ivLogout.setOnClickListener{
+            logoutClicked.invoke()
         }
     }
 
