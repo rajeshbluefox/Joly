@@ -2,20 +2,14 @@ package com.bluefox.joly.clientModule.profile.supportFunctions
 
 import android.app.Activity
 import android.content.Context
-import android.content.res.Resources
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
-import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
-import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
-import com.bumptech.glide.Glide
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 
