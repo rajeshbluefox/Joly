@@ -50,10 +50,10 @@ class LoginAPIFunctions(
     {
         mLoginViewModel.resetSSRegisterResponse()
         mLoginViewModel.ssRegister(ssRegistrationDetailsData)
-
+        getssRegisterObserver()
     }
 
-    private fun getssRegister()
+    private fun getssRegisterObserver()
     {
         mLoginViewModel.getSSRegisterResponse().observe(mLifecycleOwner){
 
