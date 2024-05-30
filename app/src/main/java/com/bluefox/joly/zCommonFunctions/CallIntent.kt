@@ -6,13 +6,15 @@ import android.content.Intent
 import com.bluefox.joly.clientModule.HomeActivity
 import com.bluefox.joly.clientModule.login.LoginActivity
 import com.bluefox.joly.clientModule.login.RegisterActivity
-import com.bluefox.joly.clientModule.viewJob.ViewJobDetailsActivity
+import com.bluefox.joly.clientModule.profile.ProfileImageActivity
+import com.bluefox.joly.clientModule.viewJob.ViewWorkDetailsActivity
 import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
+import com.bluefox.joly.homeModule.NavigationActivity
 
 object CallIntent {
 
     fun gotoViewJobDetails(context: Context, killMe: Boolean, activity: Activity) {
-        val intent = Intent(context, ViewJobDetailsActivity::class.java)
+        val intent = Intent(context, ViewWorkDetailsActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }
@@ -35,9 +37,21 @@ object CallIntent {
         if (killMe) activity.finish()
     }
 
+    fun gotoNavigationActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, NavigationActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
     fun gotoViewServiceProviderActivity(context: Context, killMe: Boolean, activity: Activity)
     {
         val intent = Intent(context, ViewServiceProviderDetailsActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoProfileImageActivity(context: Context, killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, ProfileImageActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }

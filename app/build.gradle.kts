@@ -115,6 +115,12 @@ dependencies {
 
     implementation("com.github.denzcoskun:ImageSlideshow:0.1.2")
 
+    //Image Cropper
+    implementation("com.vanniktech:android-image-cropper:4.5.0")
+
+    //Circular Image View
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
 
 
 }

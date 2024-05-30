@@ -28,9 +28,10 @@ import com.bluefox.joly.clientModule.postJob.modalClass.HomeTitleUpdater
 import com.bluefox.joly.clientModule.postJob.modalClass.JobItem
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
+import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
+import com.bluefox.joly.clientModule.postJob.supportFunctions.PostWorkUI
 import com.bluefox.joly.clientModule.postJob.supportFunctions.SubmittedDialog
-import com.bluefox.joly.clientModule.viewJob.ViewJobsFragment
-import com.bluefox.joly.clientModule.viewJob.supportFunctions.PostWorkUI
+import com.bluefox.joly.clientModule.viewJob.ViewWorksFragment
 import com.bluefox.joly.databinding.FragmentPostWorkBinding
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 import dagger.hilt.android.AndroidEntryPoint
@@ -146,11 +147,21 @@ class PostWorkFragment : Fragment() {
     }
 
     private fun callApis() {
-        postWorkUI.showPB()
-        sSapiFunctions.getCategories()
+
+        if(ServicesCatJob.isDataFetched)
+        {
+            postWorkUI.initCategoriesSpinner(ServicesCatJob.categoriesList)
+            postWorkUI.initJobsSpinner(ServicesCatJob.jobList)
+        }else{
+            postWorkUI.showPB()
+            sSapiFunctions.getCategories()
+        }
+
     }
 
     private fun jobsListResponse(jobsList: List<JobItem>) {
+        ServicesCatJob.isDataFetched = true
+
         postWorkUI.initJobsSpinner(jobsList)
         postWorkUI.hidePB()
     }
@@ -166,9 +177,13 @@ class PostWorkFragment : Fragment() {
     private fun postWorkDetails(postWorkData: PostWorkData) {
 //        SSSelectedData.imagePart=getImageFromByteArrayNew()
 //        SSSelectedData.parts.add(getImageFromByteArrayNew())
-        loginViewModel.setCurrentFragment(0)
-        submittedDialog.showLoading()
-        sSapiFunctions.postWork(postWorkData)
+        if(isPhoto1Set) {
+            loginViewModel.setCurrentFragment(0)
+            submittedDialog.showLoading()
+            sSapiFunctions.postWork(postWorkData)
+        }else{
+            UtilFunctions.showToast(requireContext(),"Select Image")
+        }
     }
 
     private fun onWorkSubmitted()
@@ -184,7 +199,7 @@ class PostWorkFragment : Fragment() {
         titleUpdater?.updateTitle("Posted Works")
 
         parentFragmentManager.beginTransaction()
-            .replace(R.id.containerFragment, ViewJobsFragment())
+            .replace(R.id.containerFragment, ViewWorksFragment())
             .commit()
     }
 

@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName
 data class JobItem(
 
     @field:SerializedName("JobId")
-    val jobId: String? = null,
+    val jobId: Int? = null,
     @field:SerializedName("CategoryId")
     val categoryId: String? = null,
     @field:SerializedName("JobName")

@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.os.Build
 import android.view.View
+import android.view.WindowInsetsController
 import android.view.WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -27,6 +28,28 @@ object StatusBarUtils {
                 activity.window.decorView.systemUiVisibility or
                         View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
+
+    fun transparentStatusBarWhite(activity: AppCompatActivity) {
+        activity.window?.decorView?.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR) // This flag is used to set dark icons. Remove this if you want white icons.
+
+        activity.window.statusBarColor = Color.TRANSPARENT
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            // For Android 11 (API level 30) and above
+            activity.window.insetsController?.setSystemBarsAppearance(
+                0, // Remove any existing light status bar appearance
+                WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+            )
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            // For Android 6.0 (API level 23) and above
+            activity.window.decorView.systemUiVisibility =
+                activity.window.decorView.systemUiVisibility and View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR.inv()
+        }
+    }
+
 
 
     fun getStatusBarHeight(resources: Resources): Int {

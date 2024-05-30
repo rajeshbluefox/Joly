@@ -1,15 +1,18 @@
 package com.bluefox.joly.clientModule.viewJob.supportFunctions
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
+import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobSelected
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobsData
 import com.bluefox.joly.databinding.ItemViewJobBinding
 import com.bumptech.glide.Glide
+import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 
 class JobsAdapter(
@@ -46,6 +49,19 @@ class JobsAdapter(
             .load(SSProfileData.mLoginData.photo)
             .fitCenter()
             .into(holder.binding.profileImage)
+
+
+        //Setting Category
+        val categoryItem = ServicesCatJob.categoriesList.find { it.categoryID == jobItem.categoryId }
+        Log.e("Test","CategoryList ${jobItem.categoryId} ${ServicesCatJob.categoriesList.size}")
+        holder.binding.tvCategory.text=categoryItem?.categoryName
+
+        //Setting JobType
+        val jobItemName = ServicesCatJob.jobList.find { it.jobId == jobItem.jobId }
+        holder.binding.tvJob.text=jobItemName?.jobName
+
+        //Set Date
+        holder.binding.tvDate.text=UtilFunctions.formatDate(jobItem.workPostedDate!!)
 
         holder.binding.cardJobItem.setOnClickListener {
 //            JobSelected.jobsData=jobItem

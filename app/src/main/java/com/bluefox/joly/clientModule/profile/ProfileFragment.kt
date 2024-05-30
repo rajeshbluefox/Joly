@@ -2,21 +2,28 @@ package com.bluefox.joly.clientModule.profile
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
-import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.LogoutDialog
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.supportFunctions.ProfileFragmentUI
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zCommonFunctions.ImageCropperHandler
 import com.bluefox.joly.zSharedPreference.UserDetails
+import com.bumptech.glide.Glide
+import com.canhub.cropper.CropImage
+import com.canhub.cropper.CropImageContract
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
@@ -24,6 +31,32 @@ class ProfileFragment : Fragment() {
     private lateinit var profileFragmentUI: ProfileFragmentUI
 
     private lateinit var logoutDialog: LogoutDialog
+
+    //Image Picker for AddWork Photos
+//    private val imageCropperHandler = ImageCropperHandler(
+//        requireContext(),
+//        registerForActivityResult(CropImageContract()) { /* handle result */
+//                result ->
+//            when {
+//                result.isSuccessful -> {
+//                    result.uriContent?.let {
+//                        Log.e("Test", "One")
+//                    }
+//                }
+//
+//                result is CropImage.CancelledResult -> Log.e("Test","cropping image was cancelled by the user")//addWorkSheet.showErrorMessage("cropping image was cancelled by the user")
+//                else -> Log.e("Test","cropping image failed") //addWorkSheet.showErrorMessage("cropping image failed")
+//            }
+//        },
+//        registerForActivityResult(CropImageContract()) { /* handle result */
+//            if (it !is CropImage.CancelledResult) {
+//                it.uriContent?.let { it1 ->
+//                    Log.e("Test", "Two")
+//
+//                }
+//            }
+//        },
+//    )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +85,14 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initViews() {
-        profileFragmentUI = ProfileFragmentUI(requireContext(), binding, ::onLogoutClicked)
+        profileFragmentUI = ProfileFragmentUI(requireContext(),requireActivity(), binding, ::onLogoutClicked)
 
         logoutDialog = LogoutDialog(layoutInflater, requireContext(), ::logoutLogic)
+
+        Glide.with(this)
+            .load(SSProfileData.mLoginData.photo)
+            .fitCenter()
+            .into(binding.profilePic)
     }
 
     private fun onLogoutClicked() {

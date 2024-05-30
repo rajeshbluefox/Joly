@@ -43,7 +43,8 @@ class MainActivity : AppCompatActivity() {
                    SSProfileData.openFrom=0
                    CallIntent.gotoHomeActivity(this,true,this)
                }else{
-                   CallIntent.gotoLogin(this,true,this)
+                   CallIntent.gotoNavigationActivity(this,true,this)
+//                   CallIntent.gotoLogin(this,true,this)
                }
         }, 2000)
     }

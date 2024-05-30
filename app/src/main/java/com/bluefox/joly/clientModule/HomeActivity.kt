@@ -12,7 +12,7 @@ import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.postJob.PostWorkFragment
 import com.bluefox.joly.clientModule.postJob.modalClass.HomeTitleUpdater
 import com.bluefox.joly.clientModule.profile.ProfileFragment
-import com.bluefox.joly.clientModule.viewJob.ViewJobsFragment
+import com.bluefox.joly.clientModule.viewJob.ViewWorksFragment
 import com.bluefox.joly.databinding.ActivityHomeBinding
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
@@ -92,7 +92,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
         binding.tvAppBarTitle.text="Posted Works"
 
         supportFragmentManager.beginTransaction()
-            .replace(R.id.containerFragment, ViewJobsFragment())
+            .replace(R.id.containerFragment, ViewWorksFragment())
             .commit()
     }
 

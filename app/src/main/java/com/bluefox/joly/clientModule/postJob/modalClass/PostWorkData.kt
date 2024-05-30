@@ -9,13 +9,17 @@ data class PostWorkData(
     var phoneNumber: String? = null,
     @SerializedName("WorkName")
     var workName: String? = null,
-    @SerializedName("CategoryId")
+    @SerializedName("Description")
+    var workDescription: String? = null,
+    @SerializedName("ServiceSeeker_Works_date")
+    var workPostedDate: String? = null,
+    @SerializedName("CategoryID")
     var categoryId: Int? = null,
-    @SerializedName("JobId")
+    @SerializedName("JobTypeID")
     var jobId: Int? = null,
     @SerializedName("AreaId")
     var areaId: Int? = null,
-    @SerializedName("WageOffered")
+    @SerializedName("Wage")
     var wageOffered: String? = null,
     @SerializedName("Photos")
     val data: List<WorkPhotoData?>? = null,

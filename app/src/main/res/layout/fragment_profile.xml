@@ -41,13 +41,17 @@
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_6">
 
-                        <ImageView
+
+
+                        <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/profilePic"
-                            android:layout_width="@dimen/dp_84"
-                            android:layout_height="@dimen/dp_84"
-                            android:src="@drawable/ic_baseline_account_circle_24"
+                            android:layout_width="72dp"
+                            android:layout_height="72dp"
+                            android:elevation="16dp"
+                            android:src="@drawable/userssm"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent"/>
+
 
                         <TextView
                             android:id="@+id/tvNumber"
@@ -71,6 +75,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/tvNumber" />
 
                         <ImageView
+                            android:visibility="gone"
                             android:id="@+id/ivEdit"
                             android:layout_width="@dimen/dp_24"
                             android:layout_height="@dimen/dp_24"
@@ -218,6 +223,89 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ltServiceProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ltAddress">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltQualification"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Qualification">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etQualification"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="5-4-6/1, kothur, Hnk" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltExperience"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Experience">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etExpeienece"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hnk" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltDescription"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Description">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Enter Description" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltWebsiteLink"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Website Link">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etWebsiteLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Website Link" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                </LinearLayout>
+
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btSubmit"
@@ -233,7 +321,7 @@
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ltAddress" />
+                    app:layout_constraintTop_toBottomOf="@id/ltServiceProvider" />
 
                <View
                    android:id="@+id/view1"
