@@ -4,6 +4,8 @@ import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyData
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
@@ -12,7 +14,6 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
-import com.bluefox.joly.zSharedPreference.UserDetails
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -52,6 +53,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
             RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.password.toString()),
             SSSelectedData.imagePart!!
         )
+    }
+
+    override suspend fun postSPTestimony(spTestimonyData: SPTestimonyData): SPTestimonyResponse {
+        return apiService.postSPTestimony(spTestimonyData.phoneNumber !!,spTestimonyData.testimony!!,"0"!!)
     }
 
     override suspend fun getCategories(): GetCategoriesResponse {

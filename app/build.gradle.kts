@@ -118,7 +118,6 @@ dependencies {
     //Image Cropper
     implementation("com.vanniktech:android-image-cropper:4.5.0")
 
-    //Circular Image View
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
 
