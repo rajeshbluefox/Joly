@@ -1,7 +1,9 @@
 package com.bluefox.joly.clientModule.login.supportFunctions
 
 import android.content.Context
+import android.widget.EditText
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.databinding.ActivityRegisterBinding
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
@@ -38,6 +40,11 @@ class RegisterActivityUI(
         val nAddress = binding.etAddress.text.toString()
         val nPassword = binding.etPassword.text.toString()
         val nConfirmPassword =binding.etConfirmPassword.text.toString()
+
+        val qualification = binding.etQualification.text.toString()
+        val experience = binding.etExperience.text.toString()
+        val description = binding.etDescription.text.toString()
+        val websiteLink = binding.etWebsiteLink.text.toString()
 
         if(nName.isEmpty())
         {
@@ -88,7 +95,27 @@ class RegisterActivityUI(
         }
 
         val sSRegistrationDetailsData = SSRegistrationDetailsData()
+
+
+        if(SSProfileData.UserRole==2)
+        {
+            if (isEditTextEmpty(binding.etQualification, context, "Enter Qualification")) return
+            if (isEditTextEmpty(binding.etExperience, context, "Enter Experience")) return
+            if (isEditTextEmpty(binding.etDescription, context, "Enter Description")) return
+            if (isEditTextEmpty(binding.etWebsiteLink, context, "Enter Website Link")) return
+
+            sSRegistrationDetailsData.qualification=qualification
+            sSRegistrationDetailsData.previousExperience=experience
+            sSRegistrationDetailsData.description=description
+            sSRegistrationDetailsData.portfolioLink=websiteLink
+
+            sSRegistrationDetailsData.city="cty"
+            sSRegistrationDetailsData.state="state"
+            sSRegistrationDetailsData.location="location"
+        }
+
         sSRegistrationDetailsData.name= nName
+        sSRegistrationDetailsData.phoneNumber=nPhoneNumber
         sSRegistrationDetailsData.aadharNumber=nAadharNum
         sSRegistrationDetailsData.dateOfBirth=nDOB
         sSRegistrationDetailsData.gender=nGenderSelected
@@ -98,6 +125,15 @@ class RegisterActivityUI(
         sSRegistrationDetailsData.confirmPassword=nConfirmPassword
 
         onSubmitClicked.invoke(sSRegistrationDetailsData)
+    }
+
+    fun isEditTextEmpty(editText: EditText, context: Context, message: String): Boolean {
+        return if (editText.text.toString().trim().isEmpty()) {
+            UtilFunctions.showToast(context,message)
+            true
+        } else {
+            false
+        }
     }
 
     private var nGenderSelected = -1

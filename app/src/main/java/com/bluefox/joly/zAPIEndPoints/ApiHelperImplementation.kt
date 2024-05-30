@@ -2,8 +2,8 @@ package com.bluefox.joly.zAPIEndPoints
 
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
-import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
@@ -12,7 +12,6 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
-import com.bluefox.joly.zSharedPreference.UserDetails
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -40,17 +39,111 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun ssRegister(sSRegistrationDetailsData: SSRegistrationDetailsData): RegistrationResponse {
-        return apiService.postRegisterSS(
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.phoneNumber.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.name.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.dateOfBirth.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.gender.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.address.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.pinCode.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.pinCode.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.aadharNumber.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.password.toString()),
-            SSSelectedData.imagePart!!
+
+        if(SSProfileData.UserRole==1) {
+            return apiService.postRegisterSS(
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.phoneNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.name.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.dateOfBirth.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.gender.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.address.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.pinCode.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.pinCode.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.aadharNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.password.toString()
+                ),
+                SSSelectedData.registerPhoto!!
+            )
+        }
+
+        return apiService.postRegisterSP(
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.phoneNumber.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.name.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.dateOfBirth.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.gender.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.address.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.pinCode.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.location.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.city.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.state.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.aadharNumber.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.password.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.qualification.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.previousExperience.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.description.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.portfolioLink.toString()
+            ),
+            SSSelectedData.registerPhoto!!
         )
     }
 

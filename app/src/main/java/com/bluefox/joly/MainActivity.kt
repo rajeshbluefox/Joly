@@ -41,6 +41,9 @@ class MainActivity : AppCompatActivity() {
                if(UserDetails.getLoginStatus(this))
                {
                    SSProfileData.openFrom=0
+
+                   SSProfileData.UserRole=UserDetails.getUserRoleStatus(this)
+
                    CallIntent.gotoHomeActivity(this,true,this)
                }else{
                    CallIntent.gotoNavigationActivity(this,true,this)

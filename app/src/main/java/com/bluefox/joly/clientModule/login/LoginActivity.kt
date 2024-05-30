@@ -44,9 +44,7 @@ class LoginActivity : AppCompatActivity() {
             CallIntent.gotoRegister(this,true,this)
         }
 
-        binding.btLogin.setOnClickListener {
-            CallIntent.gotoHomeActivity(this,true,this)
-        }
+
     }
 
     private fun postValidate(loginData: LoginData)
@@ -59,8 +57,9 @@ class LoginActivity : AppCompatActivity() {
         //Code after Login response is received
         // SAVE THE USER details to Shared Preference
         UserDetails.saveLoginStatus(this,true)
+
         if(UserDetails.getUserRoleStatus(this)==1)
-        UserDetails.saveUserMobileNo(this,loginData.phoneNumber!!)
+            UserDetails.saveUserMobileNo(this,loginData.phoneNumber!!)
         else
             UserDetails.saveUserMobileNo(this,loginData.mobileNumber!!)
 

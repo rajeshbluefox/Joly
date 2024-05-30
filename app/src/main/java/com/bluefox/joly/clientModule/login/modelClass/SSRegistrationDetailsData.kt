@@ -16,12 +16,26 @@ class SSRegistrationDetailsData(
     var gender: Int? = 0,
     @field:SerializedName("PinCode")
     var pinCode: String? = null,
+    @field:SerializedName("Location")
+    var location: String? = null,
+    @field:SerializedName("City")
+    var city: String? = null,
+    @field:SerializedName("State")
+    var state: String? = null,
     @field:SerializedName("Address")
     var address: String? = null,
     @field:SerializedName("Password")
     var password: String? = null,
     @field:SerializedName("ConfirmPassword")
     var confirmPassword: String? = null,
+    @SerializedName("Qualification")
+    var qualification: String? = null,
+    @SerializedName("PreviousExperience")
+    var previousExperience: String? = null,
+    @SerializedName("PortfolioLink")
+    var portfolioLink: String? = null,
+    @SerializedName("Description")
+    var description: String? = null,
 
 
 )

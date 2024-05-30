@@ -54,7 +54,8 @@
                     android:id="@+id/profilePic"
                     android:layout_width="@dimen/dp_96"
                     android:layout_height="@dimen/dp_96"
-                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:layout_marginTop="@dimen/dp_24"
+                    android:src="@drawable/ic_add_photo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -64,7 +65,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:layout_marginTop="48dp"
+                    android:layout_marginTop="@dimen/dp_24"
                     android:text="Name"
                     app:layout_constraintStart_toStartOf="@+id/etUserName"
                     app:layout_constraintTop_toBottomOf="@+id/profilePic" />
@@ -140,7 +141,7 @@
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="8dp"
                     android:text="Date of Birth"
-                    app:layout_constraintStart_toStartOf="@+id/etDOB"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etAadharNum" />
 
                 <TextView
@@ -162,6 +163,7 @@
 
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:visibility="gone"
                     android:id="@+id/etDOB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -198,18 +200,21 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvGender">
 
                     <RadioButton
+                        android:id="@+id/rbFemale"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Female" />
 
                     <RadioButton
+                        android:id="@+id/rbMale"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Male" />
 
                     <RadioButton
+                        android:id="@+id/rbOther"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

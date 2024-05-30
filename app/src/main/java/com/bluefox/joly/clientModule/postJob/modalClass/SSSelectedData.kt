@@ -7,6 +7,8 @@ object SSSelectedData {
     var jobItem = JobItem()
     var categoryItem = CategoryItem()
 
+    var registerPhoto : MultipartBody.Part? = null
+
     var imagePart: MultipartBody.Part? = null
 
     var parts = mutableListOf<MultipartBody.Part>()

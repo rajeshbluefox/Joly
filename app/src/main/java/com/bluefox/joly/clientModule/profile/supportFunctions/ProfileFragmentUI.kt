@@ -33,7 +33,11 @@ class ProfileFragmentUI(
 
     private fun setData()
     {
+        if(SSProfileData.UserRole==1)
         binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
+        else
+            binding.tvMobileNumber.text = SSProfileData.mLoginData.mobileNumber
+
         binding.etName.setText(SSProfileData.mLoginData.name)
         binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
         binding.etDOB.setText(SSProfileData.mLoginData.age)
@@ -41,6 +45,14 @@ class ProfileFragmentUI(
         binding.etPinCode.setText(SSProfileData.mLoginData.pincode)
         binding.etAddress.setText(SSProfileData.mLoginData.address)
 
+        val genderValue = SSProfileData.mLoginData.gender?.toInt()
+
+        when(genderValue)
+        {
+            1 -> binding.rbFemale.isChecked = true
+            2 -> binding.rbMale.isChecked = true
+            0 -> binding.rbOther.isChecked = true
+        }
 
         if(UserDetails.getUserRoleStatus(context)==2) {
             binding.ltServiceProvider.visibility=View.VISIBLE
@@ -142,6 +154,11 @@ class ProfileFragmentUI(
         disableET(binding.ltDescription)
         disableET(binding.ltWebsiteLink)
 
+        binding.rgGender.isEnabled = false
+        binding.rbMale.isEnabled = false
+        binding.rbFemale.isEnabled = false
+        binding.rbOther.isEnabled = false
+//        ic_down_arrow
     }
 
     private fun startEditing() {

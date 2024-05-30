@@ -74,6 +74,27 @@ interface ApiInterface {
         @Part photos: MultipartBody.Part
     ): RegistrationResponse
 
+    @Multipart
+    @POST("service_provider_insert.php")
+    suspend fun postRegisterSP(
+        @Part("MobileNumber") mobileNo: RequestBody,
+        @Part("CompanyName") name: RequestBody,
+        @Part("Age") age: RequestBody,
+        @Part("Gender") gender: RequestBody,
+        @Part("Address") address: RequestBody,
+        @Part("PinCode") pincode: RequestBody,
+        @Part("Location") location: RequestBody,
+        @Part("City") city: RequestBody,
+        @Part("State") State: RequestBody,
+        @Part("AadharNumber") aadharNumber: RequestBody,
+        @Part("Password") password: RequestBody,
+        @Part("Qualification") qualification: RequestBody,
+        @Part("PreviousExperience") previousExperience: RequestBody,
+        @Part("Description") description: RequestBody,
+        @Part("PortfolioLink") portfolioLink: RequestBody,
+        @Part photos: MultipartBody.Part
+    ): RegistrationResponse
+
 
     @FormUrlEncoded
     @POST("service_seeker_get.php")
