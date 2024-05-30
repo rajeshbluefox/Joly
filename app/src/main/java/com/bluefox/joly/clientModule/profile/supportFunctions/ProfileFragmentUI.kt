@@ -81,6 +81,11 @@ class ProfileFragmentUI(
         disableET(binding.ltPinCode)
         disableET(binding.ltAddress)
 
+        disableET(binding.ltQualification)
+        disableET(binding.ltExperience)
+        disableET(binding.ltDescription)
+        disableET(binding.ltWebsiteLink)
+
     }
 
     private fun startEditing() {
