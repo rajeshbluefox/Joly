@@ -7,6 +7,17 @@ object UserDetails {
 
     private const val PREFS_NAME = "JolyApp"
 
+    fun saveUserRoleStatus(context: Context, value: Int) {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putInt(Constants.USER_ROLE, value).apply()
+    }
+
+    fun getUserRoleStatus(context: Context): Int {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return sharedPref.getInt(Constants.USER_ROLE, 0)
+    }
+
     fun saveLoginStatus(context: Context, value: Boolean) {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()

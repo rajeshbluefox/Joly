@@ -28,6 +28,13 @@ interface ApiInterface {
         @Field("Password") password: String
     ): LoginResponse
 
+    @FormUrlEncoded
+    @POST("service_provider_login.php")
+    suspend fun validateLoginSP(
+        @Field("MobileNumber") phoneNumber: String,
+        @Field("Password") password: String
+    ): LoginResponse
+
     @GET("ServiceProvider_Categories_get.php")
     suspend fun getCategories(): GetCategoriesResponse
 
@@ -41,6 +48,7 @@ interface ApiInterface {
     suspend fun postSSWork(
         @Part("phone_number") phoneNumber: RequestBody,
         @Part("WorkName") WorkName: RequestBody,
+        @Part("Description") WorkDescription: RequestBody,
         @Part("CategoryID") CategoryID: RequestBody,
         @Part("JobTypeID") JobTypeID: RequestBody,
         @Part("AreaID") AreaID: RequestBody,

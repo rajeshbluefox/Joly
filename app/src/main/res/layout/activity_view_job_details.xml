@@ -7,13 +7,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".clientModule.viewJob.ViewJobDetailsActivity">
+        tools:context=".clientModule.viewJob.ViewWorkDetailsActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/appBarLt"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
+            android:layout_height="wrap_content"
             android:background="#3F51B5"
+            android:paddingBottom="@dimen/dp_6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -42,6 +43,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/ivDelete"
                 android:layout_width="@dimen/dp_24"
                 android:layout_height="@dimen/dp_24"
@@ -66,7 +68,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
                 <com.denzcoskun.imageslider.ImageSlider
@@ -102,13 +104,13 @@
                     android:paddingVertical="@dimen/dp_12"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/image_slider">
+                    app:layout_constraintTop_toTopOf="parent">
 
                     <TextView
-                        android:id="@+id/tvJobTitle"
+                        android:id="@+id/tvWageOffered"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Job Title"
+                        android:text="Wage Offered :"
                         android:textColor="#06286B"
                         android:textSize="@dimen/sp_18"
                         android:textStyle="bold"
@@ -116,7 +118,21 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/tvWageOfferedValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_12"
+                        android:text="- Bachelor's "
+                        android:textColor="#FF5722"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sp_18"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvWageOffered"
+                        app:layout_constraintStart_toEndOf="@+id/tvWageOffered"
+                        app:layout_constraintTop_toTopOf="@id/tvWageOffered"/>
+
+
+                    <TextView
+                        android:id="@+id/tvJobLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -124,12 +140,13 @@
                         android:textColor="#06286B"
                         android:textSize="@dimen/sp_14"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="@+id/tvJobTitle"
-                        app:layout_constraintTop_toBottomOf="@id/tvJobTitle" />
+                        app:layout_constraintStart_toStartOf="@+id/tvWageOffered"
+                        app:layout_constraintTop_toBottomOf="@id/tvWageOffered" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/textView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,6 +159,7 @@
                     app:layout_constraintTop_toBottomOf="@id/titleLayout" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/textView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,6 +169,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/textView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -172,7 +191,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
                 <TextView
-                    android:id="@+id/textView7"
+                    android:id="@+id/tvDescription"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
@@ -182,77 +201,78 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
                 <TextView
-                    android:id="@+id/textView8"
+                    android:id="@+id/tvCategory"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Eligibility :"
+                    android:text="Category Name :"
                     android:textColor="#06286B"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/textView7"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 
                 <TextView
-                    android:id="@+id/textView9"
+                    android:id="@+id/tvCategoryValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="- Bachelor's degree in Computer Science or related field.\n
-- Strong proficiency in Java, Spring Boot, and microservices.\n
-- Familiarity with cloud platforms such as AWS or Microsoft Azure."
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView8"
-                    app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:text="- Bachelor's "
+                    android:textColor="#FF5722"
+                    android:textStyle="bold"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/tvCategory"
+                    app:layout_constraintStart_toEndOf="@+id/tvCategory"
+                    app:layout_constraintTop_toTopOf="@id/tvCategory"/>
 
                 <TextView
-                    android:id="@+id/textView10"
+                    android:id="@+id/tvJobType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Skills Required :"
+                    android:text="Job Name :"
                     android:textColor="#06286B"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView9" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCategory" />
 
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="1. Proven experience in inside sales, lead generation, sales support or related roles.\n
-2. Knowledge of Lead Generation and Sales Support in Training and Certification industry. \n
-3. Excellent communication skills, both verbal and written. \n
-4. Strong interpersonal skills and ability to build rapport with prospects."
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView10"
-                    app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                    <TextView
+                        android:id="@+id/tvJobTypeValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/dp_12"
+                        android:text="- Bachelor's "
+                        android:textColor="#FF5722"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/tvJobType"
+                        app:layout_constraintStart_toEndOf="@+id/tvJobType"
+                        app:layout_constraintTop_toTopOf="@id/tvJobType"/>
 
-                <TextView
-                    android:id="@+id/textView12"
+
+                    <TextView
+                    android:id="@+id/tvDatePosted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="DeadLine to Apply :"
+                    android:text="Date Posted :"
                     android:textColor="#06286B"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="@+id/textView11"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobTypeValue" />
 
                 <TextView
-                    android:id="@+id/textView13"
+                    android:id="@+id/tvDateValue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/dp_12"
                     android:text="May 15 , 2024"
                     android:textColor="#FF5722"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                    app:layout_constraintStart_toEndOf="@+id/textView12"
-                    app:layout_constraintTop_toTopOf="@id/textView12" />
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDatePosted"
+                    app:layout_constraintStart_toEndOf="@+id/tvDatePosted"
+                    app:layout_constraintTop_toTopOf="@id/tvDatePosted" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

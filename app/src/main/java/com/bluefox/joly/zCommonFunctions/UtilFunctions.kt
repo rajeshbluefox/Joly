@@ -9,6 +9,8 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.Date
 
 object UtilFunctions {
@@ -72,5 +74,18 @@ object UtilFunctions {
             normalizedNumber = normalizedNumber.substring(normalizedNumber.length - 10)
         }
         return normalizedNumber
+    }
+
+    fun formatDate(input: String): String {
+        //"2024-05-29 16:19:37" to May 29 converter
+
+        val inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+        val outputFormatter = DateTimeFormatter.ofPattern("MMMM dd")
+
+        // Parse the input date string to a LocalDateTime
+        val dateTime = LocalDateTime.parse(input, inputFormatter)
+
+        // Format the LocalDateTime to the desired output format
+        return dateTime.format(outputFormatter)
     }
 }

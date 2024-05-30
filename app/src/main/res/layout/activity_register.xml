@@ -16,7 +16,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/dp_6"
             android:background="#3F51B5">
 
             <TextView
@@ -142,19 +143,38 @@
                     app:layout_constraintStart_toStartOf="@+id/etDOB"
                     app:layout_constraintTop_toBottomOf="@+id/etAadharNum" />
 
-                <EditText
+                <TextView
+                    android:id="@+id/etSelectDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:background="@drawable/et_bg_1"
+                    android:drawableEnd="@drawable/ic_calendar"
+                    android:drawablePadding="@dimen/dp_24"
+                    android:hint="Select"
+                    android:paddingHorizontal="@dimen/dp_20"
+                    android:paddingVertical="@dimen/dp_12"
+                    android:textColor="#8099CC"
+                    android:textColorHint="#8099CC"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvDOB" />
+
+
+                <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etDOB"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/et_bg_1"
-                    android:hint="Date Of Birth"
+                    android:hint="Age"
+                    android:enabled="false"
                     android:imeOptions="actionGo"
                     android:lines="1"
                     android:maxLines="1"
                     app:layout_constraintEnd_toEndOf="@+id/etAadharNum"
                     app:layout_constraintStart_toStartOf="@+id/etAadharNum"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDOB" />
+                    app:layout_constraintTop_toBottomOf="@+id/etSelectDate" />
 
                 <TextView
                     android:id="@+id/tvGender"
@@ -292,6 +312,98 @@
                     app:layout_constraintStart_toStartOf="@+id/etPassword"
                     app:layout_constraintTop_toBottomOf="@+id/tvConfirmPassword" />
 
+
+                <LinearLayout
+                    android:id="@+id/ltServiceProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@+id/etPassword"
+                    app:layout_constraintStart_toStartOf="@+id/etPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/etConfirmPassword">
+
+                    <TextView
+                        android:id="@+id/tvQualitification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Qualification" />
+
+                    <EditText
+                        android:id="@+id/etQualification"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Qualification"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+
+                    <TextView
+                        android:id="@+id/tvExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Experience" />
+
+                    <EditText
+                        android:id="@+id/etExperience"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Experience"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                    <TextView
+                        android:id="@+id/tvDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Description" />
+
+                    <EditText
+                        android:id="@+id/etDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Description"
+                        android:gravity="top"
+                        android:imeOptions="actionGo"
+                        android:lines="2"
+                        android:maxLines="2"/>
+
+                    <TextView
+                        android:id="@+id/tvWebLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Website Link" />
+
+                    <EditText
+                        android:id="@+id/etWebsiteLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Webiste Link"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                </LinearLayout>
+
+
+
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btSubmit"
                     android:layout_width="@dimen/dp_250"
@@ -304,13 +416,13 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etConfirmPassword" />
+                    app:layout_constraintTop_toBottomOf="@+id/ltServiceProvider" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp_8"
-                    android:layout_marginBottom="@dimen/dp_48"
+                    android:layout_marginBottom="@dimen/dp_100"
                     app:layout_constraintStart_toStartOf="@id/btSubmit"
                     app:layout_constraintEnd_toEndOf="@id/btSubmit"
                     app:layout_constraintTop_toBottomOf="@id/btSubmit"

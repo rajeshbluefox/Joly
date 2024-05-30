@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.postJob.apiFunctions.SSViewModel
 import com.bluefox.joly.clientModule.postJob.apiFunctions.SSapiFunctions
+import com.bluefox.joly.clientModule.postJob.modalClass.CategoryItem
+import com.bluefox.joly.clientModule.postJob.modalClass.JobItem
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
-import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
+import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobsData
 import com.bluefox.joly.clientModule.viewJob.modalClass.SSSelected
 import com.bluefox.joly.clientModule.viewJob.supportFunctions.JobsAdapter
+import com.bluefox.joly.clientModule.viewJob.supportFunctions.ViewJobsUI
 import com.bluefox.joly.databinding.FragmentViewJobsBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zSharedPreference.UserDetails
@@ -23,12 +26,15 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ViewJobsFragment : Fragment() {
+class ViewWorksFragment : Fragment() {
 
     private lateinit var binding: FragmentViewJobsBinding
 
     private lateinit var sSapiFunctions: SSapiFunctions
     private lateinit var ssViewModel: SSViewModel
+
+    private lateinit var viewJobsUI: ViewJobsUI
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,17 +60,43 @@ class ViewJobsFragment : Fragment() {
 
     private fun initViews() {
         ssViewModel = ViewModelProvider(this)[SSViewModel::class.java]
+        viewJobsUI = ViewJobsUI(requireContext(), binding)
+
+
         sSapiFunctions = SSapiFunctions(
             requireContext(),
             viewLifecycleOwner,
             ssViewModel,
-            onCategoriesResponse = {},
-            onJobsResponse = {},
+            ::categoriesListResponse,
+            ::jobsListResponse,
             onWorkSubmitted = {},
             ::onGetWorksResponse
         )
 
+        callApis()
+    }
+
+    private fun callApis() {
+        viewJobsUI.showPB()
+
+        if (ServicesCatJob.isDataFetched) {
+            getSSWorks()
+        } else {
+            sSapiFunctions.getCategories()
+        }
+    }
+
+    private fun jobsListResponse(jobsList: List<JobItem>) {
+        ServicesCatJob.jobList = jobsList as ArrayList<JobItem>
+        ServicesCatJob.isDataFetched = true
+
         getSSWorks()
+    }
+
+    private fun categoriesListResponse(categoriesList: List<CategoryItem>) {
+        //Calling Jobs API
+        ServicesCatJob.categoriesList = categoriesList as ArrayList<CategoryItem>
+        sSapiFunctions.getJobs()
     }
 
     fun getSSWorks() {
@@ -72,49 +104,15 @@ class ViewJobsFragment : Fragment() {
     }
 
     fun onGetWorksResponse(worksList: List<PostWorkData>) {
-        initJobsRv(worksList)
+        viewJobsUI.hidePB()
+
+        if (worksList.isEmpty()) {
+            binding.emptyList.visibility = View.VISIBLE
+        } else {
+            initJobsRv(worksList)
+        }
     }
 
-    private fun fillDummyList() {
-        val jobsData1 = JobsData()
-
-        jobsData1.id = "1"
-        jobsData1.jobName = "Software Developer"
-
-        jobsList.add(jobsData1)
-
-        val jobsData2 = JobsData()
-
-        jobsData2.id = "2"
-        jobsData2.jobName = "Test Developer"
-
-        jobsList.add(jobsData2)
-
-        val jobsData3 = JobsData()
-
-        jobsData3.id = "3"
-        jobsData3.jobName = "Web Developer"
-
-        val jobsData4 = JobsData()
-
-        jobsData4.id = "3"
-        jobsData4.jobName = "Cloud Developer"
-
-        val jobsData5 = JobsData()
-
-        jobsData5.id = "3"
-        jobsData5.jobName = "Mobile Developer"
-
-        val jobsData6 = JobsData()
-
-        jobsData6.id = "3"
-        jobsData6.jobName = "Agile Developer"
-
-        jobsList.add(jobsData3)
-        jobsList.add(jobsData4)
-        jobsList.add(jobsData5)
-        jobsList.add(jobsData6)
-    }
 
     private var jobsList = ArrayList<JobsData>()
 
@@ -133,7 +131,7 @@ class ViewJobsFragment : Fragment() {
     }
 
     private fun onJobClicked(jobItem: PostWorkData) {
-        SSSelected.workData=jobItem
+        SSSelected.workData = jobItem
         CallIntent.gotoViewJobDetails(requireContext(), false, requireActivity())
     }
 

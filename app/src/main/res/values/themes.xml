@@ -6,4 +6,20 @@
     </style>
 
     <style name="Theme.Joly" parent="Base.Theme.Joly" />
+
+    <style name="Theme.Joly.Custom" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/purple_700</item>
+        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/app_bar_c1</item>
+        <item name="colorSecondaryVariant">@color/app_bar_c1</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <!--        <item name="android:statusBarColor" >@color/status_color</item>-->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
+    </style>
+
 </resources>

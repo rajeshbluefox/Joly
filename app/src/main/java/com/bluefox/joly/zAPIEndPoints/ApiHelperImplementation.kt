@@ -2,6 +2,7 @@ package com.bluefox.joly.zAPIEndPoints
 
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
@@ -11,6 +12,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.zSharedPreference.UserDetails
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -23,7 +25,15 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun validateLogin(loginData: LoginData): LoginResponse {
-        return apiService.validateLogin(
+
+        if(SSProfileData.UserRole==1) {
+            return apiService.validateLogin(
+                loginData.phoneNumber!!,
+                loginData.password!!
+            )
+        }
+
+        return apiService.validateLoginSP(
             loginData.phoneNumber!!,
             loginData.password!!
         )
@@ -59,6 +69,7 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                 postWorkData.phoneNumber.toString()
             ),
             RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.workName.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.workDescription.toString()),
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
                 postWorkData.categoryId.toString()

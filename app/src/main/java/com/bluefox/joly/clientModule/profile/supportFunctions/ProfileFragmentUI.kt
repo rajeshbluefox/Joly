@@ -14,12 +14,14 @@ import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
+import com.bluefox.joly.zSharedPreference.UserDetails
 import com.bumptech.glide.Glide
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 
 class ProfileFragmentUI(
     val context: Context,
+    val activity: Activity,
     private val binding: FragmentProfileBinding,
     private val onSubmitClicked: (sSProfileDetailsData :SSProfileDetailsData) -> Unit,
     private val logoutClicked: () -> Unit
@@ -37,7 +39,7 @@ class ProfileFragmentUI(
 
     private fun setData()
     {
-        binding.tvMobileNumber.text=SSProfileData.mLoginData.phoneNumber
+        binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
         binding.etName.setText(SSProfileData.mLoginData.name)
         binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
         binding.etDOB.setText(SSProfileData.mLoginData.age)
@@ -45,10 +47,15 @@ class ProfileFragmentUI(
         binding.etPinCode.setText(SSProfileData.mLoginData.pincode)
         binding.etAddress.setText(SSProfileData.mLoginData.address)
 
-//        Glide.with(context)
-//            .load(SSProfileData.mLoginData.photo)
-//            .fitCenter()
-//            .into(binding.profilePic)
+
+        if(UserDetails.getUserRoleStatus(context)==2) {
+            binding.ltServiceProvider.visibility=View.VISIBLE
+
+            binding.etQualification.setText(SSProfileData.mLoginData.qualification)
+            binding.etExpeienece.setText(SSProfileData.mLoginData.previousExperience)
+            binding.etDescription.setText(SSProfileData.mLoginData.description)
+            binding.etWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
+        }
     }
 
     private fun onClickListeners() {
@@ -64,6 +71,10 @@ class ProfileFragmentUI(
 
         binding.ivLogout.setOnClickListener{
             logoutClicked.invoke()
+        }
+
+        binding.profilePic.setOnClickListener {
+            CallIntent.gotoProfileImageActivity(context,false,activity)
         }
     }
 
@@ -122,7 +133,7 @@ class ProfileFragmentUI(
     }
 
     private fun stopEditing() {
-        binding.ivEdit.visibility = View.VISIBLE
+//        binding.ivEdit.visibility = View.VISIBLE
         binding.btSubmit.visibility = View.GONE
 
         disableET(binding.ltName)

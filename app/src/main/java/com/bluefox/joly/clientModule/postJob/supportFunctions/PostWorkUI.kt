@@ -1,4 +1,4 @@
-package com.bluefox.joly.clientModule.viewJob.supportFunctions
+package com.bluefox.joly.clientModule.postJob.supportFunctions
 
 import android.R
 import android.content.Context
@@ -14,7 +14,6 @@ import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.databinding.FragmentPostWorkBinding
 import com.bluefox.joly.zSharedPreference.UserDetails
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
-import kotlin.time.Duration.Companion.milliseconds
 
 class PostWorkUI(
     context: Context,
@@ -51,7 +50,9 @@ class PostWorkUI(
 
     private fun getDetails() {
         val nWorkName = getValue(mBinding.etWorkName)
-        val nArea = getValue(mBinding.etSelectArea)
+        val nWorkDescription = getValue(mBinding.etWorkDescription)
+//        val nArea = getValue(mBinding.etSelectArea)
+        val nArea = "5"
         val nWageOffered = getValue(mBinding.etWageOffered)
 
         if (nWorkName.isEmpty()) {
@@ -59,12 +60,17 @@ class PostWorkUI(
             return
         }
 
-        if (SSSelectedData.categoryItem.categoryID == "-1") {
+        if (nWorkDescription.isEmpty()) {
+            UtilFunctions.showToast(mContext, "Enter WorkDescription")
+            return
+        }
+
+        if (SSSelectedData.categoryItem.categoryID == null) {
             UtilFunctions.showToast(mContext, "Select Category")
             return
         }
 
-        if (SSSelectedData.jobItem.jobId == "-1") {
+        if (SSSelectedData.jobItem.jobId == null) {
             UtilFunctions.showToast(mContext, "Select Job")
             return
         }
@@ -81,6 +87,7 @@ class PostWorkUI(
 
         val postWorkData = PostWorkData()
         postWorkData.workName = nWorkName
+        postWorkData.workDescription = nWorkDescription
         postWorkData.categoryId = SSSelectedData.categoryItem.categoryID!!.toInt()
         postWorkData.jobId = SSSelectedData.jobItem.jobId!!.toInt()
         postWorkData.areaId = nArea.toInt()
@@ -103,7 +110,7 @@ class PostWorkUI(
 
 
         val newItem = CategoryItem(
-            "-1",
+            null,
             "Select",
 
             )
@@ -142,7 +149,7 @@ class PostWorkUI(
 
 
         val newItem = JobItem(
-            "-1",
+            null,
             "Select",
 
             )
