@@ -6,6 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
+import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
+import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -45,6 +47,27 @@ class LoginViewModel @Inject constructor(
 
     fun getLoginResponse(): LiveData<LoginResponse> {
         return loginResponse
+    }
+
+
+
+
+    private var registrationResponse = MutableLiveData<RegistrationResponse>()
+
+    fun ssRegister(ssRegistrationDetailsData: SSRegistrationDetailsData) {
+        viewModelScope.launch {
+            registrationResponse.postValue(
+                loginRepository.ssRegister(ssRegistrationDetailsData)
+            )
+        }
+    }
+
+    fun resetSSRegisterResponse() {
+        registrationResponse = MutableLiveData<RegistrationResponse>()
+    }
+
+    fun getSSRegisterResponse(): LiveData<RegistrationResponse> {
+        return registrationResponse
     }
 
 }

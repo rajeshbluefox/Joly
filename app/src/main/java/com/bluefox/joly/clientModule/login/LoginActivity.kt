@@ -36,7 +36,7 @@ class LoginActivity : AppCompatActivity() {
     {
         loginUI = LoginUI(this,binding,::postValidate)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel,::onLoginResponse)
+        loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel,::onLoginResponse, onRegisterResponse = {})
     }
 
     private fun onClickListeners() {
@@ -44,9 +44,9 @@ class LoginActivity : AppCompatActivity() {
             CallIntent.gotoRegister(this,true,this)
         }
 
-//        binding.btLogin.setOnClickListener {
-//            CallIntent.gotoHomeActivity(this,true,this)
-//        }
+        binding.btLogin.setOnClickListener {
+            CallIntent.gotoHomeActivity(this,true,this)
+        }
     }
 
     private fun postValidate(loginData: LoginData)

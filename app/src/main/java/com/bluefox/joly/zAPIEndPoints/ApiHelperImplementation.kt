@@ -3,6 +3,8 @@ package com.bluefox.joly.zAPIEndPoints
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
+import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
+import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
@@ -34,6 +36,21 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
         return apiService.validateLoginSP(
             loginData.phoneNumber!!,
             loginData.password!!
+        )
+    }
+
+    override suspend fun ssRegister(sSRegistrationDetailsData: SSRegistrationDetailsData): RegistrationResponse {
+        return apiService.postRegisterSS(
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.phoneNumber.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.name.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.dateOfBirth.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.gender.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.address.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.pinCode.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.pinCode.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.aadharNumber.toString()),
+            RequestBody.create("text/plain".toMediaTypeOrNull(),sSRegistrationDetailsData.password.toString()),
+            SSSelectedData.imagePart!!
         )
     }
 

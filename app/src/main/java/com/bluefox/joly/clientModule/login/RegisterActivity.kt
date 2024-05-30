@@ -3,7 +3,14 @@ package com.bluefox.joly.clientModule.login
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.View
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
+import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
+import com.bluefox.joly.clientModule.login.modelClass.LoginData
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
+import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
+import com.bluefox.joly.clientModule.login.supportFunctions.RegisterActivityUI
 import com.bluefox.joly.databinding.ActivityRegisterBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
@@ -19,6 +26,14 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
+    private lateinit var registerActivityUI: RegisterActivityUI
+
+    private lateinit var loginViewModel : LoginViewModel
+
+    private lateinit var loginAPIFunctions: LoginAPIFunctions
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRegisterBinding.inflate(layoutInflater)
@@ -28,6 +43,7 @@ class RegisterActivity : AppCompatActivity() {
         StatusBarUtils.setTopPadding(resources,binding.appBarLt)
 
 
+        initViews()
         control()
         onClickListeners()
     }
@@ -45,6 +61,12 @@ class RegisterActivity : AppCompatActivity() {
                 binding.ltServiceProvider.visibility = View.VISIBLE
             }
         }
+
+    }
+
+    private fun initViews() {
+        registerActivityUI = RegisterActivityUI(this, binding,::onSubmitClicked)
+        loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel, onLoginResponse = {},::onRegisterResponse )
 
     }
 
@@ -118,4 +140,17 @@ class RegisterActivity : AppCompatActivity() {
 
     }
 
+
+    private fun onSubmitClicked(sSRegistrationDetailsData : SSRegistrationDetailsData)
+    {
+        Log.e("test","Name ${sSRegistrationDetailsData.name}")
+    }
+
+    private fun onRegisterResponse()
+    {
+        //Code after Login response is received
+        // SAVE THE USER details to Shared Preference
+        CallIntent.gotoLogin(this, true,this)
+
+    }
 }

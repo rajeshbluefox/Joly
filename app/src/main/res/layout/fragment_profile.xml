@@ -163,25 +163,67 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/ltGender"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                <TextView
+                    android:id="@+id/tvGender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender"
+                    android:layout_marginTop="12dp"
+                    app:layout_constraintStart_toStartOf="@+id/ltDOB"
+                    app:layout_constraintTop_toBottomOf="@id/ltDOB" />
+
+                <RadioGroup
+                    android:id="@+id/rgGender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_16"
-                    android:layout_marginTop="12dp"
-                    android:hint="Gender"
+                    android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ltDOB">
+                    app:layout_constraintStart_toStartOf="@+id/tvGender"
+                    app:layout_constraintTop_toBottomOf="@id/tvGender">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etGender"
-                        android:layout_width="match_parent"
+                    <RadioButton
+                        android:id="@+id/rbFemale"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Female" />
+
+                    <RadioButton
+                        android:id="@+id/rbMale"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:text="Male" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <RadioButton
+                        android:id="@+id/rbOther"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Other" />
+                </RadioGroup>
+
+
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/ltGender"-->
+<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginHorizontal="@dimen/dp_16"-->
+<!--                    android:layout_marginTop="12dp"-->
+<!--                    android:hint="Gender"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/ltDOB">-->
+
+<!--                    <com.google.android.material.textfield.TextInputEditText-->
+<!--                        android:id="@+id/etGender"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="Male" />-->
+
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/ltPinCode"
@@ -193,7 +235,7 @@
                     android:hint="Pin Code"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ltGender">
+                    app:layout_constraintTop_toBottomOf="@id/rgGender">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etPinCode"
