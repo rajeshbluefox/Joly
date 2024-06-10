@@ -1,4 +1,4 @@
-package com.bluefox.joly.clientModule.postJob
+package com.bluefox.joly.jobModule.jobProviderModule
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
