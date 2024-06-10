@@ -1,11 +1,14 @@
 package com.bluefox.joly.clientModule.viewJob
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
 import com.bluefox.joly.clientModule.viewJob.modalClass.SSSelected
 import com.bluefox.joly.databinding.ActivityViewJobDetailsBinding
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
+import com.bumptech.glide.Glide
 import com.denzcoskun.imageslider.constants.ScaleTypes
 import com.denzcoskun.imageslider.models.SlideModel
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
@@ -36,6 +39,11 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
 //        binding.tvJobTitle.text=JobSelected.jobsData.jobName
         loadSLideShowImages()
 
+        Glide.with(this)
+            .load(SSSelected.workData.profilePhoto)
+            .fitCenter()
+            .into(binding.profileImage)
+
         binding.tvAppBarTitle.text=SSSelected.workData.workName
 
         binding.tvWageOfferedValue.text="₹ ${SSSelected.workData.wageOffered}"
@@ -53,6 +61,13 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
 
         binding.tvDateValue.text=UtilFunctions.formatDate(SSSelected.workData.workPostedDate!!)
 
+        if(SSProfileData.UserRole==1)
+            hideClientDetailsLt()
+    }
+
+    private fun hideClientDetailsLt()
+    {
+        binding.clientDetaiilsLt.visibility=View.GONE
     }
 
     private fun loadSLideShowImages()

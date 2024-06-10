@@ -10,6 +10,9 @@ import com.bluefox.joly.clientModule.profile.ProfileImageActivity
 import com.bluefox.joly.clientModule.viewJob.ViewWorkDetailsActivity
 import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
 import com.bluefox.joly.homeModule.NavigationActivity
+import com.bluefox.joly.serviceProviderModule.AddServiceActivity
+import com.bluefox.joly.serviceProviderModule.ShowTestimoniesActivity
+import com.bluefox.joly.serviceProviderModule.TestimonialsActivity
 
 object CallIntent {
 
@@ -52,6 +55,27 @@ object CallIntent {
     fun gotoProfileImageActivity(context: Context, killMe: Boolean, activity: Activity)
     {
         val intent = Intent(context, ProfileImageActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoAddServiceActivity(context: Context, killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, AddServiceActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoTestimonialsActivity(context: Context, killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, TestimonialsActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoShowTestimonialsActivity(context: Context, killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, ShowTestimoniesActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }

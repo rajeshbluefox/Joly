@@ -52,7 +52,17 @@
                 android:padding="@dimen/dp_12"
                 android:paddingBottom="@dimen/dp_12">
 
-                <ImageView
+<!--                <ImageView-->
+<!--                    android:id="@+id/profilePic"-->
+<!--                    android:layout_width="@dimen/dp_96"-->
+<!--                    android:layout_height="@dimen/dp_96"-->
+<!--                    android:layout_marginTop="@dimen/dp_24"-->
+<!--                    android:src="@drawable/ic_add_photo"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="parent" />-->
+
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/profilePic"
                     android:layout_width="@dimen/dp_96"
                     android:layout_height="@dimen/dp_96"
@@ -60,7 +70,8 @@
                     android:src="@drawable/ic_add_photo"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"/>
+
 
                 <TextView
                     android:id="@+id/tvUserName"
@@ -243,6 +254,7 @@
                     android:imeOptions="actionGo"
                     android:lines="1"
                     android:maxLines="1"
+                    android:inputType="number"
                     app:layout_constraintEnd_toEndOf="@+id/rgGender"
                     app:layout_constraintStart_toStartOf="@+id/rgGender"
                     app:layout_constraintTop_toBottomOf="@+id/tvPinCode" />

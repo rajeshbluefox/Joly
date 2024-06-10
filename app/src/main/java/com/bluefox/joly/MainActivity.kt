@@ -10,6 +10,7 @@ import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.databinding.ActivityMainBinding
 import com.bluefox.joly.dummy.CallThemesViewModel
 import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarUtils.transparentStatusBar(this)
+
 
         callThemesViewModel = ViewModelProvider(this)[CallThemesViewModel::class.java]
 

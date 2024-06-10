@@ -150,7 +150,7 @@ class PostWorkUI(
 
         val newItem = JobItem(
             null,
-            "Select",
+            null,
 
             )
 

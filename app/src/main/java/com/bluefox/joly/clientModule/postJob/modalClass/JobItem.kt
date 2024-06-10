@@ -8,7 +8,7 @@ data class JobItem(
     @field:SerializedName("JobId")
     val jobId: Int? = null,
     @field:SerializedName("CategoryId")
-    val categoryId: String? = null,
+    val categoryId: Int? = null,
     @field:SerializedName("JobName")
     val jobName: String? = null,
     @field:SerializedName("CreatedDate")

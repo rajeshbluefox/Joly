@@ -8,6 +8,9 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SpOfferedServiceResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.http.Field
@@ -103,13 +106,43 @@ interface ApiInterface {
         @Field("phone_number") phoneNumber: String
     ): GetWorkResponse
 
+    @FormUrlEncoded
+    @POST("SSGetWorksByCategoryIds.php")
+    suspend fun getSSWorkByCategories(
+        @Field("CategoryIds") categoryIds: String
+    ): GetWorkResponse
+
+
+    //Testimonies
+
+    @FormUrlEncoded
+    @POST("ServiceProvider_Testimonials_get_phonenumber.php")
+    suspend fun getSPTestimonies(
+        @Field("PhoneNumber") phoneNumber: String
+    ): GetTestimoniesResponse
 
     @FormUrlEncoded
     @POST("ServiceProvider_Testimonials_insert.php")
     suspend fun postSPTestimony(
+        @Field("CustomerName") customerName: String,
         @Field("PhoneNumber") phoneNumber: String,
         @Field("Testimony") testimony: String,
         @Field("Status") status: String
-
     ): SPTestimonyResponse
+
+    @FormUrlEncoded
+    @POST("ServiceProvider_OfferedServices.php")
+    suspend fun addSPService(
+        @Field("PhoneNumber") phoneNumber: String,
+        @Field("CategoryId") categoryId: String,
+        @Field("JobId") jobId: String,
+        @Field("PriceRange") priceRange: String,
+        @Field("Status") status: String
+    ): AddServiceResponse
+
+    @FormUrlEncoded
+    @POST("ServiceProvider_OfferedServices_get.php")
+    suspend fun getServiceOfferedSP(
+        @Field("PhoneNumber") phoneNumber: String
+    ): SpOfferedServiceResponse
 }

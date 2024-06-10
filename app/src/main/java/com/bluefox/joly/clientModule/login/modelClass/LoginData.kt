@@ -11,6 +11,8 @@ data class LoginData(
     var password: String? = null,
     @SerializedName("id")
     val id: String? = null,
+    @SerializedName("CompanyName")
+val companyName: String? = null,
     @SerializedName("Name")
     val name: String? = null,
     @SerializedName("Age")

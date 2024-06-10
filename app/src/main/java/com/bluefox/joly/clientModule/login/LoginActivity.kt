@@ -10,6 +10,7 @@ import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.supportFunctions.LoginUI
 import com.bluefox.joly.databinding.ActivityLoginBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -27,6 +28,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarUtils.transparentStatusBar(this)
 
         initViews()
         onClickListeners()

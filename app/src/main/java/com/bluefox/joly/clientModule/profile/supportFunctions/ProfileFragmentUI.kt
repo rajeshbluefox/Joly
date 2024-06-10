@@ -33,12 +33,14 @@ class ProfileFragmentUI(
 
     private fun setData()
     {
-        if(SSProfileData.UserRole==1)
-        binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
-        else
+        if(SSProfileData.UserRole==1) {
+            binding.etName.setText(SSProfileData.mLoginData.name)
+            binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
+        }
+        else {
+            binding.etName.setText(SSProfileData.mLoginData.companyName)
             binding.tvMobileNumber.text = SSProfileData.mLoginData.mobileNumber
-
-        binding.etName.setText(SSProfileData.mLoginData.name)
+        }
         binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
         binding.etDOB.setText(SSProfileData.mLoginData.age)
 //        binding.rgGender.setText(SSProfileData.mLoginData.gender)

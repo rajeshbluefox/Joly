@@ -12,6 +12,10 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceData
+import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SpOfferedServiceResponse
 
 
 interface ApiHelper {
@@ -20,6 +24,9 @@ interface ApiHelper {
 
     suspend fun validateLogin(loginData: LoginData): LoginResponse
     suspend fun ssRegister(sSRegistrationDetailsData : SSRegistrationDetailsData): RegistrationResponse
+
+    //Testimonies
+    suspend fun getSPTestimonies(mobileNo: String): GetTestimoniesResponse
 
     suspend fun postSPTestimony(spTestimonyData: SPTestimonyData): SPTestimonyResponse
 
@@ -30,5 +37,9 @@ interface ApiHelper {
     suspend fun postWorkData(postWorkData: PostWorkData): PostWorkResponse
 
     suspend fun getSSWorks(mobileNo: String): GetWorkResponse
+
+    suspend fun getServiceOfferedSP(mobileNo: String): SpOfferedServiceResponse
+
+    suspend fun addServiceSP(addServiceData: AddServiceData): AddServiceResponse
 
 }

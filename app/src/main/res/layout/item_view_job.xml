@@ -21,26 +21,26 @@
             android:paddingVertical="@dimen/dp_4"
             android:paddingHorizontal="@dimen/dp_8">
 
-            <ImageView
-                android:id="@+id/profileImage"
-                android:layout_width="@dimen/dp_72"
-                android:layout_height="@dimen/dp_72"
-                android:src="@drawable/userssm"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-
-
-
-<!--            <de.hdodenhof.circleimageview.CircleImageView-->
+<!--            <ImageView-->
 <!--                android:id="@+id/profileImage"-->
-<!--                android:layout_width="@dimen/dp_64"-->
-<!--                android:layout_height="@dimen/dp_64"-->
-<!--                android:elevation="16dp"-->
+<!--                android:layout_width="@dimen/dp_72"-->
+<!--                android:layout_height="@dimen/dp_72"-->
 <!--                android:src="@drawable/userssm"-->
 <!--                app:layout_constraintStart_toStartOf="parent"-->
 <!--                app:layout_constraintTop_toTopOf="parent"-->
 <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImage"
+                android:layout_width="@dimen/dp_64"
+                android:layout_height="@dimen/dp_64"
+                android:elevation="16dp"
+                android:src="@drawable/userssm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
 
             <TextView

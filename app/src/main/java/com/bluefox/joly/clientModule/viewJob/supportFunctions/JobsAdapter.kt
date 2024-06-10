@@ -45,10 +45,17 @@ class JobsAdapter(
 
         holder.binding.tvJobTitle.text=jobItem.workName
 
-        Glide.with(context)
-            .load(SSProfileData.mLoginData.photo)
-            .fitCenter()
-            .into(holder.binding.profileImage)
+        if(jobItem.profilePhoto!=null) {
+            Glide.with(context)
+                .load(jobItem.profilePhoto)
+                .fitCenter()
+                .into(holder.binding.profileImage)
+        }else{
+            Glide.with(context)
+                .load(SSProfileData.mLoginData.photo)
+                .fitCenter()
+                .into(holder.binding.profileImage)
+        }
 
 
         //Setting Category

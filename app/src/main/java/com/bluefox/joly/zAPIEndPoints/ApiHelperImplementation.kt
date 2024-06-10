@@ -14,6 +14,10 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceData
+import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SpOfferedServiceResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import javax.inject.Inject
@@ -27,7 +31,7 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
 
     override suspend fun validateLogin(loginData: LoginData): LoginResponse {
 
-        if(SSProfileData.UserRole==1) {
+        if (SSProfileData.UserRole == 1) {
             return apiService.validateLogin(
                 loginData.phoneNumber!!,
                 loginData.password!!
@@ -42,7 +46,7 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
 
     override suspend fun ssRegister(sSRegistrationDetailsData: SSRegistrationDetailsData): RegistrationResponse {
 
-        if(SSProfileData.UserRole==1) {
+        if (SSProfileData.UserRole == 1) {
             return apiService.postRegisterSS(
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
@@ -149,8 +153,17 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
         )
     }
 
+    override suspend fun getSPTestimonies(mobileNo: String): GetTestimoniesResponse {
+        return apiService.getSPTestimonies(mobileNo)
+    }
+
     override suspend fun postSPTestimony(spTestimonyData: SPTestimonyData): SPTestimonyResponse {
-        return apiService.postSPTestimony(spTestimonyData.phoneNumber !!,spTestimonyData.testimony!!,"0"!!)
+        return apiService.postSPTestimony(
+            spTestimonyData.customerName!!,
+            spTestimonyData.phoneNumber!!,
+            spTestimonyData.testimony!!,
+            spTestimonyData.status!!
+        )
     }
 
     override suspend fun getCategories(): GetCategoriesResponse {
@@ -168,7 +181,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                 postWorkData.phoneNumber.toString()
             ),
             RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.workName.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.workDescription.toString()),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                postWorkData.workDescription.toString()
+            ),
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
                 postWorkData.categoryId.toString()
@@ -184,7 +200,24 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun getSSWorks(mobileNo: String): GetWorkResponse {
+        if(SSProfileData.UserRole==1)
         return apiService.getSSWork(mobileNo)
+
+        return apiService.getSSWorkByCategories(mobileNo)
+    }
+
+    override suspend fun getServiceOfferedSP(mobileNo: String): SpOfferedServiceResponse {
+        return apiService.getServiceOfferedSP(mobileNo)
+    }
+
+    override suspend fun addServiceSP(addServiceData: AddServiceData): AddServiceResponse {
+        return apiService.addSPService(
+            addServiceData.phoneNumber!!,
+            addServiceData.categoryId!!,
+            addServiceData.jobId!!,
+            addServiceData.priceRange!!,
+            addServiceData.status!!
+        )
     }
 
 

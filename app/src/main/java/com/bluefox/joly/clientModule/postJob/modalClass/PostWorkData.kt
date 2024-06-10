@@ -21,6 +21,10 @@ data class PostWorkData(
     var areaId: Int? = null,
     @SerializedName("Wage")
     var wageOffered: String? = null,
+    @SerializedName("Name")
+    var name: String? = null,
+    @SerializedName("Photo")
+    var profilePhoto: String? = null,
     @SerializedName("Photos")
     val data: List<WorkPhotoData?>? = null,
 )

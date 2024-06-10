@@ -7,6 +7,7 @@ import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.databinding.ActivityHomeBinding
 import com.bluefox.joly.databinding.ActivityNavigationBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,6 +19,8 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNavigationBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarUtils.transparentStatusBar(this)
 
         onClickListeners()
     }

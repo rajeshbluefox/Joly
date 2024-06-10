@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.postJob.apiFunctions.SSViewModel
 import com.bluefox.joly.clientModule.postJob.apiFunctions.SSapiFunctions
 import com.bluefox.joly.clientModule.postJob.modalClass.CategoryItem
@@ -60,8 +61,7 @@ class ViewWorksFragment : Fragment() {
 
     private fun initViews() {
         ssViewModel = ViewModelProvider(this)[SSViewModel::class.java]
-        viewJobsUI = ViewJobsUI(requireContext(), binding)
-
+        viewJobsUI = ViewJobsUI(requireContext(), binding,::getWorkByCategory)
 
         sSapiFunctions = SSapiFunctions(
             requireContext(),
@@ -86,9 +86,12 @@ class ViewWorksFragment : Fragment() {
         }
     }
 
+
     private fun jobsListResponse(jobsList: List<JobItem>) {
         ServicesCatJob.jobList = jobsList as ArrayList<JobItem>
         ServicesCatJob.isDataFetched = true
+
+        viewJobsUI.initCategoriesSpinner(ServicesCatJob.categoriesList)
 
         getSSWorks()
     }
@@ -99,8 +102,15 @@ class ViewWorksFragment : Fragment() {
         sSapiFunctions.getJobs()
     }
 
-    fun getSSWorks() {
-        sSapiFunctions.getSSWorks(UserDetails.getUserMobileNo(requireContext()))
+    private fun getSSWorks() {
+        if (SSProfileData.UserRole == 1)
+            sSapiFunctions.getSSWorks(UserDetails.getUserMobileNo(requireContext()))
+
+    }
+
+    private fun getWorkByCategory(categoryItem: CategoryItem)
+    {
+        sSapiFunctions.getSSWorks(categoryItem.categoryID.toString())
     }
 
     fun onGetWorksResponse(worksList: List<PostWorkData>) {
@@ -108,7 +118,10 @@ class ViewWorksFragment : Fragment() {
 
         if (worksList.isEmpty()) {
             binding.emptyList.visibility = View.VISIBLE
+            binding.rvJobs.visibility= View.GONE
         } else {
+            binding.emptyList.visibility = View.GONE
+            binding.rvJobs.visibility= View.VISIBLE
             initJobsRv(worksList)
         }
     }

@@ -14,6 +14,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.HomeTitleUpdater
 import com.bluefox.joly.clientModule.profile.ProfileFragment
 import com.bluefox.joly.clientModule.viewJob.ViewWorksFragment
 import com.bluefox.joly.databinding.ActivityHomeBinding
+import com.bluefox.joly.serviceProviderModule.SPAddServicesFragment
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,14 +31,29 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.transparentStatusBarWhite(this)
         StatusBarUtils.setTopPadding(resources,binding.appBarLt)
 
+        setBottomNavigationBarText()
         initViews()
 
         fillViewServices()
         onClickListeners()
         getCurrentObserver()
+    }
+
+    private fun setBottomNavigationBarText()
+    {
+        if(SSProfileData.UserRole==1)
+        {
+            binding.tv1.text="Posted Works"
+            binding.tv2.text="Post Work"
+            binding.tv3.text="Profile"
+        }else{
+            binding.tv1.text="Works"
+            binding.tv2.text="My Services"
+            binding.tv3.text="Profile"
+        }
     }
 
     private fun getCurrentObserver()
@@ -79,7 +95,12 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
         }
 
         binding.postJobBT.setOnClickListener {
-            fillPostWork()
+            if(binding.tv2.text.toString()=="My Services")
+            {
+                fillServicesOffered()
+            }else {
+                fillPostWork()
+            }
         }
 
         binding.profileBT.setOnClickListener {
@@ -112,6 +133,18 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, ProfileFragment())
+            .commit()
+    }
+
+
+    //Service Provider
+
+    private fun fillServicesOffered() {
+
+        binding.tvAppBarTitle.text="Services Offered"
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.containerFragment, SPAddServicesFragment())
             .commit()
     }
 
