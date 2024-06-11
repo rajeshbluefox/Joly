@@ -1,8 +1,10 @@
 package com.bluefox.joly.clientModule
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
@@ -46,13 +48,13 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
     {
         if(SSProfileData.UserRole==1)
         {
-            binding.tv1.text="Posted Works"
-            binding.tv2.text="Post Work"
-            binding.tv3.text="Profile"
+            binding.tvPostedWork.text="Posted Works"
+            binding.tvPostWork.text="Post Work"
+            binding.tvProfile.text="Profile"
         }else{
-            binding.tv1.text="Works"
-            binding.tv2.text="My Services"
-            binding.tv3.text="Profile"
+            binding.tvPostedWork.text="Works"
+            binding.tvPostWork.text="My Services"
+            binding.tvProfile.text="Profile"
         }
     }
 
@@ -92,19 +94,22 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
     private fun onClickListeners() {
         binding.myJobBT.setOnClickListener {
             fillViewServices()
+            onChangeBackGround(1)
         }
 
         binding.postJobBT.setOnClickListener {
-            if(binding.tv2.text.toString()=="My Services")
+            if(binding.tvPostWork.text.toString()=="My Services")
             {
                 fillServicesOffered()
             }else {
                 fillPostWork()
+                onChangeBackGround(2)
             }
         }
 
         binding.profileBT.setOnClickListener {
             fillProfile()
+            onChangeBackGround(3)
         }
     }
 
@@ -152,5 +157,62 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
         binding.tvAppBarTitle.text=newTitle
     }
 
+    private fun onChangeBackGround(mSelectedItem: Int)
+    {
+        when(mSelectedItem)
+        {
+            1->{
+                binding.myJobBT.setBackgroundResource(R.drawable.navi_bar_selected_bg)
+                binding.icPostedWork.setImageResource(R.drawable.ic_posted_work_colored)
+                val textColor1 = ContextCompat.getColor(this, R.color.navi_bar_text)
+                binding.tvPostedWork.setTextColor(textColor1)
+
+                binding.postJobBT.background = null
+                binding.icPostWork.setImageResource(R.drawable.ic_post_work)
+                val textColor2 = ContextCompat.getColor(this, R.color.black)
+                binding.tvPostWork.setTextColor(textColor2)
+
+                binding.profileBT.background = null
+                binding.icProfile.setImageResource(R.drawable.ic_profile)
+                val textColor3 = ContextCompat.getColor(this, R.color.black)
+                binding.tvPostedWork.setTextColor(textColor3)
+            }
+
+            2->{
+                binding.myJobBT.background = null
+                binding.icPostedWork.setImageResource(R.drawable.ic_posted_work)
+                val textColor1 = ContextCompat.getColor(this, R.color.black)
+                binding.tvPostedWork.setTextColor(textColor1)
+
+                binding.postJobBT.setBackgroundResource(R.drawable.navi_bar_selected_bg)
+                binding.icPostWork.setImageResource(R.drawable.ic_post_work_colored)
+                val textColor2 = ContextCompat.getColor(this, R.color.navi_bar_text)
+                binding.tvPostWork.setTextColor(textColor2)
+
+                binding.profileBT.background = null
+                binding.icProfile.setImageResource(R.drawable.ic_profile)
+                val textColor3 = ContextCompat.getColor(this, R.color.black)
+                binding.tvPostedWork.setTextColor(textColor3)
+            }
+
+            2->{
+                binding.myJobBT.background = null
+                binding.icPostedWork.setImageResource(R.drawable.ic_posted_work)
+                val textColor1 = ContextCompat.getColor(this, R.color.black)
+                binding.tvPostedWork.setTextColor(textColor1)
+
+                binding.postJobBT.background = null
+                binding.icPostWork.setImageResource(R.drawable.ic_post_work)
+                val textColor2 = ContextCompat.getColor(this, R.color.black)
+                binding.tvPostWork.setTextColor(textColor2)
+
+                binding.profileBT.setBackgroundResource(R.drawable.navi_bar_selected_bg)
+                binding.icProfile.setImageResource(R.drawable.ic_profile_colored)
+                val textColor3 = ContextCompat.getColor(this, R.color.navi_bar_text)
+                binding.tvPostedWork.setTextColor(textColor3)
+            }
+        }
+
+    }
 
 }

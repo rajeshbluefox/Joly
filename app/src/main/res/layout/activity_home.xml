@@ -59,8 +59,9 @@
         <LinearLayout
             android:id="@+id/bottomNavigationBar"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_52"
-            android:background="#64FFDA"
+            android:layout_height="@dimen/dp_62"
+            android:background="#FFFFFF"
+            android:padding="6dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
@@ -69,32 +70,34 @@
                 android:id="@+id/myJobBT"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@drawable/navi_bar_selected_bg">
 
                 <ImageView
-                    android:id="@+id/icDoctor"
+                    android:id="@+id/icPostedWork"
                     android:layout_width="@dimen/dp_24"
                     android:layout_height="@dimen/dp_24"
                     android:layout_marginTop="@dimen/dp_6"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_baseline_account_circle_24"/>
+                    android:src="@drawable/ic_posted_work_colored"/>
 
                 <TextView
-                    android:id="@+id/tv1"
+                    android:id="@+id/tvPostedWork"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Posted Works"
-                    android:textColor="@color/black_to_white"
+                    android:textColor="#1B66A3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/icDoctor"
+                    app:layout_constraintTop_toBottomOf="@id/icPostedWork"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
+                android:visibility="gone"
                 android:layout_width="@dimen/dp_2"
                 android:layout_height="match_parent"
                 android:background="@color/black"
@@ -107,29 +110,30 @@
                 android:layout_height="match_parent">
 
                 <ImageView
-                    android:id="@+id/icHistory"
+                    android:id="@+id/icPostWork"
                     android:layout_width="@dimen/dp_24"
                     android:layout_height="@dimen/dp_24"
                     android:layout_marginTop="@dimen/dp_6"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_baseline_account_circle_24"/>
+                    android:src="@drawable/ic_post_work"/>
 
                 <TextView
-                    android:id="@+id/tv2"
+                    android:id="@+id/tvPostWork"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Post Work"
                     android:textColor="@color/black_to_white"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/icHistory"
+                    app:layout_constraintTop_toBottomOf="@id/icPostWork"
                     app:layout_constraintBottom_toBottomOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
+                android:visibility="gone"
                 android:layout_width="@dimen/dp_2"
                 android:layout_height="match_parent"
                 android:background="@color/black"
@@ -149,10 +153,10 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:src="@drawable/ic_baseline_account_circle_24"/>
+                    android:src="@drawable/ic_profile"/>
 
                 <TextView
-                    android:id="@+id/tv3"
+                    android:id="@+id/tvProfile"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Profile"
