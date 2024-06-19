@@ -179,8 +179,6 @@ class RegisterActivity : AppCompatActivity() {
             cal.set(Calendar.MONTH, monthOfYear)
             cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
 
-
-
             val myFormat = "dd/MM/yyyy" // mention the format you need
             val myFormat1 = "yyyy-MM-dd"
             val sdfCalc = SimpleDateFormat(myFormat1, Locale.US)
@@ -188,7 +186,6 @@ class RegisterActivity : AppCompatActivity() {
             val selectedDateForCalculation = sdfCalc.format(cal.time)
 
             val age = calculateAge(selectedDateForCalculation, myFormat1)
-
 
             binding.etDOB.setText(age.toString())
 
@@ -198,7 +195,7 @@ class RegisterActivity : AppCompatActivity() {
 
         }
 
-    fun calculateAge(dob: String, format: String): Int {
+    private fun calculateAge(dob: String, format: String): Int {
         val formatter = DateTimeFormatter.ofPattern(format, Locale.US)
         val birthDate = LocalDate.parse(dob, formatter)
         val currentDate = LocalDate.now()

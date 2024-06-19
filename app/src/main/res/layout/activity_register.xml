@@ -333,6 +333,7 @@
 
 
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/ltServiceProvider"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -421,6 +422,94 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ltJobProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@+id/etPassword"
+                    app:layout_constraintStart_toStartOf="@+id/etPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/ltServiceProvider">
+
+                    <TextView
+                        android:id="@+id/tvCompanyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="CompanyName" />
+
+                    <EditText
+                        android:id="@+id/etCompanyName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Company Name"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                    <TextView
+                        android:id="@+id/tvCompanyLocation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Company Location" />
+
+                    <EditText
+                        android:id="@+id/etCompanyLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Company Location"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                    <TextView
+                        android:id="@+id/tvCompanyDescription"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Company Description" />
+
+                    <EditText
+                        android:id="@+id/etCompanyDescription"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Company Description"
+                        android:imeOptions="actionGo"
+                        android:gravity="start|top"
+                        android:lines="4"
+                        android:maxLines="4"/>
+
+                    <TextView
+                        android:id="@+id/tvCompanyWebLink"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Company Website Link" />
+
+                    <EditText
+                        android:id="@+id/etCompanyWebLink"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Company WebsiteLink"
+                        android:imeOptions="actionGo"
+                        android:gravity="start|top"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                </LinearLayout>
 
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -435,7 +524,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ltServiceProvider" />
+                    app:layout_constraintTop_toBottomOf="@+id/ltJobProvider" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

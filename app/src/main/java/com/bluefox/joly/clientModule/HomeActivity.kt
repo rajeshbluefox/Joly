@@ -195,7 +195,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
                 binding.tvPostedWork.setTextColor(textColor3)
             }
 
-            2->{
+            3 ->{
                 binding.myJobBT.background = null
                 binding.icPostedWork.setImageResource(R.drawable.ic_posted_work)
                 val textColor1 = ContextCompat.getColor(this, R.color.black)
