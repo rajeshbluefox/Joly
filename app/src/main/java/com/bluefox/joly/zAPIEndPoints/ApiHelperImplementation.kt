@@ -31,6 +31,14 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
 
     override suspend fun validateLogin(loginData: LoginData): LoginResponse {
 
+        if(SSProfileData.UserRole == 3)
+        {
+            return apiService.validateLoginJP(
+                loginData.phoneNumber!!,
+                loginData.password!!
+            )
+        }
+
         if (SSProfileData.UserRole == 1) {
             return apiService.validateLogin(
                 loginData.phoneNumber!!,
@@ -45,6 +53,71 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun ssRegister(sSRegistrationDetailsData: SSRegistrationDetailsData): RegistrationResponse {
+
+        if(SSProfileData.UserRole == 3)
+        {
+            return apiService.postRegisterJP(
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.phoneNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.companyName.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.dateOfBirth.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.gender.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.address.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.pinCode.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.address.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.city.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.state.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.state.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.aadharNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.password.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.description.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.portfolioLink.toString()
+                ),
+                SSSelectedData.registerPhoto!!
+
+            )
+        }
+
 
         if (SSProfileData.UserRole == 1) {
             return apiService.postRegisterSS(

@@ -28,6 +28,7 @@ class SSRegistrationDetailsData(
     var password: String? = null,
     @field:SerializedName("ConfirmPassword")
     var confirmPassword: String? = null,
+
     @SerializedName("Qualification")
     var qualification: String? = null,
     @SerializedName("PreviousExperience")
@@ -36,6 +37,11 @@ class SSRegistrationDetailsData(
     var portfolioLink: String? = null,
     @SerializedName("Description")
     var description: String? = null,
+
+    @SerializedName("CompanyName")
+    var companyName: String? = null,
+    @SerializedName("CompanyLocation")
+    var companyLocation: String? = null
 
 
 )

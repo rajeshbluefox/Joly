@@ -22,7 +22,6 @@ class ProfileFragmentUI(
 
     ) {
 
-
     init {
 
         setData()
@@ -33,14 +32,44 @@ class ProfileFragmentUI(
 
     private fun setData()
     {
-        if(SSProfileData.UserRole==1) {
-            binding.etName.setText(SSProfileData.mLoginData.name)
-            binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
+
+        when(SSProfileData.UserRole)
+        {
+            1 ->{
+                binding.etName.setText(SSProfileData.mLoginData.name)
+            }
+            2 ->{
+                binding.etName.setText(SSProfileData.mLoginData.companyName)
+
+                binding.ltServiceProvider.visibility=View.VISIBLE
+                binding.ltJobProvider.visibility=View.GONE
+
+                binding.etQualification.setText(SSProfileData.mLoginData.qualification)
+                binding.etExpeienece.setText(SSProfileData.mLoginData.previousExperience)
+                binding.etDescription.setText(SSProfileData.mLoginData.description)
+                binding.etWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
+            }
+            3 ->{
+                binding.ltServiceProvider.visibility=View.GONE
+                binding.ltJobProvider.visibility=View.VISIBLE
+
+                binding.etCompanyName.setText(SSProfileData.mLoginData.companyName)
+                binding.etCompanyLocation.setText(SSProfileData.mLoginData.location)
+                binding.etCompanyDescription.setText(SSProfileData.mLoginData.description)
+                binding.etCompanyWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
+            }
         }
-        else {
-            binding.etName.setText(SSProfileData.mLoginData.companyName)
-            binding.tvMobileNumber.text = SSProfileData.mLoginData.mobileNumber
-        }
+
+//        if(SSProfileData.UserRole==1) {
+//            binding.etName.setText(SSProfileData.mLoginData.name)
+//            binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
+//        }
+//        else {
+//            binding.etName.setText(SSProfileData.mLoginData.companyName)
+//            binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
+//        }
+
+        binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
         binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
         binding.etDOB.setText(SSProfileData.mLoginData.age)
 //        binding.rgGender.setText(SSProfileData.mLoginData.gender)
@@ -56,14 +85,14 @@ class ProfileFragmentUI(
             0 -> binding.rbOther.isChecked = true
         }
 
-        if(UserDetails.getUserRoleStatus(context)==2) {
-            binding.ltServiceProvider.visibility=View.VISIBLE
-
-            binding.etQualification.setText(SSProfileData.mLoginData.qualification)
-            binding.etExpeienece.setText(SSProfileData.mLoginData.previousExperience)
-            binding.etDescription.setText(SSProfileData.mLoginData.description)
-            binding.etWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
-        }
+//        if(UserDetails.getUserRoleStatus(context)==2) {
+//            binding.ltServiceProvider.visibility=View.VISIBLE
+//
+//            binding.etQualification.setText(SSProfileData.mLoginData.qualification)
+//            binding.etExpeienece.setText(SSProfileData.mLoginData.previousExperience)
+//            binding.etDescription.setText(SSProfileData.mLoginData.description)
+//            binding.etWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
+//        }
     }
 
     private fun onClickListeners() {

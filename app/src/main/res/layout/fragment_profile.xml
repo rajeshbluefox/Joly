@@ -354,6 +354,88 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:visibility="gone"
+                    android:id="@+id/ltJobProvider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ltAddress">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltCompanyName"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Company Name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCompanyName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="XYZ Solutions" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltCompanyLocation"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Company Location">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCompanyLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Hyderabad" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltCompanyDescription"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Company Description">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCompanyDescription"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Enter Description" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/ltCompanyWebsiteLink"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/dp_16"
+                        android:layout_marginTop="12dp"
+                        android:hint="Company Website">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etCompanyWebsiteLink"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="www.xyz.com" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                </LinearLayout>
+
 
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -370,7 +452,7 @@
                     android:visibility="visible"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/ltServiceProvider" />
+                    app:layout_constraintTop_toBottomOf="@id/ltJobProvider" />
 
                <View
                    android:id="@+id/view1"

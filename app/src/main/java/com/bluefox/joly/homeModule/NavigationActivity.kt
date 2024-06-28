@@ -37,5 +37,11 @@ class NavigationActivity : AppCompatActivity() {
             SSProfileData.UserRole = 2
             CallIntent.gotoLogin(this,false,this)
         }
+
+        binding.btJobProvider.setOnClickListener {
+            UserDetails.saveUserRoleStatus(this,3)
+            SSProfileData.UserRole = 3
+            CallIntent.gotoLogin(this,false,this)
+        }
     }
 }

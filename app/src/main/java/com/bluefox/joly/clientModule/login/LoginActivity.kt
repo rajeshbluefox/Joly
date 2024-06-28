@@ -21,7 +21,7 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginUI: LoginUI
 
-    private lateinit var loginViewModel : LoginViewModel
+    private lateinit var loginViewModel: LoginViewModel
     private lateinit var loginAPIFunctions: LoginAPIFunctions
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,42 +35,41 @@ class LoginActivity : AppCompatActivity() {
         onClickListeners()
     }
 
-    private fun initViews()
-    {
-        loginUI = LoginUI(this,binding,::postValidate)
+    private fun initViews() {
+        loginUI = LoginUI(this, binding, ::postValidate)
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel,::onLoginResponse, onRegisterResponse = {})
+        loginAPIFunctions = LoginAPIFunctions(
+            this,
+            this,
+            loginViewModel,
+            ::onLoginResponse,
+            onRegisterResponse = {})
     }
 
     private fun onClickListeners() {
         binding.showRegister.setOnClickListener {
-            CallIntent.gotoRegister(this,true,this)
+            CallIntent.gotoRegister(this, true, this)
         }
 
 
     }
 
-    private fun postValidate(loginData: LoginData)
-    {
+    private fun postValidate(loginData: LoginData) {
         loginAPIFunctions.validateLogin(loginData)
     }
 
-    private fun onLoginResponse(loginData: LoginData)
-    {
+    private fun onLoginResponse(loginData: LoginData) {
         //Code after Login response is received
         // SAVE THE USER details to Shared Preference
-        UserDetails.saveLoginStatus(this,true)
+        UserDetails.saveLoginStatus(this, true)
 
-        if(UserDetails.getUserRoleStatus(this)==1)
-            UserDetails.saveUserMobileNo(this,loginData.phoneNumber!!)
-        else
-            UserDetails.saveUserMobileNo(this,loginData.mobileNumber!!)
+        UserDetails.saveUserMobileNo(this, loginData.phoneNumber!!)
 
-        UserDetails.saveUserPassword(this,loginData.password!!)
+        UserDetails.saveUserPassword(this, loginData.password!!)
 
-        SSProfileData.openFrom=1
-        SSProfileData.mLoginData=loginData
-        CallIntent.gotoHomeActivity(this,true,this)
+        SSProfileData.openFrom = 1
+        SSProfileData.mLoginData = loginData
+        CallIntent.gotoHomeActivity(this, true, this)
 
     }
 

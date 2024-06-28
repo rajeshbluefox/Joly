@@ -39,6 +39,13 @@ interface ApiInterface {
         @Field("Password") password: String
     ): LoginResponse
 
+    @FormUrlEncoded
+    @POST("JobProvider_Login.php")
+    suspend fun validateLoginJP(
+        @Field("MobileNo") phoneNumber: String,
+        @Field("Password") password: String
+    ): LoginResponse
+
     @GET("ServiceProvider_Categories_get.php")
     suspend fun getCategories(): GetCategoriesResponse
 
@@ -99,6 +106,26 @@ interface ApiInterface {
         @Part photos: MultipartBody.Part
     ): RegistrationResponse
 
+
+    @Multipart
+    @POST("JobProvider_Register.php")
+    suspend fun postRegisterJP(
+        @Part("PhoneNumber") mobileNo: RequestBody,
+        @Part("CompanyName") name: RequestBody,
+        @Part("DateOfBirth") age: RequestBody,
+        @Part("Gender") gender: RequestBody,
+        @Part("Address") address: RequestBody,
+        @Part("PinCode") pincode: RequestBody,
+        @Part("Location") location: RequestBody,
+        @Part("City") city: RequestBody,
+        @Part("State") State: RequestBody,
+        @Part("Country") country: RequestBody,
+        @Part("AadharNumber") aadharNumber: RequestBody,
+        @Part("Password") password: RequestBody,
+        @Part("CompanyDescription") companyDescription: RequestBody,
+        @Part("CompanyWebsiteLink") companyWebsiteLink: RequestBody,
+        @Part photos: MultipartBody.Part
+    ): RegistrationResponse
 
     @FormUrlEncoded
     @POST("service_seeker_get.php")

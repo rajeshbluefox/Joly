@@ -1,11 +1,13 @@
 package com.bluefox.joly.clientModule.login.supportFunctions
 
 import android.content.Context
+import android.view.View
 import android.widget.EditText
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.databinding.ActivityRegisterBinding
+import com.bluefox.joly.zSharedPreference.UserDetails
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 class RegisterActivityUI(
@@ -17,6 +19,7 @@ class RegisterActivityUI(
 
     init {
 
+        setFields()
         onClickListeners()
         genderOnClickListener()
 
@@ -26,6 +29,20 @@ class RegisterActivityUI(
 
         binding.btSubmit.setOnClickListener {
             getValues()
+        }
+    }
+
+    private fun setFields()
+    {
+        val userRole = UserDetails.getUserRoleStatus(context)
+
+        if(userRole == 3)
+        {
+            binding.ltJobProvider.visibility=View.VISIBLE
+            binding.ltServiceProvider.visibility=View.GONE
+        }else{
+            binding.ltJobProvider.visibility=View.GONE
+            binding.ltServiceProvider.visibility=View.VISIBLE
         }
     }
 
@@ -45,6 +62,11 @@ class RegisterActivityUI(
         val experience = binding.etExperience.text.toString()
         val description = binding.etDescription.text.toString()
         val websiteLink = binding.etWebsiteLink.text.toString()
+
+        val companyName = binding.etCompanyName.text.toString()
+        val companyLocation = binding.etCompanyLocation.text.toString()
+        val companyDescription = binding.etCompanyDescription.text.toString()
+        val companyLink = binding.etCompanyWebLink.text.toString()
 
         if(nName.isEmpty())
         {
@@ -108,6 +130,23 @@ class RegisterActivityUI(
             sSRegistrationDetailsData.previousExperience=experience
             sSRegistrationDetailsData.description=description
             sSRegistrationDetailsData.portfolioLink=websiteLink
+
+            sSRegistrationDetailsData.city="cty"
+            sSRegistrationDetailsData.state="state"
+            sSRegistrationDetailsData.location="location"
+        }
+
+        if(SSProfileData.UserRole==3)
+        {
+            if (isEditTextEmpty(binding.etCompanyName, context, "Enter CompanyName")) return
+            if (isEditTextEmpty(binding.etCompanyLocation, context, "Enter CompanyLocation")) return
+            if (isEditTextEmpty(binding.etCompanyDescription, context, "Enter CompanyDescription")) return
+            if (isEditTextEmpty(binding.etCompanyWebLink, context, "Enter CompanyWebsite")) return
+
+            sSRegistrationDetailsData.companyName=companyName
+            sSRegistrationDetailsData.companyLocation=companyLocation
+            sSRegistrationDetailsData.description=companyDescription
+            sSRegistrationDetailsData.portfolioLink=companyLink
 
             sSRegistrationDetailsData.city="cty"
             sSRegistrationDetailsData.state="state"
