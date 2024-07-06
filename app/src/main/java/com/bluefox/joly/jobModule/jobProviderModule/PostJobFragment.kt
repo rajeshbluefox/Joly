@@ -1,14 +1,15 @@
 package com.bluefox.joly.jobModule.jobProviderModule
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.databinding.FragmentPostJobBinding
-import com.bluefox.joly.databinding.FragmentPostWorkBinding
+import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.PostJobUI
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -16,6 +17,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class PostJobFragment : Fragment() {
 
     private lateinit var binding: FragmentPostJobBinding
+
+    private lateinit var postJobUI: PostJobUI
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +39,15 @@ class PostJobFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        initViews()
+    }
+
+    fun initViews() {
+        postJobUI = PostJobUI(requireContext(), binding, ::onSubmitted)
+    }
+
+    private fun onSubmitted(postWorkData: PostWorkData) {
 
     }
 

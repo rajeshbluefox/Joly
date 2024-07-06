@@ -69,7 +69,15 @@ class LoginActivity : AppCompatActivity() {
 
         SSProfileData.openFrom = 1
         SSProfileData.mLoginData = loginData
-        CallIntent.gotoHomeActivity(this, true, this)
+
+        var userRole = UserDetails.getUserRoleStatus(this)
+
+        if (userRole==1) {
+            CallIntent.gotoHomeActivity(this, true, this)
+        }else{
+            CallIntent.gotoJobHomeActivity(this,true,this)
+
+        }
 
     }
 

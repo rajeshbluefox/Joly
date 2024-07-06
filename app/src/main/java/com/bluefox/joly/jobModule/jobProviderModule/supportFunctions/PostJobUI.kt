@@ -15,6 +15,7 @@ class PostJobUI(
     private val mContext: Context
 
     init {
-
+        mContext=context
+        mBinding=binding
     }
 }

@@ -39,31 +39,33 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getUserLoginStatus()
-    {
+    private fun getUserLoginStatus() {
         Handler(Looper.getMainLooper()).postDelayed({
-               if(UserDetails.getLoginStatus(this))
-               {
-                   SSProfileData.openFrom=0
+            if (UserDetails.getLoginStatus(this)) {
+                SSProfileData.openFrom = 0
 
-                   SSProfileData.UserRole=UserDetails.getUserRoleStatus(this)
+                SSProfileData.UserRole = UserDetails.getUserRoleStatus(this)
 
-                   CallIntent.gotoHomeActivity(this,true,this)
-               }else{
-                   CallIntent.gotoNavigationActivity(this,true,this)
+                var userRole = UserDetails.getUserRoleStatus(this)
+
+                if (userRole <= 2)
+                    CallIntent.gotoHomeActivity(this, true, this)
+                else
+                    CallIntent.gotoJobHomeActivity(this, true, this)
+            } else {
+                CallIntent.gotoNavigationActivity(this, true, this)
 //                   CallIntent.gotoLogin(this,true,this)
-               }
+            }
         }, 2000)
     }
 
     private fun observers() {
         callThemesViewModel.getThemesResponse().observe(this)
         {
-            if(it.status==200)
-            {
-                Log.e("Test",it.data.toString())
-            }else{
-                Log.e("Test","No Response")
+            if (it.status == 200) {
+                Log.e("Test", it.data.toString())
+            } else {
+                Log.e("Test", "No Response")
             }
         }
     }

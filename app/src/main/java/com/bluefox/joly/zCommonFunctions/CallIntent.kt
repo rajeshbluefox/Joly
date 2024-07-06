@@ -10,6 +10,7 @@ import com.bluefox.joly.clientModule.profile.ProfileImageActivity
 import com.bluefox.joly.clientModule.viewJob.ViewWorkDetailsActivity
 import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
 import com.bluefox.joly.homeModule.NavigationActivity
+import com.bluefox.joly.jobModule.JobHomeActivity
 import com.bluefox.joly.serviceProviderModule.AddServiceActivity
 import com.bluefox.joly.serviceProviderModule.ShowTestimoniesActivity
 import com.bluefox.joly.serviceProviderModule.TestimonialsActivity
@@ -36,6 +37,12 @@ object CallIntent {
 
     fun gotoHomeActivity(context: Context, killMe: Boolean, activity: Activity) {
         val intent = Intent(context, HomeActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoJobHomeActivity(context: Context, killMe: Boolean, activity: Activity) {
+        val intent = Intent(context, JobHomeActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }
