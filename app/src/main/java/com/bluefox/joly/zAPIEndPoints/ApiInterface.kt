@@ -8,6 +8,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.SpOfferedServiceResponse
@@ -172,4 +173,18 @@ interface ApiInterface {
     suspend fun getServiceOfferedSP(
         @Field("PhoneNumber") phoneNumber: String
     ): SpOfferedServiceResponse
+
+    //Job Provider
+
+    @FormUrlEncoded
+    @POST("job_provider_postjob.php")
+    suspend fun jp_PostJob(
+        @Field("UserId") userId: String,
+        @Field("JobName") jobName: String,
+        @Field("JobDetails") jobDetails: String,
+        @Field("JobDescription") jobDescription: String,
+        @Field("Eligibility") eligibility: String,
+        @Field("DeadLinetoApply") deadLineToApply: String,
+        @Field("SkillRequired") skillRequired: String
+    ): PostJobResponse
 }

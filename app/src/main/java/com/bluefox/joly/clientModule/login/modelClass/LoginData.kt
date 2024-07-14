@@ -25,6 +25,12 @@ data class LoginData(
     val pincode: String? = null,
     @SerializedName("Location")
     val location: String? = null,
+    @SerializedName("City")
+    val city: String? = null,
+    @SerializedName("State")
+    val state: String? = null,
+    @SerializedName("Country")
+    val country: String? = null,
     @SerializedName("AadharNumber")
     val aadharNumber: String? = null,
     @SerializedName("Photo")
@@ -37,4 +43,8 @@ data class LoginData(
     val portfolioLink: String? = null,
     @SerializedName("Description")
     val description: String? = null,
+    @SerializedName("CompanyDescription")
+    val companyDescription: String? = null,
+    @SerializedName("CompanyWebsiteLink")
+    val companyWebsiteLink: String? = null
 )

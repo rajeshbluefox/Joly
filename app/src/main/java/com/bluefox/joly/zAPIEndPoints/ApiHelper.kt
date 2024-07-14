@@ -12,6 +12,8 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceData
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
@@ -42,4 +44,6 @@ interface ApiHelper {
 
     suspend fun addServiceSP(addServiceData: AddServiceData): AddServiceResponse
 
+    //Job Provider
+    suspend fun jp_PostJob(postJobData: PostJobData):PostJobResponse
 }

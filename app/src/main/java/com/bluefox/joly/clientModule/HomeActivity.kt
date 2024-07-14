@@ -1,6 +1,5 @@
 package com.bluefox.joly.clientModule
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity

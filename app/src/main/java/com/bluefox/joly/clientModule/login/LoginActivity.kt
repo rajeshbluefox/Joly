@@ -64,7 +64,6 @@ class LoginActivity : AppCompatActivity() {
         UserDetails.saveLoginStatus(this, true)
 
         UserDetails.saveUserMobileNo(this, loginData.phoneNumber!!)
-
         UserDetails.saveUserPassword(this, loginData.password!!)
 
         SSProfileData.openFrom = 1

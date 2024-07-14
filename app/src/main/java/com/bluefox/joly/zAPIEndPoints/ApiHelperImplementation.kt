@@ -14,6 +14,8 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceData
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
@@ -293,5 +295,18 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
         )
     }
 
+    //Job Provider
+
+    override suspend fun jp_PostJob(postJobData: PostJobData): PostJobResponse {
+        return apiService.jp_PostJob(
+            postJobData.phoneNumber!!,
+            postJobData.jobName!!,
+            postJobData.jobDetails!!,
+            postJobData.jobDescription!!,
+            postJobData.eligibility!!,
+            postJobData.deadLineToApply!!,
+            postJobData.skills!!
+        )
+    }
 
 }

@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.bluefox.joly.R
-import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.databinding.FragmentPostJobBinding
+import com.bluefox.joly.jobModule.apiFunctions.JPViewModel
+import com.bluefox.joly.jobModule.apiFunctions.JPapiFunctions
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.PostJobUI
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,10 +22,8 @@ class PostJobFragment : Fragment() {
     private lateinit var binding: FragmentPostJobBinding
 
     private lateinit var postJobUI: PostJobUI
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+    private lateinit var jPapiFunctions: JPapiFunctions
+    private lateinit var jpViewModel: JPViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,10 +31,7 @@ class PostJobFragment : Fragment() {
     ): View? {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_post_job, container, false)
-
         return binding.root
-        // Inflate the layout for this fragment
-//        return inflater.inflate(R.layout.fragment_post_job, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,11 +42,19 @@ class PostJobFragment : Fragment() {
     }
 
     fun initViews() {
-        postJobUI = PostJobUI(requireContext(), binding, ::onSubmitted)
+        postJobUI = PostJobUI(requireContext(), binding, ::onPostJobClicked)
+        jpViewModel = ViewModelProvider(this)[JPViewModel::class.java]
+        jPapiFunctions = JPapiFunctions(requireContext(), lifecycleOwner = this,jpViewModel, ::onJobPostedResponse)
     }
 
-    private fun onSubmitted(postWorkData: PostWorkData) {
 
+    private fun onPostJobClicked(postJobData: PostJobData) {
+        jPapiFunctions.postJob(postJobData)
+    }
+
+    private fun onJobPostedResponse()
+    {
+        //Code after Job Posted response is received
     }
 
 }

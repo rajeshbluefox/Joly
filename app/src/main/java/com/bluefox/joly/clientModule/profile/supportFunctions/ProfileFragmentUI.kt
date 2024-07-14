@@ -54,9 +54,9 @@ class ProfileFragmentUI(
                 binding.ltJobProvider.visibility=View.VISIBLE
 
                 binding.etCompanyName.setText(SSProfileData.mLoginData.companyName)
-                binding.etCompanyLocation.setText(SSProfileData.mLoginData.location)
-                binding.etCompanyDescription.setText(SSProfileData.mLoginData.description)
-                binding.etCompanyWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
+                binding.etCompanyLocation.setText("${SSProfileData.mLoginData.city},${SSProfileData.mLoginData.state},${SSProfileData.mLoginData.country}")
+                binding.etCompanyDescription.setText(SSProfileData.mLoginData.companyDescription)
+                binding.etCompanyWebsiteLink.setText(SSProfileData.mLoginData.companyWebsiteLink)
             }
         }
 
