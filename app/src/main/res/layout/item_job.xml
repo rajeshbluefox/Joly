@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardJobItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_4"
+        android:layout_marginTop="@dimen/dp_6"
+        app:cardBackgroundColor="@color/cardColor1"
+        app:cardCornerRadius="@dimen/dp_8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingVertical="@dimen/dp_4"
+            android:paddingHorizontal="@dimen/dp_8">
+
+            <!--            <ImageView-->
+            <!--                android:id="@+id/profileImage"-->
+            <!--                android:layout_width="@dimen/dp_72"-->
+            <!--                android:layout_height="@dimen/dp_72"-->
+            <!--                android:src="@drawable/userssm"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImage"
+                android:layout_width="@dimen/dp_64"
+                android:layout_height="@dimen/dp_64"
+                android:elevation="16dp"
+                android:src="@drawable/userssm"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+            <TextView
+                android:id="@+id/tvJobTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:text="Job Title"
+                android:textColor="#06286B"
+                android:textSize="@dimen/sp_18"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/profileImage"
+                app:layout_constraintTop_toTopOf="@+id/profileImage" />
+
+            <TextView
+                android:id="@+id/tvDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Apr 5"
+                android:textColor="#06286B"
+                android:textSize="@dimen/sp_14"
+                app:layout_constraintBottom_toBottomOf="@id/tvJobTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvJobTitle" />
+
+            <TextView
+                android:id="@+id/tvCompanyLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Company Location"
+                android:textColor="#06286B"
+                android:textSize="@dimen/sp_14"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tvJobTitle"
+                app:layout_constraintTop_toBottomOf="@id/tvJobTitle" />
+
+            <TextView
+                android:id="@+id/tvDeadLineToApply"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="DeadLine to apply : "
+                android:textColor="#06286B"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tvCompanyLocation"
+                app:layout_constraintTop_toBottomOf="@id/tvCompanyLocation" />
+
+            <TextView
+                android:id="@+id/tvDeadLineToApplyValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:text="Apr 5"
+                android:textColor="#FA030B"
+                android:textSize="@dimen/sp_12"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvDeadLineToApply"
+                app:layout_constraintStart_toEndOf="@+id/tvDeadLineToApply"
+                app:layout_constraintTop_toTopOf="@+id/tvDeadLineToApply" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</layout>
