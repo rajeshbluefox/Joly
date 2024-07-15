@@ -9,7 +9,6 @@ import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
-import com.bluefox.joly.zSharedPreference.UserDetails
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 

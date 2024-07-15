@@ -48,9 +48,20 @@
 
 
         <FrameLayout
+            android:visibility="visible"
             android:id="@+id/containerFragment"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLt"
+            app:layout_constraintBottom_toTopOf="@id/bottomNavigationBar"/>
+
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/appBarLt"

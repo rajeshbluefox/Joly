@@ -69,9 +69,9 @@ class LoginActivity : AppCompatActivity() {
         SSProfileData.openFrom = 1
         SSProfileData.mLoginData = loginData
 
-        var userRole = UserDetails.getUserRoleStatus(this)
+        val userRole = UserDetails.getUserRoleStatus(this)
 
-        if (userRole==1) {
+        if (userRole<=2) {
             CallIntent.gotoHomeActivity(this, true, this)
         }else{
             CallIntent.gotoJobHomeActivity(this,true,this)

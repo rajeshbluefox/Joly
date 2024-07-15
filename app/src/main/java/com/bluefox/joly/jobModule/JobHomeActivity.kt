@@ -1,14 +1,18 @@
 package com.bluefox.joly.jobModule
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bluefox.joly.R
+import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
+import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
+import com.bluefox.joly.clientModule.login.modelClass.LoginData
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.ProfileFragment
-import com.bluefox.joly.clientModule.viewJob.ViewWorksFragment
-import com.bluefox.joly.databinding.ActivityHomeBinding
 import com.bluefox.joly.databinding.ActivityJobHomeBinding
 import com.bluefox.joly.jobModule.jobProviderModule.PostJobFragment
+import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -16,14 +20,34 @@ class JobHomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityJobHomeBinding
 
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var loginAPIFunctions: LoginAPIFunctions
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+//        initViews()
         fillPostJob()
         onClickListeners()
 
+        val loginData = LoginData()
+        loginData.phoneNumber = UserDetails.getUserMobileNo(this)
+        loginData.password = UserDetails.getUserPassword(this)
+//        postValidate(loginData)
+
+    }
+
+    private fun initViews() {
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        loginAPIFunctions = LoginAPIFunctions(
+            this,
+            this,
+            loginViewModel,
+            ::onLoginResponse,
+            onRegisterResponse = {})
     }
 
     private fun onClickListeners() {
@@ -118,4 +142,32 @@ class JobHomeActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun postValidate(loginData: LoginData) {
+        loginAPIFunctions.validateLogin(loginData)
+    }
+
+    private fun onLoginResponse(loginData: LoginData) {
+
+        SSProfileData.openFrom = 1
+        SSProfileData.mLoginData = loginData
+
+        val userRole = UserDetails.getUserRoleStatus(this)
+        SSProfileData.UserRole = userRole
+
+        hidePB()
+        fillPostJob()
+
+    }
+
+    fun showPB() {
+        binding.progressBar.visibility = android.view.View.VISIBLE
+        binding.containerFragment.visibility = android.view.View.GONE
+    }
+
+    private fun hidePB() {
+        binding.progressBar.visibility = android.view.View.GONE
+        binding.containerFragment.visibility = android.view.View.VISIBLE
+    }
+
 }

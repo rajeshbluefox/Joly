@@ -6,7 +6,11 @@ import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
+import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
+import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
+import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
+import com.bluefox.joly.clientModule.login.supportFunctions.LoginUI
 import com.bluefox.joly.databinding.ActivityMainBinding
 import com.bluefox.joly.dummy.CallThemesViewModel
 import com.bluefox.joly.zCommonFunctions.CallIntent
@@ -21,6 +25,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var callThemesViewModel: CallThemesViewModel
 
+    private lateinit var loginViewModel: LoginViewModel
+    private lateinit var loginAPIFunctions: LoginAPIFunctions
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -32,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         callThemesViewModel = ViewModelProvider(this)[CallThemesViewModel::class.java]
 
 
+        initViews()
         getUserLoginStatus()
 
 //        getThemes()
@@ -39,22 +47,39 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private fun initViews() {
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+        loginAPIFunctions = LoginAPIFunctions(
+            this,
+            this,
+            loginViewModel,
+            ::onLoginResponse,
+            onRegisterResponse = {})
+    }
+
     private fun getUserLoginStatus() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (UserDetails.getLoginStatus(this)) {
-                SSProfileData.openFrom = 0
+//                SSProfileData.openFrom = 0
+//
+//                SSProfileData.UserRole = UserDetails.getUserRoleStatus(this)
+//
+//                var userRole = UserDetails.getUserRoleStatus(this)
+//
+//                if (userRole <= 2)
+//                    CallIntent.gotoHomeActivity(this, true, this)
+//                else
+//                    CallIntent.gotoJobHomeActivity(this, true, this)
+//
 
-                SSProfileData.UserRole = UserDetails.getUserRoleStatus(this)
+                val loginData = LoginData()
+                loginData.phoneNumber = UserDetails.getUserMobileNo(this)
+                loginData.password = UserDetails.getUserPassword(this)
+                SSProfileData.UserRole= UserDetails.getUserRoleStatus(this)
+                postValidate(loginData)
 
-                var userRole = UserDetails.getUserRoleStatus(this)
-
-                if (userRole <= 2)
-                    CallIntent.gotoHomeActivity(this, true, this)
-                else
-                    CallIntent.gotoJobHomeActivity(this, true, this)
             } else {
                 CallIntent.gotoNavigationActivity(this, true, this)
-//                   CallIntent.gotoLogin(this,true,this)
             }
         }, 2000)
     }
@@ -72,5 +97,32 @@ class MainActivity : AppCompatActivity() {
 
     private fun getThemes() {
         callThemesViewModel.getThemes()
+    }
+
+    private fun postValidate(loginData: LoginData) {
+        loginAPIFunctions.validateLogin(loginData)
+    }
+
+    private fun onLoginResponse(loginData: LoginData) {
+        //Code after Login response is received
+        // SAVE THE USER details to Shared Preference
+//        UserDetails.saveLoginStatus(this, true)
+//
+//        UserDetails.saveUserMobileNo(this, loginData.phoneNumber!!)
+//        UserDetails.saveUserPassword(this, loginData.password!!)
+
+        SSProfileData.openFrom = 1
+        SSProfileData.mLoginData = loginData
+
+        val userRole = UserDetails.getUserRoleStatus(this)
+        SSProfileData.UserRole = userRole
+
+        if (userRole<=2) {
+            CallIntent.gotoHomeActivity(this, true, this)
+        }else{
+            CallIntent.gotoJobHomeActivity(this,true,this)
+
+        }
+
     }
 }
