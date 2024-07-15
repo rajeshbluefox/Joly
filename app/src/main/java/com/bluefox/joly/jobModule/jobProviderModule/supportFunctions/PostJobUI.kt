@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.content.Context
 import com.bluefox.joly.databinding.FragmentPostJobBinding
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
+import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -36,14 +37,55 @@ class PostJobUI(
         //set the values to PostJobData data class
         // call this callback : onJobPostClicked.invoke(postJobData)
 
+
+        val nJobName = binding.etJobName.text.toString()
+        val nJobDetails = binding.etJobDetails.text.toString()
+        val nJobDescription = binding.etJobDescription.text.toString()
+        val nEligibility = binding.etEligibility.text.toString()
+        val nDeadLineToApply = binding.tvDeadLineToApplyValue.text.toString()
+        val nSkills = binding.etSkillsRequired.text.toString()
+
+        if(nJobName.isEmpty())
+        {
+            UtilFunctions.showToast(mContext , "Enter JobName")
+            return
+        }
+        if (nJobDetails.isEmpty())
+        {
+            UtilFunctions.showToast(mContext, "Enter JobDetails")
+            return
+        }
+        if (nJobDescription.isEmpty())
+        {
+            UtilFunctions.showToast(mContext, "Enter JobDescription")
+            return
+
+        }
+        if (nEligibility.isEmpty())
+        {
+            UtilFunctions.showToast(mContext, "Enter Eligibility")
+            return
+
+        }
+        if (nDeadLineToApply.isEmpty())
+        {
+            UtilFunctions.showToast(mContext, "Enter DeadLineToApply")
+            return
+        }
+        if (nSkills.isEmpty())
+        {
+            UtilFunctions.showToast(mContext, "Enter Skills")
+            return
+        }
+
         val postJobData = PostJobData()
         postJobData.phoneNumber = "1"
-        postJobData.jobName = "WebDeveloper"
-        postJobData.jobDetails = "WebDeveloperDetails"
-        postJobData.jobDescription = "WebDeveloperDescription"
-        postJobData.eligibility = "WebDeveloperEligibility"
-        postJobData.deadLineToApply = "2024-01-01"
-        postJobData.skills = "HTML,CSS,JS"
+        postJobData.jobName = nJobName
+        postJobData.jobDetails = nJobDetails
+        postJobData.jobDescription = nJobDescription
+        postJobData.eligibility = nEligibility
+        postJobData.deadLineToApply = nDeadLineToApply
+        postJobData.skills = nSkills
 
         onJobPostClicked.invoke(postJobData)
     }
