@@ -23,7 +23,6 @@ class JobHomeActivity : AppCompatActivity() {
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var loginAPIFunctions: LoginAPIFunctions
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobHomeBinding.inflate(layoutInflater)
