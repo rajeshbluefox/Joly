@@ -2,8 +2,6 @@ package com.bluefox.joly.jobModule.apiFunctions
 
 import android.content.Context
 import androidx.lifecycle.LifecycleOwner
-import com.bluefox.joly.clientModule.postJob.apiFunctions.SSViewModel
-import com.bluefox.joly.clientModule.postJob.modalClass.CategoryItem
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
@@ -12,7 +10,8 @@ class JPapiFunctions(
     context: Context,
     lifecycleOwner: LifecycleOwner,
     mJpViewModel: JPViewModel,
-    private val onJobPostedResponse: () -> Unit
+    private val onJobPostedResponse: () -> Unit,
+    private val onGetPostedJobsResponse: (postedJobsList: ArrayList<PostJobData>) -> Unit
 ) {
 
     private var mContext: Context = context
@@ -34,5 +33,29 @@ class JPapiFunctions(
             }
         }
     }
+
+    fun getPostedJobs(userId:String)
+    {
+        jpViewModel.resetGetPostedJobsJP()
+        jpViewModel.getPostedJobsJP(userId)
+
+        getPostedJobsObserver()
+    }
+
+    private fun getPostedJobsObserver() {
+        jpViewModel.getPostedJobsJPResponse().observe(mLifecycleOwner) {
+            if (it.code == 200) {
+
+                if (it.postedJobsList.isNotEmpty()) {
+                    onGetPostedJobsResponse.invoke(it.postedJobsList)
+                } else {
+                    UtilFunctions.showToast(mContext, "No Jobs Posted")
+                }
+            }
+        }
+
+    }
+
+
 
 }

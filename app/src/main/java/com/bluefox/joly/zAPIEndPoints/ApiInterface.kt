@@ -8,6 +8,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetPostedJobsResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
@@ -187,4 +188,11 @@ interface ApiInterface {
         @Field("DeadLinetoApply") deadLineToApply: String,
         @Field("SkillRequired") skillRequired: String
     ): PostJobResponse
+
+    //TODO Change the End Point
+    @FormUrlEncoded
+    @POST("job_provider_postjob.php")
+    suspend fun jp_getPostedJob(
+        @Field("UserId") userId: String
+    ): GetPostedJobsResponse
 }

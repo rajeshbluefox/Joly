@@ -44,7 +44,14 @@ class PostJobFragment : Fragment() {
     fun initViews() {
         postJobUI = PostJobUI(requireContext(), binding, ::onPostJobClicked)
         jpViewModel = ViewModelProvider(this)[JPViewModel::class.java]
-        jPapiFunctions = JPapiFunctions(requireContext(), lifecycleOwner = this,jpViewModel, ::onJobPostedResponse)
+
+        jPapiFunctions = JPapiFunctions(
+            requireContext(),
+            lifecycleOwner = this,
+            jpViewModel,
+            ::onJobPostedResponse,
+            onGetPostedJobsResponse = {}
+        )
     }
 
 
@@ -52,8 +59,7 @@ class PostJobFragment : Fragment() {
         jPapiFunctions.postJob(postJobData)
     }
 
-    private fun onJobPostedResponse()
-    {
+    private fun onJobPostedResponse() {
         //Code after Job Posted response is received
     }
 

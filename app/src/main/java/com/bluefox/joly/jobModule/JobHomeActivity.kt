@@ -3,7 +3,6 @@ package com.bluefox.joly.jobModule
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.ViewModelProvider
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
@@ -12,6 +11,7 @@ import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.ProfileFragment
 import com.bluefox.joly.databinding.ActivityJobHomeBinding
 import com.bluefox.joly.jobModule.jobProviderModule.PostJobFragment
+import com.bluefox.joly.jobModule.jobProviderModule.PostedJobsFragment
 import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -28,7 +28,6 @@ class JobHomeActivity : AppCompatActivity() {
         binding = ActivityJobHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        initViews()
         fillPostJob()
         onClickListeners()
 
@@ -39,20 +38,11 @@ class JobHomeActivity : AppCompatActivity() {
 
     }
 
-    private fun initViews() {
-        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        loginAPIFunctions = LoginAPIFunctions(
-            this,
-            this,
-            loginViewModel,
-            ::onLoginResponse,
-            onRegisterResponse = {})
-    }
 
     private fun onClickListeners() {
 
         binding.myJobBT.setOnClickListener {
-
+            fillPostedJobs()
         }
 
         binding.postJobBT.setOnClickListener {
@@ -85,6 +75,18 @@ class JobHomeActivity : AppCompatActivity() {
             .replace(R.id.containerFragment, PostJobFragment())
             .commit()
     }
+
+    private fun fillPostedJobs() {
+
+        onChangeBackGround(1)
+
+        binding.tvAppBarTitle.text = "Posted Job"
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.containerFragment, PostedJobsFragment())
+            .commit()
+    }
+
 
     private fun onChangeBackGround(mSelectedItem: Int) {
         when (mSelectedItem) {
