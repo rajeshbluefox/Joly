@@ -11,6 +11,7 @@ import com.bluefox.joly.clientModule.viewJob.ViewWorkDetailsActivity
 import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
 import com.bluefox.joly.homeModule.NavigationActivity
 import com.bluefox.joly.jobModule.JobHomeActivity
+import com.bluefox.joly.jobModule.jobProviderModule.ViewPostedJobActivity
 import com.bluefox.joly.serviceProviderModule.AddServiceActivity
 import com.bluefox.joly.serviceProviderModule.ShowTestimoniesActivity
 import com.bluefox.joly.serviceProviderModule.TestimonialsActivity
@@ -83,6 +84,12 @@ object CallIntent {
     fun gotoShowTestimonialsActivity(context: Context, killMe: Boolean, activity: Activity)
     {
         val intent = Intent(context, ShowTestimoniesActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+    fun gotoViewPostedJobActivity(context: Context,killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, ViewPostedJobActivity::class.java)
         context.startActivity(intent)
         if (killMe) activity.finish()
     }

@@ -23,9 +23,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
         <activity
+            android:name=".jobModule.jobProviderModule.ViewPostedJobActivity"
+            android:exported="false" />
+        <activity
             android:name=".jobModule.JobHomeActivity"
             android:exported="false"
-            android:theme="@style/Theme.Joly"/>
+            android:theme="@style/Theme.Joly" />
         <activity
             android:name=".serviceProviderModule.ShowTestimoniesActivity"
             android:exported="false"
