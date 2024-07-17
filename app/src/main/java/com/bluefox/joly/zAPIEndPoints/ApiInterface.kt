@@ -129,6 +129,23 @@ interface ApiInterface {
         @Part photos: MultipartBody.Part
     ): RegistrationResponse
 
+    @Multipart
+    @POST("JobSeekers_Register.php")
+    suspend fun postRegisterJobSeeker(
+        @Part("PhoneNumber") phoneNumber: RequestBody,
+        @Part("Name") name: RequestBody,
+        @Part("DateOfBirth") dateOfBirth: RequestBody,
+        @Part("Gender") gender: RequestBody,
+        @Part("Password") password: RequestBody,
+        @Part("City") city: RequestBody,
+        @Part("State") state: RequestBody,
+        @Part("Country") country: RequestBody,
+        @Part("Qualification") qualification: RequestBody,
+        @Part("Skills") skills: RequestBody,
+        @Part photo: MultipartBody.Part
+    ): RegistrationResponse
+
+
     @FormUrlEncoded
     @POST("service_seeker_get.php")
     suspend fun getSSWork(
@@ -189,10 +206,21 @@ interface ApiInterface {
         @Field("SkillRequired") skillRequired: String
     ): PostJobResponse
 
-    //TODO Change the End Point
     @FormUrlEncoded
-    @POST("job_provider_postjob.php")
+    @POST("JP_Update_PostedJob_ByJobId.php")
+    suspend fun jp_UpdateJob(
+        @Field("JobId") jobId: String,
+        @Field("JobName") jobName: String,
+        @Field("JobDetails") jobDetails: String,
+        @Field("JobDescription") jobDescription: String,
+        @Field("Eligibility") eligibility: String,
+        @Field("DeadLinetoApply") deadLineToApply: String,
+        @Field("SkillRequired") skillRequired: String
+    ): PostJobResponse
+
+    @FormUrlEncoded
+    @POST("jp_getPostedJobs_ByUserId.php")
     suspend fun jp_getPostedJob(
-        @Field("UserId") userId: String
+        @Field("userId") userId: String
     ): GetPostedJobsResponse
 }

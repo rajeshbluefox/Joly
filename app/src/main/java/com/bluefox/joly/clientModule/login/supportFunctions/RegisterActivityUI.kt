@@ -36,6 +36,29 @@ class RegisterActivityUI(
     {
         val userRole = UserDetails.getUserRoleStatus(context)
 
+        when(userRole)
+        {
+            4 ->{
+                binding.ltJobProvider.visibility=View.GONE
+                binding.ltServiceProvider.visibility=View.GONE
+
+                binding.tvPinCode.visibility=View.GONE
+                binding.etPinCode.visibility=View.GONE
+
+                binding.tvAddress.visibility=View.GONE
+                binding.etAddress.visibility=View.GONE
+            }
+
+            3 ->{
+                binding.ltJobProvider.visibility=View.VISIBLE
+                binding.ltServiceProvider.visibility=View.GONE
+            }
+            else ->{
+                binding.ltJobProvider.visibility=View.GONE
+                binding.ltServiceProvider.visibility=View.VISIBLE
+            }
+        }
+
         if(userRole == 3)
         {
             binding.ltJobProvider.visibility=View.VISIBLE

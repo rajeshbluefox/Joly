@@ -22,12 +22,17 @@ class SSRegistrationDetailsData(
     var city: String? = null,
     @field:SerializedName("State")
     var state: String? = null,
+    @field:SerializedName("Country")
+    var country: String? = null,
     @field:SerializedName("Address")
     var address: String? = null,
     @field:SerializedName("Password")
     var password: String? = null,
     @field:SerializedName("ConfirmPassword")
     var confirmPassword: String? = null,
+
+    @SerializedName("Skills")
+    var skills: String? = null,
 
     @SerializedName("Qualification")
     var qualification: String? = null,

@@ -37,6 +37,18 @@ class JPRepository @Inject constructor(
         return postJobResponse
     }
 
+    private var postJobResponseUJ = PostJobResponse()
+
+    suspend fun getUpdateResponse(postJobData: PostJobData): PostJobResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                postJobResponseUJ = apiHelper.jpUpdatePostedJob(postJobData)
+            }
+        } catch (_: Exception) {
+        }
+        return postJobResponseUJ
+    }
+
     private var getPostedJobsResponse = GetPostedJobsResponse()
 
     suspend fun getPostedJobsJP(userId: String): GetPostedJobsResponse {
