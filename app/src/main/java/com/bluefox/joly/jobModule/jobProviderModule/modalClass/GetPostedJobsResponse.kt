@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 
 data class GetPostedJobsResponse (
-    @SerializedName("code")
+    @SerializedName("status")
     val code: Int = 195,
     @SerializedName("PostedJobsList")
     val postedJobsList: ArrayList<PostJobData> =ArrayList()

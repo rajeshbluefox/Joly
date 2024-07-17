@@ -48,5 +48,7 @@ interface ApiHelper {
     //Job Provider
     suspend fun jpPostJob(postJobData: PostJobData):PostJobResponse
 
+    suspend fun jpUpdatePostedJob(postJobData: PostJobData):PostJobResponse
+
     suspend fun jpGetPostedJob(userId:String):GetPostedJobsResponse
 }

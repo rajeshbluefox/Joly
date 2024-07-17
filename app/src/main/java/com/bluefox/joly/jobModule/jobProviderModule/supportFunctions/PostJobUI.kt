@@ -2,6 +2,7 @@ package com.bluefox.joly.jobModule.jobProviderModule.supportFunctions
 
 import android.app.DatePickerDialog
 import android.content.Context
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.databinding.FragmentPostJobBinding
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
@@ -79,7 +80,7 @@ class PostJobUI(
         }
 
         val postJobData = PostJobData()
-        postJobData.phoneNumber = "1"
+        postJobData.userId = SSProfileData.mLoginData.userId
         postJobData.jobName = nJobName
         postJobData.jobDetails = nJobDetails
         postJobData.jobDescription = nJobDescription

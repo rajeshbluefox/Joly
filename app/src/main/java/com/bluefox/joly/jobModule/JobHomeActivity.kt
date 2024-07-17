@@ -5,13 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
-import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
-import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.ProfileFragment
 import com.bluefox.joly.databinding.ActivityJobHomeBinding
 import com.bluefox.joly.jobModule.jobProviderModule.PostJobFragment
 import com.bluefox.joly.jobModule.jobProviderModule.PostedJobsFragment
+import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,13 +19,14 @@ class JobHomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityJobHomeBinding
 
-    private lateinit var loginViewModel: LoginViewModel
-    private lateinit var loginAPIFunctions: LoginAPIFunctions
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityJobHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        StatusBarUtils.transparentStatusBarWhite(this)
+        StatusBarUtils.setTopPadding(resources, binding.appBarLt)
 
         fillPostJob()
         onClickListeners()
@@ -34,7 +34,6 @@ class JobHomeActivity : AppCompatActivity() {
         val loginData = LoginData()
         loginData.phoneNumber = UserDetails.getUserMobileNo(this)
         loginData.password = UserDetails.getUserPassword(this)
-//        postValidate(loginData)
 
     }
 
@@ -144,31 +143,5 @@ class JobHomeActivity : AppCompatActivity() {
 
     }
 
-    private fun postValidate(loginData: LoginData) {
-        loginAPIFunctions.validateLogin(loginData)
-    }
-
-    private fun onLoginResponse(loginData: LoginData) {
-
-        SSProfileData.openFrom = 1
-        SSProfileData.mLoginData = loginData
-
-        val userRole = UserDetails.getUserRoleStatus(this)
-        SSProfileData.UserRole = userRole
-
-        hidePB()
-        fillPostJob()
-
-    }
-
-    fun showPB() {
-        binding.progressBar.visibility = android.view.View.VISIBLE
-        binding.containerFragment.visibility = android.view.View.GONE
-    }
-
-    private fun hidePB() {
-        binding.progressBar.visibility = android.view.View.GONE
-        binding.containerFragment.visibility = android.view.View.VISIBLE
-    }
 
 }

@@ -57,6 +57,54 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
 
     override suspend fun ssRegister(sSRegistrationDetailsData: SSRegistrationDetailsData): RegistrationResponse {
 
+
+        if (SSProfileData.UserRole == 4) {
+            return apiService.postRegisterJobSeeker(
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.phoneNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.name.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.dateOfBirth.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.gender.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.password.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.city.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.state.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.country.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.qualification.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.skills.toString()
+                ),
+                SSSelectedData.registerPhoto!!
+            )
+        }
+
+
         if(SSProfileData.UserRole == 3)
         {
             return apiService.postRegisterJP(
@@ -300,7 +348,19 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
 
     override suspend fun jpPostJob(postJobData: PostJobData): PostJobResponse {
         return apiService.jp_PostJob(
-            postJobData.phoneNumber!!,
+            postJobData.userId.toString(),
+            postJobData.jobName!!,
+            postJobData.jobDetails!!,
+            postJobData.jobDescription!!,
+            postJobData.eligibility!!,
+            postJobData.deadLineToApply!!,
+            postJobData.skills!!
+        )
+    }
+
+    override suspend fun jpUpdatePostedJob(postJobData: PostJobData): PostJobResponse {
+        return apiService.jp_UpdateJob(
+            postJobData.jobId.toString(),
             postJobData.jobName!!,
             postJobData.jobDetails!!,
             postJobData.jobDescription!!,

@@ -4,8 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 
 data class PostJobData(
-    @SerializedName("PhoneNumber")
-    var phoneNumber: String? = null,
+    @SerializedName("UserId")
+    var userId: Int = 0,
+    @SerializedName("JobId")
+    var jobId: Int = 0,
     @SerializedName("JobName")
     var jobName: String? = null,
     @SerializedName("JobDetails")
@@ -20,7 +22,7 @@ data class PostJobData(
     var skills: String? = null,
     @SerializedName("JobLocation")
     var jobLocation: String? = "hyd",
-    @SerializedName("PostedDate")
+    @SerializedName("PostedDatee")
     var postedDate: String? = "5 Apr",
 
 )

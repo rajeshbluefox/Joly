@@ -1,6 +1,7 @@
 package com.bluefox.joly.jobModule.jobProviderModule
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +15,11 @@ import com.bluefox.joly.databinding.FragmentPostedJobsBinding
 import com.bluefox.joly.jobModule.apiFunctions.JPViewModel
 import com.bluefox.joly.jobModule.apiFunctions.JPapiFunctions
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
 import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.JpJobsAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PostedJobsFragment : Fragment() {
 
     private lateinit var binding: FragmentPostedJobsBinding
@@ -59,7 +63,7 @@ class PostedJobsFragment : Fragment() {
 
 
         //GetPostedJobs
-        jPapiFunctions.getPostedJobs(SSProfileData.mLoginData.id!!)
+        jPapiFunctions.getPostedJobs(SSProfileData.mLoginData.userId.toString())
 
     }
 
@@ -69,6 +73,8 @@ class PostedJobsFragment : Fragment() {
 
 
     private fun initPostedJobs(worksList: List<PostJobData>) {
+
+        Log.e("Test","3")
 
         val jpJobsAdapter = JpJobsAdapter(requireContext(), worksList, ::onJobClicked)
         binding.rvJobs.apply {
@@ -83,6 +89,8 @@ class PostedJobsFragment : Fragment() {
 
     private fun onJobClicked(postJobData: PostJobData) {
         //Call ViewPostedJob
+        SelJobDetails.postJobData=postJobData
+        //Call intent to ViewJob
     }
 
 
