@@ -1,6 +1,7 @@
 package com.bluefox.joly.jobModule.apiFunctions
 
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetApplicationResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetPostedJobsResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
@@ -59,6 +60,31 @@ class JPRepository @Inject constructor(
         } catch (_: Exception) {
         }
         return getPostedJobsResponse
+    }
+
+    private var getPostedJobsResponseUJS = PostJobResponse()
+
+    suspend fun getUpdatedJobStatusResponse(jobId: String, jobStatus: String): PostJobResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                getPostedJobsResponseUJS = apiHelper.jpUpdateJobStatus(jobId,jobStatus)
+            }
+        } catch (_: Exception) {
+        }
+        return getPostedJobsResponseUJS
+    }
+
+
+    private var getJobApplicationsResponse = GetApplicationResponse()
+
+    suspend fun getPostedApplicationsResponse(jobId: String): GetApplicationResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                getJobApplicationsResponse = apiHelper.jpGetJobApplications(jobId)
+            }
+        } catch (_: Exception) {
+        }
+        return getJobApplicationsResponse
     }
 
 }

@@ -1,47 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:context=".jobModule.jobProviderModule.ViewPostedJobActivity">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/appBarLt"
-            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3F51B5"
+            android:paddingBottom="@dimen/dp_6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_48"
-            android:background="#3F51B5">
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
+                android:src="@drawable/baseline_arrow_back_36"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tvAppBarTitle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Post a New Job"
-                android:textAlignment="center"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="View Job"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_22"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivBack"
+                app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ScrollView
-            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scrollbars="none"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLt"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLt">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/main"
@@ -52,11 +62,11 @@
                 tools:context=".clientModule.postJob.PostJobFragment">
 
                 <ImageView
-                    android:visibility="gone"
                     android:id="@+id/profilePic"
                     android:layout_width="@dimen/dp_96"
                     android:layout_height="@dimen/dp_96"
                     android:src="@drawable/ic_baseline_account_circle_24"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +76,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
-                    android:layout_marginTop="@dimen/dp_16"
+                    android:layout_marginTop="@dimen/dp_12"
                     android:text="Job Name"
                     app:layout_constraintStart_toStartOf="@+id/etJobName"
                     app:layout_constraintTop_toBottomOf="@+id/profilePic" />
@@ -101,16 +111,14 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/et_bg_1"
-                    android:hint="JobDetails"
                     android:gravity="top"
+                    android:hint="JobDetails"
                     android:imeOptions="actionGo"
                     android:lines="4"
                     android:maxLines="4"
                     app:layout_constraintEnd_toEndOf="@+id/etJobName"
                     app:layout_constraintStart_toStartOf="@+id/etJobName"
                     app:layout_constraintTop_toBottomOf="@+id/tvJobDetails" />
-
-
 
                 <TextView
                     android:id="@+id/tvJobDescription"
@@ -128,8 +136,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/et_bg_1"
-                    android:hint="JobDescription"
                     android:gravity="top"
+                    android:hint="JobDescription"
                     android:imeOptions="actionGo"
                     android:lines="4"
                     android:maxLines="4"
@@ -153,8 +161,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:background="@drawable/et_bg_1"
-                    android:hint="Eligibility"
                     android:gravity="top"
+                    android:hint="Eligibility"
                     android:imeOptions="actionGo"
                     android:lines="4"
                     android:maxLines="4"
@@ -171,21 +179,6 @@
                     android:text="DeadLine to Apply"
                     app:layout_constraintStart_toStartOf="@+id/tvDeadLineToApplyValue"
                     app:layout_constraintTop_toBottomOf="@+id/etEligibility" />
-
-                <EditText
-                    android:visibility="gone"
-                    android:id="@+id/etDeadLineToApply"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:background="@drawable/et_bg_1"
-                    android:hint="DeadLine to Apply"
-                    android:imeOptions="actionGo"
-                    android:lines="1"
-                    android:maxLines="1"
-                    app:layout_constraintEnd_toEndOf="@+id/etEligibility"
-                    app:layout_constraintStart_toStartOf="@+id/etEligibility"
-                    app:layout_constraintTop_toBottomOf="@+id/tvDeadLineToApply" />
 
                 <TextView
                     android:id="@+id/tvDeadLineToApplyValue"
@@ -205,7 +198,6 @@
                     app:layout_constraintStart_toStartOf="@+id/etEligibility"
                     app:layout_constraintTop_toBottomOf="@+id/tvDeadLineToApply" />
 
-
                 <TextView
                     android:id="@+id/tvSkillsRequired"
                     android:layout_width="wrap_content"
@@ -222,33 +214,62 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/et_bg_1"
-                    android:hint="Skills Required"
                     android:gravity="top"
+                    android:hint="Skills Required"
                     android:imeOptions="actionGo"
                     android:lines="4"
                     android:maxLines="4"
-                    app:layout_constraintEnd_toEndOf="@+id/etDeadLineToApply"
-                    app:layout_constraintStart_toStartOf="@+id/etDeadLineToApply"
+                    app:layout_constraintEnd_toEndOf="@+id/tvDeadLineToApplyValue"
+                    app:layout_constraintStart_toStartOf="@+id/tvDeadLineToApplyValue"
                     app:layout_constraintTop_toBottomOf="@+id/tvSkillsRequired" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btSubmit"
+                    android:id="@+id/btViewApplication"
                     android:layout_width="@dimen/dp_250"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
+                    android:layout_marginTop="28dp"
+                    android:background="@drawable/button_two"
+                    android:text="View Application"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/etSkillsRequired" />
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btCloseJob"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/button_two"
+                    android:text="Close Job"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btViewApplication" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btUpdateJob"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
                     android:layout_marginBottom="16dp"
                     android:background="@drawable/button_two"
-                    android:text="Post"
+                    android:text="Update Job"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/etSkillsRequired" />
-
+                    app:layout_constraintTop_toBottomOf="@+id/btCloseJob" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
         </ScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

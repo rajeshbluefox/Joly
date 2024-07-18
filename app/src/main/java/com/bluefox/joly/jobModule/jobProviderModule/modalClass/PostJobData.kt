@@ -8,6 +8,8 @@ data class PostJobData(
     var userId: Int = 0,
     @SerializedName("JobId")
     var jobId: Int = 0,
+    @SerializedName("JobStatus")
+    var jobStatus: Int? = 0,
     @SerializedName("JobName")
     var jobName: String? = null,
     @SerializedName("JobDetails")
@@ -24,5 +26,6 @@ data class PostJobData(
     var jobLocation: String? = "hyd",
     @SerializedName("PostedDatee")
     var postedDate: String? = "5 Apr",
+
 
 )

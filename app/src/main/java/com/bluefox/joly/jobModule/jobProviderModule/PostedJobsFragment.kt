@@ -17,6 +17,7 @@ import com.bluefox.joly.jobModule.apiFunctions.JPapiFunctions
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
 import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.JpJobsAdapter
+import com.bluefox.joly.zCommonFunctions.CallIntent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -91,6 +92,7 @@ class PostedJobsFragment : Fragment() {
         //Call ViewPostedJob
         SelJobDetails.postJobData=postJobData
         //Call intent to ViewJob
+        CallIntent.gotoViewPostedJobActivity(requireContext(), false, requireActivity())
     }
 
 

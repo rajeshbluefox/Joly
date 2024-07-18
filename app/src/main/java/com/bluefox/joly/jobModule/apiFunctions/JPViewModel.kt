@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetApplicationResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetPostedJobsResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
@@ -70,4 +71,43 @@ class JPViewModel @Inject constructor(
     fun getUpdateJobResponse(): LiveData<PostJobResponse> {
         return getUpdateJobResponse
     }
+
+
+    private var getUpdateJobStatusResponse = MutableLiveData<PostJobResponse>()
+
+    fun updateJobStatus(jobId: String, jobStatus: String) {
+        viewModelScope.launch {
+            getUpdateJobStatusResponse.postValue(
+                jpRepository.getUpdatedJobStatusResponse(jobId,jobStatus)
+            )
+        }
+    }
+
+    fun resetUpdateJobStatusResponse() {
+        getUpdateJobStatusResponse = MutableLiveData<PostJobResponse>()
+    }
+
+    fun getUpdateJobStatusResponse(): LiveData<PostJobResponse> {
+        return getUpdateJobStatusResponse
+    }
+
+
+    private var getUpdateJobApplicationsResponse = MutableLiveData<GetApplicationResponse>()
+
+    fun updateJobApplications(jobId: String) {
+        viewModelScope.launch {
+            getUpdateJobApplicationsResponse.postValue(
+                jpRepository.getPostedApplicationsResponse(jobId)
+            )
+        }
+    }
+
+    fun resetUpdateJobApplicationsResponse() {
+        getUpdateJobApplicationsResponse = MutableLiveData<GetApplicationResponse>()
+    }
+
+    fun getUpdateJobApplicationsResponse(): LiveData<GetApplicationResponse> {
+        return getUpdateJobApplicationsResponse
+    }
+
 }
