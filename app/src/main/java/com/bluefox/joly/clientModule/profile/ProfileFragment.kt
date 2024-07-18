@@ -13,12 +13,14 @@ import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.LogoutDialog
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
-import com.bluefox.joly.clientModule.profile.supportFunctions.ProfileFragmentUI
+//import com.bluefox.joly.clientModule.profile.supportFunctions.ProfileFragmentUI
+import com.bluefox.joly.clientModule.profile.supportFunctions.SPUI
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zSharedPreference.UserDetails
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import javax.annotation.meta.When
 
 
 @AndroidEntryPoint
@@ -26,7 +28,10 @@ class ProfileFragment : Fragment() {
 
     private lateinit var binding: FragmentProfileBinding
 
-    private lateinit var profileFragmentUI: ProfileFragmentUI
+//    private lateinit var profileFragmentUI: ProfileFragmentUI
+
+    private lateinit var spui: SPUI
+
 
     private lateinit var logoutDialog: LogoutDialog
 
@@ -53,19 +58,36 @@ class ProfileFragment : Fragment() {
 
 
         initViews()
-        getKeyHeight(view)
+//        getKeyHeight(view)
     }
 
     private fun initViews() {
-        profileFragmentUI = ProfileFragmentUI(requireContext(),requireActivity(), binding,::onSubmitClicked, ::onLogoutClicked)
+
+//        profileFragmentUI = ProfileFragmentUI(requireContext(),requireActivity(), binding,::onSubmitClicked, ::onLogoutClicked)
 
         logoutDialog = LogoutDialog(layoutInflater, requireContext(), ::logoutLogic)
 
-        Log.e("Test","Photo :${SSProfileData.mLoginData.photo}")
-        Glide.with(this)
-            .load(SSProfileData.mLoginData.photo)
-            .fitCenter()
-            .into(binding.profilePic)
+        Log.e("Test", "Photo :${SSProfileData.mLoginData.photo}")
+
+
+        when (SSProfileData.UserRole) {
+
+            2 -> {
+                spui = SPUI(
+                    requireContext(),
+                    requireActivity(),
+                    binding,
+                    ::onSubmitClicked,
+                    ::onLogoutClicked
+                )
+
+                Glide.with(this)
+                    .load(SSProfileData.mLoginData.photo)
+                    .fitCenter()
+                    .into(binding.ltServiceProvider.profilePic)
+
+            }
+        }
 
     }
 
@@ -74,64 +96,62 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logoutLogic() {
-        UserDetails.saveLoginStatus(requireContext(),false)
+        UserDetails.saveLoginStatus(requireContext(), false)
         CallIntent.gotoLogin(requireContext(), true, requireActivity())
     }
 
-    private fun getKeyHeight(view: View) {
-        view.getKeyboardHeight { keyboardHeight ->
-            if (keyboardHeight > 0) {
-                // Keyboard is visible
-                // Handle the keyboard height
-                println("Keyboard height: $keyboardHeight")
+//    private fun getKeyHeight(view: View) {
+//        view.getKeyboardHeight { keyboardHeight ->
+//            if (keyboardHeight > 0) {
+//                // Keyboard is visible
+//                // Handle the keyboard height
+//                println("Keyboard height: $keyboardHeight")
+//
+//                profileFragmentUI.setBottomMargin(
+//                    binding.view1,
+//                    keyboardHeight + (keyboardHeight / 2)
+//                )
+//            } else {
+//                // Keyboard is hidden
+//                println("Keyboard hidden")
+//
+//                profileFragmentUI.setBottomMargin(binding.view1, 16)
+//
+//            }
+//        }
+//    }
 
-                profileFragmentUI.setBottomMargin(
-                    binding.view1,
-                    keyboardHeight + (keyboardHeight / 2)
-                )
-            } else {
-                // Keyboard is hidden
-                println("Keyboard hidden")
+//    fun View.getKeyboardHeight(onKeyboardHeightChanged: (Int) -> Unit) {
+//        val rootView = this
+//        rootView.viewTreeObserver.addOnGlobalLayoutListener(object :
+//            ViewTreeObserver.OnGlobalLayoutListener {
+//            private var previousKeyboardHeight = -1
+//
+//            override fun onGlobalLayout() {
+//                val rect = Rect()
+//                rootView.getWindowVisibleDisplayFrame(rect)
+//                val screenHeight = rootView.height
+//                val keypadHeight = screenHeight - rect.bottom
+//
+//                if (keypadHeight > screenHeight * 0.15) { // Keyboard is opened
+//                    if (keypadHeight != previousKeyboardHeight) {
+//                        onKeyboardHeightChanged(keypadHeight)
+//                        previousKeyboardHeight = keypadHeight
+//                    }
+//                } else {
+//                    if (previousKeyboardHeight != 0) {
+//                        onKeyboardHeightChanged(0)
+//                        previousKeyboardHeight = 0
+//                    }
+//                }
+//            }
+//        })
+//    }
 
-                profileFragmentUI.setBottomMargin(binding.view1, 16)
 
-            }
-        }
+    private fun onSubmitClicked(sSProfileDetailsData: SSProfileDetailsData) {
+        Log.e("test", "Name ${sSProfileDetailsData.name}")
     }
-
-    fun View.getKeyboardHeight(onKeyboardHeightChanged: (Int) -> Unit) {
-        val rootView = this
-        rootView.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            private var previousKeyboardHeight = -1
-
-            override fun onGlobalLayout() {
-                val rect = Rect()
-                rootView.getWindowVisibleDisplayFrame(rect)
-                val screenHeight = rootView.height
-                val keypadHeight = screenHeight - rect.bottom
-
-                if (keypadHeight > screenHeight * 0.15) { // Keyboard is opened
-                    if (keypadHeight != previousKeyboardHeight) {
-                        onKeyboardHeightChanged(keypadHeight)
-                        previousKeyboardHeight = keypadHeight
-                    }
-                } else {
-                    if (previousKeyboardHeight != 0) {
-                        onKeyboardHeightChanged(0)
-                        previousKeyboardHeight = 0
-                    }
-                }
-            }
-        })
-    }
-
-
-    private fun onSubmitClicked(sSProfileDetailsData : SSProfileDetailsData)
-    {
-        Log.e("test","Name ${sSProfileDetailsData.name}")
-    }
-
 
 
 }

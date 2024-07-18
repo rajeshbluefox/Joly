@@ -10,11 +10,24 @@
     android:layout_height="match_parent"
     tools:context=".homeModule.NavigationActivity">
 
+    <LinearLayout
+        android:id="@+id/ltService"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/ltJobs"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+
     <androidx.cardview.widget.CardView
         android:id="@+id/btServiceSeeker"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/dp_6"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_6"
         app:cardBackgroundColor="@color/cardColor1"
         app:layout_constraintVertical_chainStyle="spread"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,18 +60,20 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:text="Post your works and get them done"/>
+            android:text="Post your works \nand get them done"/>
 
     </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/btServiceProvider"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/dp_6"
+        android:layout_marginStart="@dimen/dp_6"
+        android:layout_marginEnd="@dimen/dp_12"
         app:cardBackgroundColor="@color/cardColor1"
         app:layout_constraintBottom_toTopOf="@id/btJobProvider"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,17 +106,32 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:text="Post Services you offer and find works"/>
+            android:text="Post Services you offer \nand find works"/>
 
     </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ltJobs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/ltService"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/btJobProvider"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/dp_6"
+        android:layout_marginStart="@dimen/dp_12"
+        android:layout_marginEnd="@dimen/dp_6"
         app:cardBackgroundColor="@color/cardColor1"
         app:layout_constraintBottom_toTopOf="@id/btJobSeeker"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +140,7 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
@@ -134,7 +164,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:text="Post jobs you offer and find employees"/>
+                android:text="Post Jobs you offer \nand Find Employees"/>
 
         </LinearLayout>
 
@@ -142,12 +172,14 @@
 
     </androidx.cardview.widget.CardView>
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/btJobSeeker"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="wrap_content"
         app:cardCornerRadius="@dimen/dp_6"
+        android:layout_marginEnd="@dimen/dp_12"
+        android:layout_marginStart="@dimen/dp_6"
         app:cardBackgroundColor="@color/cardColor1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,7 +188,7 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center"
@@ -180,7 +212,7 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:textColor="@color/black"
-                android:text="Find Jobs and Apply"/>
+                android:text="Find Jobs \nand Apply"/>
 
         </LinearLayout>
 
@@ -188,6 +220,7 @@
 
     </androidx.cardview.widget.CardView>
 
+    </LinearLayout>
 
 
 
