@@ -23,6 +23,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
         <activity
+            android:name=".jobModule.jobProviderModule.ApplicantProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".jobModule.jobProviderModule.ViewApplicationsActivity"
+            android:exported="false" />
+        <activity
             android:name=".jobModule.jobProviderModule.ViewPostedJobActivity"
             android:exported="false" />
         <activity

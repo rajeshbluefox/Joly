@@ -73,5 +73,46 @@ class JPapiFunctions(
 
     }
 
+    fun getPostedJobStatus(jobId: String, jobStatus: String) {
+        jpViewModel.resetUpdateJobStatusResponse()
+        jpViewModel.updateJobStatus(jobId, jobStatus)
+
+        getPostedJobStatusObserver()
+    }
+
+    private fun getPostedJobStatusObserver() {
+        jpViewModel.getUpdateJobStatusResponse().observe(mLifecycleOwner) {
+            if (it.status == 200) {
+                UtilFunctions.showToast(mContext, "Job Status Updated SuccessFully")
+                //TODO Impl Callback
+            }
+            else {
+                UtilFunctions.showToast(mContext, "Server Not Responding")
+            }
+        }
+
+    }
+
+
+    fun getJobApplications(jobId: String) {
+        jpViewModel.resetUpdateJobApplicationsResponse()
+        jpViewModel.updateJobApplications(jobId)
+
+        getJobApplicationsObserver()
+    }
+
+    private fun getJobApplicationsObserver() {
+        jpViewModel.getUpdateJobApplicationsResponse().observe(mLifecycleOwner) {
+            if (it.code == 200) {
+                UtilFunctions.showToast(mContext, "Job Application SuccessFully")
+                //TODO Impl Callback
+            }
+            else {
+                UtilFunctions.showToast(mContext, "Server Not Responding")
+            }
+        }
+
+    }
+
 
 }

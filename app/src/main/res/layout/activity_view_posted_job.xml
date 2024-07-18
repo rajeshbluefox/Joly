@@ -224,13 +224,12 @@
                     app:layout_constraintTop_toBottomOf="@+id/tvSkillsRequired" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btCloseJob"
+                    android:id="@+id/btViewApplication"
                     android:layout_width="@dimen/dp_250"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
-                    android:layout_marginBottom="16dp"
                     android:background="@drawable/button_two"
-                    android:text="Close Job"
+                    android:text="View Application"
                     android:textColor="@color/white"
                     android:textSize="@dimen/sp_18"
                     android:textStyle="bold"
@@ -238,8 +237,23 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/etSkillsRequired" />
 
+
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btSubmit"
+                    android:id="@+id/btCloseJob"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="18dp"
+                    android:background="@drawable/button_two"
+                    android:text="Close Job"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btViewApplication" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btUpdateJob"
                     android:layout_width="@dimen/dp_250"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="18dp"

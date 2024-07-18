@@ -8,6 +8,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
 import com.bluefox.joly.dummy.GetThemesResponse
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetApplicationResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetPostedJobsResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
@@ -223,4 +224,18 @@ interface ApiInterface {
     suspend fun jp_getPostedJob(
         @Field("userId") userId: String
     ): GetPostedJobsResponse
+
+
+    @FormUrlEncoded
+    @POST("JP_Update_PostedJob_ByJobId.php")
+    suspend fun jp_UpdateJobStatus(
+        @Field("JobId") jobId: String,
+        @Field("JobStatus") jobStatus: String,
+    ): PostJobResponse
+
+    @FormUrlEncoded
+    @POST("jp_getPostedJobs_ByUserId.php")
+    suspend fun jp_getPostedApplications(
+        @Field("jobId") jobId: String
+    ): GetApplicationResponse
 }
