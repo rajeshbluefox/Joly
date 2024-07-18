@@ -25,9 +25,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-            <include
-                android:id="@+id/ltServiceProvider"
-                layout="@layout/fragment_profile_sp_layout"/>
+                <include
+                    android:id="@+id/ltServiceSeeker"
+                    layout="@layout/fragment_profile_ss_layout" />
+
+
+                <include
+                    android:id="@+id/ltServiceProvider"
+                    layout="@layout/fragment_profile_sp_layout" />
+
+                <include
+                    android:id="@+id/ltJobProvider"
+                    layout="@layout/fragment_profile_jp_layout" />
+
+                <include
+                    android:id="@+id/ltJobSeeker"
+                    layout="@layout/fragment_profile_js_layout" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
