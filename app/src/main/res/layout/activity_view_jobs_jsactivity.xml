@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".jobModule.jobSeekerModule.viewJobs.ViewJobsJSActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appBarLt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3F51B5"
+            android:paddingBottom="@dimen/dp_6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_12"
+                android:src="@drawable/baseline_arrow_back_36"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvAppBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="View Job"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_22"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/ivBack"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLt">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_12"
+                android:paddingBottom="@dimen/dp_12">
+
+                <ImageView
+                    android:id="@+id/profilePic"
+                    android:layout_width="@dimen/dp_96"
+                    android:layout_height="@dimen/dp_96"
+                    android:src="@drawable/ic_baseline_account_circle_24"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvJobName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="@dimen/dp_6"
+                    android:text="Job Name"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvJobNameValue"
+                    app:layout_constraintTop_toBottomOf="@+id/profilePic" />
+
+                <TextView
+                    android:id="@+id/tvJobNameValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Job Name"
+                    android:textSize="@dimen/sp_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobName" />
+
+                <TextView
+                    android:id="@+id/tvJobDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Job Details"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvJobNameValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobNameValue" />
+
+                <TextView
+                    android:id="@+id/tvJobDetailsValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Job Details"
+                    android:textSize="@dimen/sp_20"
+                    app:layout_constraintEnd_toEndOf="@+id/tvJobNameValue"
+                    app:layout_constraintStart_toStartOf="@+id/tvJobNameValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobDetails" />
+
+                <TextView
+                    android:id="@+id/tvJobDescription"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Job Description"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvJobDescriptionValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobDetailsValue" />
+
+                <TextView
+                    android:id="@+id/tvJobDescriptionValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Job Description"
+                    android:textSize="@dimen/sp_20"
+                    app:layout_constraintEnd_toEndOf="@+id/tvJobNameValue"
+                    app:layout_constraintStart_toStartOf="@+id/tvJobNameValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobDescription" />
+
+                <TextView
+                    android:id="@+id/tvEligibility"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Eligibility"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvEligibilityValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvJobDescriptionValue" />
+
+                <TextView
+                    android:id="@+id/tvEligibilityValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Eligibility"
+                    android:textSize="@dimen/sp_20"
+                    app:layout_constraintEnd_toEndOf="@+id/tvJobDescriptionValue"
+                    app:layout_constraintStart_toStartOf="@+id/tvJobDescriptionValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEligibility" />
+
+                <TextView
+                    android:id="@+id/tvSkillsRequired"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Skills Required"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_14"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvSkillsRequiredValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEligibilityValue" />
+
+                <TextView
+                    android:id="@+id/tvSkillsRequiredValue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Skills Required"
+                    android:textSize="@dimen/sp_20"
+                    app:layout_constraintEnd_toEndOf="@+id/tvEligibilityValue"
+                    app:layout_constraintStart_toStartOf="@+id/tvEligibilityValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSkillsRequired" />
+
+                <TextView
+                    android:id="@+id/tvDeadLineToApply"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="12dp"
+                    android:text="DeadLine To Apply :"
+                    android:textColor="#06286B"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="@+id/tvSkillsRequiredValue"
+                    app:layout_constraintTop_toBottomOf="@+id/tvSkillsRequiredValue" />
+
+                <TextView
+                    android:id="@+id/tvDeadLineToApplyValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:text="Apr 5"
+                    android:textColor="#FA030B"
+                    android:textSize="@dimen/sp_16"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvDeadLineToApply"
+                    app:layout_constraintStart_toEndOf="@+id/tvDeadLineToApply"
+                    app:layout_constraintTop_toTopOf="@+id/tvDeadLineToApply" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btApply"
+                    android:layout_width="@dimen/dp_250"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="55dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/button_two"
+                    android:text="Apply"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp_18"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDeadLineToApply" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </ScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
