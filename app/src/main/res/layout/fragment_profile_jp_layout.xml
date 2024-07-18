@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-<layout>
-
-    <LinearLayout
-        android:visibility="gone"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ltServiceProvider"
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/ltJobProvider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/ltJobProvider">
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvProfile"
@@ -22,7 +15,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -80,7 +72,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -93,19 +84,19 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltCompany"
+                android:id="@+id/ltName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="Company">
+                android:hint="Name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCompany"
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="XYZ Solutions" />
+                    android:text="John Doe" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -144,9 +135,9 @@
                 android:id="@+id/tvGender"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:text="Gender"
-                android:layout_marginHorizontal="@dimen/dp_16"/>
+                android:text="Gender" />
 
             <RadioGroup
                 android:id="@+id/rgGender"
@@ -180,6 +171,21 @@
                     android:text="Other" />
             </RadioGroup>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ltAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="12dp"
+                android:hint="Address">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="5-4-6/1, Kothur, Hnk" />
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ltCity"
@@ -214,19 +220,19 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltAddress"
+                android:id="@+id/ltCountry"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="Address">
+                android:hint="Country">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etAddress"
+                    android:id="@+id/etCountry"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="5-4-6/1, Kothur, Hnk" />
+                    android:text="India" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -246,104 +252,56 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltLocation"
+                android:id="@+id/ltCompanyName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="Location">
+                android:hint="Company Name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etLocation"
+                    android:id="@+id/etCompanyName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hyderabad" />
+                    android:text="Company XYZ" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltQualification"
+                android:id="@+id/ltCompanyDescription"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="Qualification">
+                android:hint="Company Description">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etQualification"
+                    android:id="@+id/etCompanyDescription"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="B.Tech" />
+                    android:text="Description of the company" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltPreviousExperience"
+                android:id="@+id/ltCompanyWebsite"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="Previous Experience">
+                android:hint="Company Website Link">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPreviousExperience"
+                    android:id="@+id/etCompanyWebsite"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="2 years" />
+                    android:text="https://www.companyxyz.com" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltPortfolioLink"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="Portfolio Link">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPortfolioLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="www.portfolio.com" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltDescription"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="Description">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enter Description" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btSubmit"
-                android:layout_width="@dimen/dp_250"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="22dp"
-                android:layout_marginBottom="16dp"
-                android:background="@drawable/button_two"
-                android:text="Submit"
-                android:textColor="@color/white"
-                android:textSize="@dimen/sp_18"
-                android:textStyle="bold"
-                android:visibility="visible" />
+            <!-- Button and other views can be added here as needed -->
 
         </LinearLayout>
 
-
     </LinearLayout>
-
 </layout>
-
-

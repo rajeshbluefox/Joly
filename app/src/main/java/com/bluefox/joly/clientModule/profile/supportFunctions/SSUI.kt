@@ -12,18 +12,15 @@ import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
-
-class SPUI(
+class SSUI(
     val context: Context,
     val activity: Activity,
     private val binding: FragmentProfileBinding,
     private val onSubmitClicked: (sSProfileDetailsData: SSProfileDetailsData) -> Unit,
     private val logoutClicked: () -> Unit
-
 ) {
 
     init {
-
         disableAllEditTexts()
         setDetails()
         genderOnClickListener()
@@ -32,19 +29,19 @@ class SPUI(
 
     fun onClickListeners() {
 
-        binding.ltServiceProvider.ivEdit.setOnClickListener {
+        binding.ltServiceSeeker.ivEdit.setOnClickListener {
             enableAllEditTexts()
         }
 
-        binding.ltServiceProvider.ivLogout.setOnClickListener {
+        binding.ltServiceSeeker.ivLogout.setOnClickListener {
             logoutClicked.invoke()
         }
 
-        binding.ltServiceProvider.btSubmit.setOnClickListener {
+        binding.ltServiceSeeker.btSubmit.setOnClickListener {
             getValues()
         }
 
-        binding.ltServiceProvider.profilePic.setOnClickListener {
+        binding.ltServiceSeeker.profilePic.setOnClickListener {
             CallIntent.gotoProfileImageActivity(context, false, activity)
         }
 
@@ -53,20 +50,14 @@ class SPUI(
     private fun setDetails() {
         val profileData = SSProfileData.mLoginData
 
-        binding.ltServiceProvider.apply {
+        binding.ltServiceSeeker.apply {
             tvMobileNumber.text = profileData.phoneNumber
-            etCompany.setText(profileData.companyName)
+            etName.setText(profileData.name)
             etAadharNumber.setText(profileData.aadharNumber)
             etDOB.setText(profileData.age)
-            etCity.setText(profileData.city)
-            etState.setText(profileData.state)
-            etAddress.setText(profileData.address)
-            etPincode.setText(profileData.pincode)
             etLocation.setText(profileData.location)
-            etQualification.setText(profileData.qualification)
-            etPreviousExperience.setText(profileData.previousExperience)
-            etPortfolioLink.setText(profileData.portfolioLink)
-            etDescription.setText(profileData.description)
+            etPincode.setText(profileData.pincode)
+            etAddress.setText(profileData.address)
 
             val genderValue = SSProfileData.mLoginData.gender?.toInt()
 
@@ -79,12 +70,12 @@ class SPUI(
     }
 
     private fun getValues() {
-        binding.ltServiceProvider.apply {
+        binding.ltServiceSeeker.apply {
             val ssRegistrationDetailsData = SSRegistrationDetailsData()
 
-            val nCompanyName = etCompany.text.toString()
-            if (isEditTextEmpty(etCompany, context, "Enter CompanyName")) return
-            ssRegistrationDetailsData.companyName = nCompanyName
+            val nName = etName.text.toString()
+            if (isEditTextEmpty(etName, context, "Enter Name")) return
+            ssRegistrationDetailsData.name = nName
 
             val nAadharNumber = etAadharNumber.text.toString()
             if (isEditTextEmpty(etAadharNumber, context, "Enter Aadhar Number")) return
@@ -99,47 +90,21 @@ class SPUI(
                 return
             }
 
-            val nCity = etCity.text.toString()
-            if (isEditTextEmpty(etCity, context, "Enter City")) return
-            ssRegistrationDetailsData.city = nCity
-
-            val nState = etState.text.toString()
-            if (isEditTextEmpty(etState, context, "Enter State")) return
-            ssRegistrationDetailsData.state = nState
-
-            val nAddress = etAddress.text.toString()
-            if (isEditTextEmpty(etAddress, context, "Enter Address")) return
-            ssRegistrationDetailsData.address = nAddress
+            val nLocation = etLocation.text.toString()
+            if (isEditTextEmpty(etLocation, context, "Enter Location")) return
+            ssRegistrationDetailsData.location = nLocation
 
             val nPincode = etPincode.text.toString()
             if (isEditTextEmpty(etPincode, context, "Enter Pincode")) return
             ssRegistrationDetailsData.pinCode = nPincode
 
-            val nLocation = etLocation.text.toString()
-            if (isEditTextEmpty(etLocation, context, "Enter Location")) return
-            ssRegistrationDetailsData.location = nLocation
+            val nAddress = etAddress.text.toString()
+            if (isEditTextEmpty(etAddress, context, "Enter Address")) return
+            ssRegistrationDetailsData.address = nAddress
 
-            val nQualification = etQualification.text.toString()
-            if (isEditTextEmpty(etQualification, context, "Enter Qualification")) return
-            ssRegistrationDetailsData.qualification = nQualification
-
-            val nPreviousExperience = etPreviousExperience.text.toString()
-            if (isEditTextEmpty(etPreviousExperience, context, "Enter Previous Experience")) return
-            ssRegistrationDetailsData.previousExperience = nPreviousExperience
-
-            val nPortfolioLink = etPortfolioLink.text.toString()
-            if (isEditTextEmpty(etPortfolioLink, context, "Enter Portfolio Link")) return
-            ssRegistrationDetailsData.portfolioLink = nPortfolioLink
-
-            val nDescription = etDescription.text.toString()
-            if (isEditTextEmpty(etDescription, context, "Enter Description")) return
-            ssRegistrationDetailsData.description = nDescription
-
-
-            //TODO Callback
+            // TODO: Callback
         }
     }
-
 
     private fun isEditTextEmpty(editText: EditText, context: Context, message: String): Boolean {
         return if (editText.text.toString().trim().isEmpty()) {
@@ -150,21 +115,14 @@ class SPUI(
         }
     }
 
-
     private fun disableAllEditTexts() {
-        binding.ltServiceProvider.apply {
-            disableET(etCompany)
+        binding.ltServiceSeeker.apply {
+            disableET(etName)
             disableET(etAadharNumber)
             disableET(etDOB)
-            disableET(etCity)
-            disableET(etState)
-            disableET(etAddress)
-            disableET(etPincode)
             disableET(etLocation)
-            disableET(etQualification)
-            disableET(etPreviousExperience)
-            disableET(etPortfolioLink)
-            disableET(etDescription)
+            disableET(etPincode)
+            disableET(etAddress)
             rgGender.isEnabled = false
             rbMale.isEnabled = false
             rbFemale.isEnabled = false
@@ -174,19 +132,13 @@ class SPUI(
     }
 
     private fun enableAllEditTexts() {
-        binding.ltServiceProvider.apply {
-            enableET(etCompany)
+        binding.ltServiceSeeker.apply {
+            enableET(etName)
             enableET(etAadharNumber)
             enableET(etDOB)
-            enableET(etCity)
-            enableET(etState)
-            enableET(etAddress)
-            enableET(etPincode)
             enableET(etLocation)
-            enableET(etQualification)
-            enableET(etPreviousExperience)
-            enableET(etPortfolioLink)
-            enableET(etDescription)
+            enableET(etPincode)
+            enableET(etAddress)
             rgGender.isEnabled = true
             rbMale.isEnabled = true
             rbFemale.isEnabled = true
@@ -195,35 +147,30 @@ class SPUI(
         }
     }
 
-
     private fun disableET(view: View) {
-        view.isClickable = false;
+        view.isClickable = false
         view.isEnabled = false
     }
 
     private fun enableET(view: View) {
-        view.isClickable = true;
-        view.isEnabled = true;
+        view.isClickable = true
+        view.isEnabled = true
     }
 
     private var nGenderSelected = -1
     private fun genderOnClickListener() {
-        binding.ltServiceProvider.rgGender.setOnCheckedChangeListener { group, checkedId ->
+        binding.ltServiceSeeker.rgGender.setOnCheckedChangeListener { group, checkedId ->
             when (checkedId) {
                 R.id.rbFemale -> {
                     nGenderSelected = 1
-
                 }
-
                 R.id.rbMale -> {
                     nGenderSelected = 2
                 }
-
                 R.id.rbOther -> {
                     nGenderSelected = 0
                 }
             }
         }
     }
-
 }

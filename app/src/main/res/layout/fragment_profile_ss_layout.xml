@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout>
 
     <LinearLayout
         android:visibility="gone"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/ltServiceProvider"
+        android:id="@+id/ltServiceSeeker"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -22,7 +21,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -80,7 +78,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
@@ -93,19 +90,19 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltCompany"
+                android:id="@+id/ltName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="Company">
+                android:hint="Name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCompany"
+                    android:id="@+id/etName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="XYZ Solutions" />
+                    android:text="John Doe" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -139,6 +136,7 @@
                     android:layout_height="wrap_content"
                     android:text="01/01/1990" />
             </com.google.android.material.textfield.TextInputLayout>
+
 
             <TextView
                 android:id="@+id/tvGender"
@@ -182,51 +180,19 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltCity"
+                android:id="@+id/ltLocation"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="City">
+                android:hint="Location">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCity"
+                    android:id="@+id/etLocation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Hyderabad" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltState"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="State">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etState"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Telangana" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltAddress"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="Address">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etAddress"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="5-4-6/1, Kothur, Hnk" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
@@ -246,83 +212,19 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltLocation"
+                android:id="@+id/ltAddress"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/dp_16"
                 android:layout_marginTop="12dp"
-                android:hint="Location">
+                android:hint="Address">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etLocation"
+                    android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Hyderabad" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltQualification"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="Qualification">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etQualification"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="B.Tech" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltPreviousExperience"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="Previous Experience">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPreviousExperience"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="2 years" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltPortfolioLink"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="Portfolio Link">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etPortfolioLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="www.portfolio.com" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ltDescription"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/dp_16"
-                android:layout_marginTop="12dp"
-                android:hint="Description">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Enter Description" />
+                    android:text="5-4-6/1, Kothur, Hnk" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <androidx.appcompat.widget.AppCompatButton
@@ -339,11 +241,8 @@
                 android:textStyle="bold"
                 android:visibility="visible" />
 
+
         </LinearLayout>
-
-
     </LinearLayout>
 
 </layout>
-
-

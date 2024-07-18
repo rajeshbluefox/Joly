@@ -1,26 +1,26 @@
 package com.bluefox.joly.clientModule.profile
 
-import android.graphics.Rect
+//import com.bluefox.joly.clientModule.profile.supportFunctions.ProfileFragmentUI
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.LogoutDialog
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
-//import com.bluefox.joly.clientModule.profile.supportFunctions.ProfileFragmentUI
+import com.bluefox.joly.clientModule.profile.supportFunctions.JPUI
+import com.bluefox.joly.clientModule.profile.supportFunctions.JSUI
 import com.bluefox.joly.clientModule.profile.supportFunctions.SPUI
+import com.bluefox.joly.clientModule.profile.supportFunctions.SSUI
 import com.bluefox.joly.databinding.FragmentProfileBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zSharedPreference.UserDetails
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
-import javax.annotation.meta.When
 
 
 @AndroidEntryPoint
@@ -31,6 +31,10 @@ class ProfileFragment : Fragment() {
 //    private lateinit var profileFragmentUI: ProfileFragmentUI
 
     private lateinit var spui: SPUI
+    private lateinit var ssui: SSUI
+
+    private lateinit var jpui: JPUI
+    private lateinit var jsui: JSUI
 
 
     private lateinit var logoutDialog: LogoutDialog
@@ -71,8 +75,27 @@ class ProfileFragment : Fragment() {
 
 
         when (SSProfileData.UserRole) {
+            1 ->{
+                binding.ltServiceSeeker.ltServiceSeeker.visibility = View.VISIBLE
+
+                ssui = SSUI(
+                    requireContext(),
+                    requireActivity(),
+                    binding,
+                    ::onSubmitClicked,
+                    ::onLogoutClicked
+                    )
+
+                Glide.with(this)
+                    .load(SSProfileData.mLoginData.photo)
+                    .fitCenter()
+                    .into(binding.ltServiceSeeker.profilePic)
+            }
 
             2 -> {
+
+                binding.ltServiceProvider.ltServiceProvider.visibility = View.VISIBLE
+
                 spui = SPUI(
                     requireContext(),
                     requireActivity(),
@@ -85,6 +108,41 @@ class ProfileFragment : Fragment() {
                     .load(SSProfileData.mLoginData.photo)
                     .fitCenter()
                     .into(binding.ltServiceProvider.profilePic)
+
+            }
+
+            3 ->{
+                binding.ltJobProvider.ltJobProvider.visibility = View.VISIBLE
+
+                jpui = JPUI(
+                    requireContext(),
+                    requireActivity(),
+                    binding,
+                    ::onSubmitClicked,
+                    ::onLogoutClicked
+                )
+
+                Glide.with(this)
+                    .load(SSProfileData.mLoginData.photo)
+                    .fitCenter()
+                    .into(binding.ltJobProvider.profilePic)
+            }
+
+            4 ->{
+                binding.ltJobSeeker.ltJobSeeker.visibility = View.VISIBLE
+
+                jsui = JSUI(
+                    requireContext(),
+                    requireActivity(),
+                    binding,
+                    ::onSubmitClicked,
+                    ::onLogoutClicked
+                )
+
+                Glide.with(this)
+                    .load(SSProfileData.mLoginData.photo)
+                    .fitCenter()
+                    .into(binding.ltJobSeeker.profilePic)
 
             }
         }
