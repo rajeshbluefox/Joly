@@ -34,6 +34,14 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
 
     override suspend fun validateLogin(loginData: LoginData): LoginResponse {
 
+        if(SSProfileData.UserRole==4)
+        {
+            return apiService.jsLogin(
+                loginData.phoneNumber!!,
+                loginData.password!!
+            )
+        }
+
         if(SSProfileData.UserRole == 3)
         {
             return apiService.validateLoginJP(
@@ -82,6 +90,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                 ),
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.aadharNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.city.toString()
                 ),
                 RequestBody.create(
@@ -112,6 +124,11 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                     "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.phoneNumber.toString()
                 ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.name.toString()
+                )
+                ,
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.companyName.toString()

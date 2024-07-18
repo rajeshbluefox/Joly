@@ -42,8 +42,16 @@ interface ApiInterface {
     ): LoginResponse
 
     @FormUrlEncoded
-    @POST("JobProvider_Login.php")
+    @POST("JobProvider/JobProvider_Login.php")
     suspend fun validateLoginJP(
+        @Field("MobileNo") phoneNumber: String,
+        @Field("Password") password: String
+    ): LoginResponse
+
+    //TODO Check Once
+    @FormUrlEncoded
+    @POST("JobSeeker/JS_Login.php")
+    suspend fun jsLogin(
         @Field("MobileNo") phoneNumber: String,
         @Field("Password") password: String
     ): LoginResponse
@@ -73,7 +81,7 @@ interface ApiInterface {
 //    @Part workImages: MultipartBody.Part
 
     @Multipart
-    @POST("job_provider_insert.php")
+    @POST("SS_Register.php")
     suspend fun postRegisterSS(
         @Part("MobileNo") mobileNo: RequestBody,
         @Part("Name") name: RequestBody,
@@ -110,10 +118,11 @@ interface ApiInterface {
 
 
     @Multipart
-    @POST("JobProvider_Register.php")
+    @POST("JobProvider/JobProvider_Register.php")
     suspend fun postRegisterJP(
         @Part("PhoneNumber") mobileNo: RequestBody,
-        @Part("CompanyName") name: RequestBody,
+        @Part("Name") name: RequestBody,
+        @Part("CompanyName") companyName: RequestBody,
         @Part("DateOfBirth") age: RequestBody,
         @Part("Gender") gender: RequestBody,
         @Part("Address") address: RequestBody,
@@ -130,13 +139,14 @@ interface ApiInterface {
     ): RegistrationResponse
 
     @Multipart
-    @POST("JobSeekers_Register.php")
+    @POST("JobSeeker/JS_Register.php")
     suspend fun postRegisterJobSeeker(
         @Part("PhoneNumber") phoneNumber: RequestBody,
         @Part("Name") name: RequestBody,
         @Part("DateOfBirth") dateOfBirth: RequestBody,
         @Part("Gender") gender: RequestBody,
         @Part("Password") password: RequestBody,
+        @Part("AadharNumber") aadharNumber: RequestBody,
         @Part("City") city: RequestBody,
         @Part("State") state: RequestBody,
         @Part("Country") country: RequestBody,
@@ -195,7 +205,7 @@ interface ApiInterface {
     //Job Provider
 
     @FormUrlEncoded
-    @POST("job_provider_postjob.php")
+    @POST("JobProvider/job_provider_postjob.php")
     suspend fun jp_PostJob(
         @Field("UserId") userId: String,
         @Field("JobName") jobName: String,
@@ -207,7 +217,7 @@ interface ApiInterface {
     ): PostJobResponse
 
     @FormUrlEncoded
-    @POST("JP_Update_PostedJob_ByJobId.php")
+    @POST("JobProvider/JP_Update_PostedJob_ByJobId.php")
     suspend fun jp_UpdateJob(
         @Field("JobId") jobId: String,
         @Field("JobName") jobName: String,
@@ -219,7 +229,7 @@ interface ApiInterface {
     ): PostJobResponse
 
     @FormUrlEncoded
-    @POST("jp_getPostedJobs_ByUserId.php")
+    @POST("JobProvider/jp_getPostedJobs_ByUserId.php")
     suspend fun jp_getPostedJob(
         @Field("userId") userId: String
     ): GetPostedJobsResponse

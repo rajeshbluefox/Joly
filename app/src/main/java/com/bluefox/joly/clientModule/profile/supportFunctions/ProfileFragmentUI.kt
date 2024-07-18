@@ -49,29 +49,37 @@ class ProfileFragmentUI(
                 binding.etWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
             }
             3 ->{
+                binding.etName.setText(SSProfileData.mLoginData.name)
+
                 binding.ltServiceProvider.visibility=View.GONE
                 binding.ltJobProvider.visibility=View.VISIBLE
+                binding.ltJobSeeker.visibility=View.GONE
 
                 binding.etCompanyName.setText(SSProfileData.mLoginData.companyName)
                 binding.etCompanyLocation.setText("${SSProfileData.mLoginData.city},${SSProfileData.mLoginData.state},${SSProfileData.mLoginData.country}")
                 binding.etCompanyDescription.setText(SSProfileData.mLoginData.companyDescription)
                 binding.etCompanyWebsiteLink.setText(SSProfileData.mLoginData.companyWebsiteLink)
             }
+            4 ->{
+                binding.ltServiceProvider.visibility=View.GONE
+                binding.ltJobProvider.visibility=View.GONE
+                binding.ltJobSeeker.visibility=View.VISIBLE
+
+                binding.ltPinCode.visibility=View.GONE
+                binding.ltAddress.visibility=View.GONE
+
+                binding.etCity.setText(SSProfileData.mLoginData.city)
+                binding.etState.setText(SSProfileData.mLoginData.state)
+                binding.etCountry.setText(SSProfileData.mLoginData.country)
+                binding.etQualificationJS.setText(SSProfileData.mLoginData.qualification)
+                binding.etSkills.setText(SSProfileData.mLoginData.skills)
+            }
         }
 
-//        if(SSProfileData.UserRole==1) {
-//            binding.etName.setText(SSProfileData.mLoginData.name)
-//            binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
-//        }
-//        else {
-//            binding.etName.setText(SSProfileData.mLoginData.companyName)
-//            binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
-//        }
 
         binding.tvMobileNumber.text = SSProfileData.mLoginData.phoneNumber
         binding.etAadharNum.setText(SSProfileData.mLoginData.aadharNumber)
         binding.etDOB.setText(SSProfileData.mLoginData.age)
-//        binding.rgGender.setText(SSProfileData.mLoginData.gender)
         binding.etPinCode.setText(SSProfileData.mLoginData.pincode)
         binding.etAddress.setText(SSProfileData.mLoginData.address)
 
@@ -84,14 +92,6 @@ class ProfileFragmentUI(
             0 -> binding.rbOther.isChecked = true
         }
 
-//        if(UserDetails.getUserRoleStatus(context)==2) {
-//            binding.ltServiceProvider.visibility=View.VISIBLE
-//
-//            binding.etQualification.setText(SSProfileData.mLoginData.qualification)
-//            binding.etExpeienece.setText(SSProfileData.mLoginData.previousExperience)
-//            binding.etDescription.setText(SSProfileData.mLoginData.description)
-//            binding.etWebsiteLink.setText(SSProfileData.mLoginData.portfolioLink)
-//        }
     }
 
     private fun onClickListeners() {
@@ -184,6 +184,17 @@ class ProfileFragmentUI(
         disableET(binding.ltDescription)
         disableET(binding.ltWebsiteLink)
 
+        disableET(binding.ltCompanyName)
+        disableET(binding.ltCompanyLocation)
+        disableET(binding.ltCompanyDescription)
+        disableET(binding.ltCompanyWebsiteLink)
+
+        disableET(binding.ltCity)
+        disableET(binding.ltState)
+        disableET(binding.ltCountry)
+        disableET(binding.ltQualificationJS)
+        disableET(binding.ltSkills)
+
         binding.rgGender.isEnabled = false
         binding.rbMale.isEnabled = false
         binding.rbFemale.isEnabled = false
@@ -201,6 +212,8 @@ class ProfileFragmentUI(
         enableET(binding.rgGender)
         enableET(binding.ltPinCode)
         enableET(binding.ltAddress)
+
+        enableET(binding.ltCompanyLocation)
     }
 
     private fun disableET(view: View) {

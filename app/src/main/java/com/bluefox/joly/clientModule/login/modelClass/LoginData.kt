@@ -17,7 +17,7 @@ data class LoginData(
     val companyName: String? = null,
     @SerializedName("Name")
     val name: String? = null,
-    @SerializedName("Age")
+    @SerializedName("DateOfBirth")
     val age: String? = null,
     @SerializedName("Gender")
     val gender: String? = null,
@@ -37,6 +37,8 @@ data class LoginData(
     val aadharNumber: String? = null,
     @SerializedName("Photo")
     val photo: String? = null,
+    @SerializedName("Skills")
+    val skills: String? = null,
     @SerializedName("Qualification")
     val qualification: String? = null,
     @SerializedName("PreviousExperience")

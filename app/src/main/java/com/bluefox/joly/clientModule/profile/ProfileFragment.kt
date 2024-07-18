@@ -61,12 +61,11 @@ class ProfileFragment : Fragment() {
 
         logoutDialog = LogoutDialog(layoutInflater, requireContext(), ::logoutLogic)
 
+        Log.e("Test","Photo :${SSProfileData.mLoginData.photo}")
         Glide.with(this)
             .load(SSProfileData.mLoginData.photo)
             .fitCenter()
             .into(binding.profilePic)
-
-
 
     }
 

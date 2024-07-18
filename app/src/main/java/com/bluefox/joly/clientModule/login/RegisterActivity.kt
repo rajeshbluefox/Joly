@@ -189,7 +189,9 @@ class RegisterActivity : AppCompatActivity() {
 
             binding.etDOB.setText(age.toString())
 
-            binding.etSelectDate.text = "${selectedDateForCalculation} , Age - $age"
+//            binding.etSelectDate.text = "${selectedDateForCalculation} , Age - $age"
+            binding.etSelectDate.text = "${selectedDateForCalculation}"
+
             selectedDate = selectedDateForCalculation
 //            createVendorUIFunctions.setDateSelected(true)
 

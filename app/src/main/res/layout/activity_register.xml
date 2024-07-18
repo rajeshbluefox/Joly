@@ -512,6 +512,113 @@
 
                 </LinearLayout>
 
+                <LinearLayout
+                    android:id="@+id/ltJobSeeker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="@+id/etPassword"
+                    app:layout_constraintStart_toStartOf="@+id/etPassword"
+                    app:layout_constraintTop_toBottomOf="@+id/ltJobProvider">
+
+                    <TextView
+                        android:id="@+id/tvCity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="City" />
+
+                    <EditText
+                        android:id="@+id/etCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="City"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/tvState"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="State" />
+
+                    <EditText
+                        android:id="@+id/etState"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="State"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/tvCountry"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Country" />
+
+                    <EditText
+                        android:id="@+id/etCountry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Country"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/tvQualification"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Qualification" />
+
+                    <EditText
+                        android:id="@+id/etQualificationJS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Qualification"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/tvSkills"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Skills" />
+
+                    <EditText
+                        android:id="@+id/etSkills"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Skills"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1" />
+
+                </LinearLayout>
+
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btSubmit"
@@ -525,7 +632,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ltJobProvider" />
+                    app:layout_constraintTop_toBottomOf="@+id/ltJobSeeker" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
