@@ -1,10 +1,13 @@
 package com.bluefox.joly.jobModule
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
+import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.profile.ProfileFragment
 import com.bluefox.joly.databinding.ActivityJobHomeBinding
@@ -19,6 +22,8 @@ class JobHomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityJobHomeBinding
 
+    private lateinit var loginViewModel: LoginViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +33,24 @@ class JobHomeActivity : AppCompatActivity() {
         StatusBarUtils.transparentStatusBarWhite(this)
         StatusBarUtils.setTopPadding(resources, binding.appBarLt)
 
+        initViews()
         fillPostJob()
         onClickListeners()
+        getCurrentObserver()
+    }
 
-        val loginData = LoginData()
-        loginData.phoneNumber = UserDetails.getUserMobileNo(this)
-        loginData.password = UserDetails.getUserPassword(this)
+    fun initViews()
+    {
+        loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+    }
 
+    private fun getCurrentObserver() {
+        loginViewModel.getFragment().observe(this) {
+            Log.e("Test", "Fragment $it")
+            if (it == 1) {
+                fillPostedJobs()
+            }
+        }
     }
 
 

@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bluefox.joly.databinding.ItemJobBinding
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
+import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 
 class JpJobsAdapter(
@@ -36,7 +37,8 @@ class JpJobsAdapter(
 
         holder.binding.tvJobTitle.text = jobItem.jobName
         holder.binding.tvCompanyLocation.text = jobItem.jobLocation
-        holder.binding.tvDeadLineToApplyValue.text = jobItem.postedDate
+        holder.binding.tvDate.text=UtilFunctions.formatDate2(jobItem.postedDate!!)
+        holder.binding.tvDeadLineToApplyValue.text = UtilFunctions.formatDate2(jobItem.deadLineToApply!!)
 
         holder.binding.cardJobItem.setOnClickListener {
             onJobClicked.invoke(jobItem)

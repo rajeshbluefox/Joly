@@ -61,6 +61,12 @@ class SPAddServicesFragment : Fragment() {
         onClickListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        callApis()
+    }
+
     private fun onClickListeners() {
         binding.btAddService.setOnClickListener {
             AddServicesSelectedJobs.selectedPage=1
@@ -95,7 +101,7 @@ class SPAddServicesFragment : Fragment() {
             onGetTestimonials = {}
         )
 
-        callApis()
+//        callApis()
     }
 
     private fun onGetServices(servicesOfferedList: List<ServicesOfferedData>) {

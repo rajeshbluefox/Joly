@@ -33,6 +33,10 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
         binding.ivBack.setOnClickListener {
             finish()
         }
+
+        binding.btCloseService.setOnClickListener {
+            //TODO call CloseWorkAPI
+        }
     }
 
     private fun setDetails() {
@@ -63,6 +67,12 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
 
         if(SSProfileData.UserRole==1)
             hideClientDetailsLt()
+        else{
+            binding.btCloseService.visibility=View.GONE
+
+            binding.tvClientName.text=SSSelected.workData.name
+            binding.tvClientNumber.text=SSSelected.workData.phoneNumber
+        }
     }
 
     private fun hideClientDetailsLt()

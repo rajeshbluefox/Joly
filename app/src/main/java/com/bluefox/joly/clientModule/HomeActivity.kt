@@ -21,11 +21,11 @@ import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
+class HomeActivity : AppCompatActivity(), HomeTitleUpdater {
 
-    private lateinit var binding : ActivityHomeBinding
+    private lateinit var binding: ActivityHomeBinding
 
-    private lateinit var loginViewModel : LoginViewModel
+    private lateinit var loginViewModel: LoginViewModel
     private lateinit var loginAPIFunctions: LoginAPIFunctions
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +33,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
         setContentView(binding.root)
 
         StatusBarUtils.transparentStatusBarWhite(this)
-        StatusBarUtils.setTopPadding(resources,binding.appBarLt)
+        StatusBarUtils.setTopPadding(resources, binding.appBarLt)
 
         setBottomNavigationBarText()
         initViews()
@@ -43,51 +43,50 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
         getCurrentObserver()
     }
 
-    private fun setBottomNavigationBarText()
-    {
-        if(SSProfileData.UserRole==1)
-        {
-            binding.tvPostedWork.text="Posted Works"
-            binding.tvPostWork.text="Post Work"
-            binding.tvProfile.text="Profile"
-        }else{
-            binding.tvPostedWork.text="Works"
-            binding.tvPostWork.text="My Services"
-            binding.tvProfile.text="Profile"
+    private fun setBottomNavigationBarText() {
+        if (SSProfileData.UserRole == 1) {
+            binding.tvPostedWork.text = "Posted Works"
+            binding.tvPostWork.text = "Post Work"
+            binding.tvProfile.text = "Profile"
+        } else {
+            binding.tvPostedWork.text = "Works"
+            binding.tvPostWork.text = "My Services"
+            binding.tvProfile.text = "Profile"
         }
     }
 
-    private fun getCurrentObserver()
-    {
-        loginViewModel.getFragment().observe(this){
-            Log.e("Test","Fragment $it")
-            if (it==1)
-            {
+    private fun getCurrentObserver() {
+        loginViewModel.getFragment().observe(this) {
+            Log.e("Test", "Fragment $it")
+            if (it == 1) {
                 fillViewServices()
             }
         }
     }
 
-    private fun initViews()
-    {
+    private fun initViews() {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel,::onLoginResponse, onRegisterResponse = {})
+        loginAPIFunctions = LoginAPIFunctions(
+            this,
+            this,
+            loginViewModel,
+            ::onLoginResponse,
+            onRegisterResponse = {})
 
-        if(SSProfileData.openFrom==0)
-            postValidate()
+//        if (SSProfileData.openFrom == 0)
+//            postValidate()
     }
 
-    private fun postValidate()
-    {
+    private fun postValidate() {
         val loginData = LoginData()
-        loginData.phoneNumber=UserDetails.getUserMobileNo(this)
-        loginData.password=UserDetails.getUserPassword(this)
+        loginData.phoneNumber = UserDetails.getUserMobileNo(this)
+        loginData.password = UserDetails.getUserPassword(this)
 
         loginAPIFunctions.validateLogin(loginData)
     }
-    private fun onLoginResponse(loginData: LoginData)
-    {
-        SSProfileData.mLoginData=loginData
+
+    private fun onLoginResponse(loginData: LoginData) {
+        SSProfileData.mLoginData = loginData
     }
 
     private fun onClickListeners() {
@@ -97,12 +96,12 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
         }
 
         binding.postJobBT.setOnClickListener {
-            if(binding.tvPostWork.text.toString()=="My Services")
-            {
+            onChangeBackGround(2)
+
+            if (binding.tvPostWork.text.toString() == "My Services") {
                 fillServicesOffered()
-            }else {
+            } else {
                 fillPostWork()
-                onChangeBackGround(2)
             }
         }
 
@@ -114,7 +113,9 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
 
     private fun fillViewServices() {
 
-        binding.tvAppBarTitle.text="Posted Works"
+        onChangeBackGround(1)
+
+        binding.tvAppBarTitle.text = "Posted Works"
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, ViewWorksFragment())
@@ -123,7 +124,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
 
     private fun fillPostWork() {
 
-        binding.tvAppBarTitle.text="Post Work"
+        binding.tvAppBarTitle.text = "Post Work"
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, PostWorkFragment())
@@ -133,7 +134,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
 
     private fun fillProfile() {
 
-        binding.tvAppBarTitle.text="Profile"
+        binding.tvAppBarTitle.text = "Profile"
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, ProfileFragment())
@@ -145,7 +146,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
 
     private fun fillServicesOffered() {
 
-        binding.tvAppBarTitle.text="Services Offered"
+        binding.tvAppBarTitle.text = "Services Offered"
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, SPAddServicesFragment())
@@ -153,14 +154,12 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
     }
 
     override fun updateTitle(newTitle: String) {
-        binding.tvAppBarTitle.text=newTitle
+        binding.tvAppBarTitle.text = newTitle
     }
 
-    private fun onChangeBackGround(mSelectedItem: Int)
-    {
-        when(mSelectedItem)
-        {
-            1->{
+    private fun onChangeBackGround(mSelectedItem: Int) {
+        when (mSelectedItem) {
+            1 -> {
                 binding.myJobBT.setBackgroundResource(R.drawable.navi_bar_selected_bg)
                 binding.icPostedWork.setImageResource(R.drawable.ic_posted_work_colored)
                 val textColor1 = ContextCompat.getColor(this, R.color.navi_bar_text)
@@ -177,7 +176,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
                 binding.tvPostedWork.setTextColor(textColor3)
             }
 
-            2->{
+            2 -> {
                 binding.myJobBT.background = null
                 binding.icPostedWork.setImageResource(R.drawable.ic_posted_work)
                 val textColor1 = ContextCompat.getColor(this, R.color.black)
@@ -194,7 +193,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater  {
                 binding.tvPostedWork.setTextColor(textColor3)
             }
 
-            3 ->{
+            3 -> {
                 binding.myJobBT.background = null
                 binding.icPostedWork.setImageResource(R.drawable.ic_posted_work)
                 val textColor1 = ContextCompat.getColor(this, R.color.black)

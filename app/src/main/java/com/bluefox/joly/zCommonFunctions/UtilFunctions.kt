@@ -9,6 +9,7 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.Date
@@ -87,5 +88,12 @@ object UtilFunctions {
 
         // Format the LocalDateTime to the desired output format
         return dateTime.format(outputFormatter)
+    }
+
+    fun formatDate2(dateString: String): String {
+        val dateFormatter = DateTimeFormatter.ofPattern("MMM dd")
+
+        val date = LocalDate.parse(dateString)
+        return  date.format(dateFormatter)
     }
 }

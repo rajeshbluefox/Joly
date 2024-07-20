@@ -15,7 +15,6 @@ import java.util.Calendar
 import java.util.Locale
 
 
-
 class ViewPostedJobUI(
     context: Context,
     mbinding: ActivityViewPostedJobBinding,
@@ -30,16 +29,15 @@ class ViewPostedJobUI(
         onClickListeners()
     }
 
-    private fun setDetails()
-    {
-        var postJobData = SelJobDetails.postJobData
+    private fun setDetails() {
+        val postJobData = SelJobDetails.postJobData
 
         binding.etJobName.setText(postJobData.jobName)
         binding.etJobDetails.setText(postJobData.jobDetails)
         binding.etJobDescription.setText(postJobData.jobDescription)
         binding.etEligibility.setText(postJobData.eligibility)
         binding.etSkillsRequired.setText(postJobData.skills)
-        binding.tvDeadLineToApplyValue.setText(postJobData.deadLineToApply)
+        binding.tvDeadLineToApplyValue.text = postJobData.deadLineToApply
     }
 
     fun onClickListeners() {
@@ -47,22 +45,15 @@ class ViewPostedJobUI(
             initDatePicker()
         }
 
-//        binding.ivBack.setOnClickListener {
-//            mContext.finish()
-//        }
-
         binding.btUpdateJob.setOnClickListener {
             getValues()
         }
 
-        binding.btCloseJob.setOnClickListener{
-            if(SelJobDetails.postJobData.jobStatus==1)
-            {
-                onUpdateJobStatus.invoke(SelJobDetails.postJobData.jobId.toString(),"0")
-            }
-            else
-            {
-                onUpdateJobStatus.invoke(SelJobDetails.postJobData.jobId.toString(),"1")
+        binding.btCloseJob.setOnClickListener {
+            if (SelJobDetails.postJobData.jobStatus == 1) {
+                onUpdateJobStatus.invoke(SelJobDetails.postJobData.jobId.toString(), "0")
+            } else {
+                onUpdateJobStatus.invoke(SelJobDetails.postJobData.jobId.toString(), "1")
             }
         }
 
@@ -84,35 +75,29 @@ class ViewPostedJobUI(
         val nDeadLineToApply = binding.tvDeadLineToApplyValue.text.toString()
         val nSkills = binding.etSkillsRequired.text.toString()
 
-        if(nJobName.isEmpty())
-        {
-            UtilFunctions.showToast(mContext , "Enter JobName")
+        if (nJobName.isEmpty()) {
+            UtilFunctions.showToast(mContext, "Enter JobName")
             return
         }
-        if (nJobDetails.isEmpty())
-        {
+        if (nJobDetails.isEmpty()) {
             UtilFunctions.showToast(mContext, "Enter JobDetails")
             return
         }
-        if (nJobDescription.isEmpty())
-        {
+        if (nJobDescription.isEmpty()) {
             UtilFunctions.showToast(mContext, "Enter JobDescription")
             return
 
         }
-        if (nEligibility.isEmpty())
-        {
+        if (nEligibility.isEmpty()) {
             UtilFunctions.showToast(mContext, "Enter Eligibility")
             return
 
         }
-        if (nDeadLineToApply.isEmpty())
-        {
+        if (nDeadLineToApply.isEmpty()) {
             UtilFunctions.showToast(mContext, "Enter DeadLineToApply")
             return
         }
-        if (nSkills.isEmpty())
-        {
+        if (nSkills.isEmpty()) {
             UtilFunctions.showToast(mContext, "Enter Skills")
             return
         }

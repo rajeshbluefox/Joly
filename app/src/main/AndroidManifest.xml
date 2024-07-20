@@ -24,13 +24,16 @@
         tools:targetApi="34">
         <activity
             android:name=".jobModule.jobProviderModule.ApplicantProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Joly" />
         <activity
             android:name=".jobModule.jobProviderModule.ViewApplicationsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Joly" />
         <activity
             android:name=".jobModule.jobProviderModule.ViewPostedJobActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.Joly" />
         <activity
             android:name=".jobModule.JobHomeActivity"
             android:exported="false"
