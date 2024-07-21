@@ -15,6 +15,8 @@ import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
 import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.PostJobUI
 import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.ViewPostedJobUI
+import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,6 +34,9 @@ class ViewPostedJobActivity : AppCompatActivity() {
         binding = ActivityViewPostedJobBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.appBarLt)
+
         initViews()
         onClickListeners()
     }
@@ -45,13 +50,23 @@ class ViewPostedJobActivity : AppCompatActivity() {
             lifecycleOwner = this,
             jpViewModel,
             onJobPostedResponse ={},
-            onGetPostedJobsResponse = {}
+            onGetPostedJobsResponse = {},
+            onViewApplicationResponse = {},
+            onGetAllJobs = {}
         )
     }
 
     fun onClickListeners() {
         binding.ivBack.setOnClickListener {
             finish()
+        }
+
+        binding.btViewApplication.setOnClickListener {
+            CallIntent.gotoViewApplicationsActivity(this,false,this)
+        }
+
+        binding.btCloseJob.setOnClickListener {
+            //Close Job API
         }
     }
 

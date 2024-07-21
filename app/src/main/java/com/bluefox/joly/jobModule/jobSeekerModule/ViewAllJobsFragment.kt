@@ -1,4 +1,4 @@
-package com.bluefox.joly.jobModule.jobProviderModule
+package com.bluefox.joly.jobModule.jobSeekerModule
 
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
-import com.bluefox.joly.databinding.FragmentPostedJobsBinding
+import com.bluefox.joly.databinding.FragmentViewAllJobsBinding
 import com.bluefox.joly.jobModule.apiFunctions.JPViewModel
 import com.bluefox.joly.jobModule.apiFunctions.JPapiFunctions
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
@@ -21,9 +21,9 @@ import com.bluefox.joly.zCommonFunctions.CallIntent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostedJobsFragment : Fragment() {
+class ViewAllJobsFragment : Fragment() {
 
-    private lateinit var binding: FragmentPostedJobsBinding
+    private lateinit var binding: FragmentViewAllJobsBinding
 
     private lateinit var jPapiFunctions: JPapiFunctions
     private lateinit var jpViewModel: JPViewModel
@@ -39,7 +39,7 @@ class PostedJobsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_posted_jobs, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_view_all_jobs, container, false)
         return binding.root
     }
 
@@ -52,8 +52,9 @@ class PostedJobsFragment : Fragment() {
     override fun onResume() {
         super.onResume()
 
-        jPapiFunctions.getPostedJobs(SSProfileData.mLoginData.userId.toString())
+        jPapiFunctions.getAllJobs(SSProfileData.mLoginData.userId.toString())
     }
+
 
     private fun initViews() {
         jpViewModel = ViewModelProvider(this)[JPViewModel::class.java]
@@ -63,9 +64,9 @@ class PostedJobsFragment : Fragment() {
             lifecycleOwner = this,
             jpViewModel,
             onJobPostedResponse = {},
-            ::onJobsFetched,
+            onGetPostedJobsResponse = {},
             onViewApplicationResponse = {},
-            onGetAllJobs = {}
+            ::onJobsFetched
         )
     }
 
@@ -95,6 +96,4 @@ class PostedJobsFragment : Fragment() {
         //Call intent to ViewJob
         CallIntent.gotoViewPostedJobActivity(requireContext(), false, requireActivity())
     }
-
-
 }

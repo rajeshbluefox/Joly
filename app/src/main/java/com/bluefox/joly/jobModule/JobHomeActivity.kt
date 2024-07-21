@@ -9,10 +9,13 @@ import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginAPIFunctions
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
+import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.clientModule.profile.ProfileFragment
 import com.bluefox.joly.databinding.ActivityJobHomeBinding
 import com.bluefox.joly.jobModule.jobProviderModule.PostJobFragment
 import com.bluefox.joly.jobModule.jobProviderModule.PostedJobsFragment
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
+import com.bluefox.joly.jobModule.jobSeekerModule.ViewAllJobsFragment
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bluefox.joly.zSharedPreference.UserDetails
 import dagger.hilt.android.AndroidEntryPoint
@@ -84,22 +87,40 @@ class JobHomeActivity : AppCompatActivity() {
 
         onChangeBackGround(2)
 
-        binding.tvAppBarTitle.text = "Post Job"
+        if(SSProfileData.UserRole==3) {
+            binding.tvAppBarTitle.text = "Post Job"
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.containerFragment, PostJobFragment())
-            .commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerFragment, PostJobFragment())
+                .commit()
+        }else{
+            SelJobDetails.selFragmentJobSeeker=1
+            binding.tvAppBarTitle.text = "Applied Jobs"
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerFragment, ViewAllJobsFragment())
+                .commit()
+        }
     }
 
     private fun fillPostedJobs() {
 
         onChangeBackGround(1)
 
-        binding.tvAppBarTitle.text = "Posted Job"
+        if(SSProfileData.UserRole==3) {
+            binding.tvAppBarTitle.text = "Posted Job"
 
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.containerFragment, PostedJobsFragment())
-            .commit()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerFragment, PostedJobsFragment())
+                .commit()
+        }else{
+            SelJobDetails.selFragmentJobSeeker=0
+            binding.tvAppBarTitle.text = "View Jobs"
+
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.containerFragment, ViewAllJobsFragment())
+                .commit()
+        }
     }
 
 

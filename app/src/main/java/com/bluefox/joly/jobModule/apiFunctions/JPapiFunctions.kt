@@ -3,6 +3,7 @@ package com.bluefox.joly.jobModule.apiFunctions
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
+import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
@@ -12,7 +13,9 @@ class JPapiFunctions(
     lifecycleOwner: LifecycleOwner,
     mJpViewModel: JPViewModel,
     private val onJobPostedResponse: () -> Unit,
-    private val onGetPostedJobsResponse: (postedJobsList: ArrayList<PostJobData>) -> Unit
+    private val onGetPostedJobsResponse: (postedJobsList: ArrayList<PostJobData>) -> Unit,
+    private val onViewApplicationResponse: (applicationsList: ArrayList<LoginData>) -> Unit,
+    private val onGetAllJobs: (postedJobsList: ArrayList<PostJobData>) -> Unit,
 ) {
 
     private var mContext: Context = context
@@ -104,8 +107,12 @@ class JPapiFunctions(
     private fun getJobApplicationsObserver() {
         jpViewModel.getUpdateJobApplicationsResponse().observe(mLifecycleOwner) {
             if (it.code == 200) {
-                UtilFunctions.showToast(mContext, "Job Application SuccessFully")
-                //TODO Impl Callback
+                if(it.applicationsList.isNotEmpty())
+                onViewApplicationResponse.invoke(it.applicationsList)
+                else{
+                    UtilFunctions.showToast(mContext,"No Applications Received")
+                }
+//                UtilFunctions.showToast(mContext, "Job Application SuccessFully")
             }
             else {
                 UtilFunctions.showToast(mContext, "Server Not Responding")
@@ -114,5 +121,28 @@ class JPapiFunctions(
 
     }
 
+    fun getAllJobs(jobId: String) {
+        jpViewModel.resetGetAllJobsResponse()
+        jpViewModel.getAllJobs(jobId)
+
+        getAllJobsObserver()
+    }
+
+    private fun getAllJobsObserver() {
+        jpViewModel.getAllJobsResponse().observe(mLifecycleOwner) {
+            if (it.code == 200) {
+                if(it.postedJobsList.isNotEmpty())
+                    onGetAllJobs.invoke(it.postedJobsList)
+                else{
+                    UtilFunctions.showToast(mContext,"No Jobs")
+                }
+
+            }
+            else {
+                UtilFunctions.showToast(mContext, "Server Not Responding")
+            }
+        }
+
+    }
 
 }

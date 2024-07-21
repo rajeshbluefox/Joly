@@ -87,4 +87,28 @@ class JPRepository @Inject constructor(
         return getJobApplicationsResponse
     }
 
+    private var getPostedJobsResponseJS = GetPostedJobsResponse()
+
+    suspend fun getAllJobs(userId: String): GetPostedJobsResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                getPostedJobsResponseJS = apiHelper.jsGetAllJobs(userId)
+            }
+        } catch (_: Exception) {
+        }
+        return getPostedJobsResponseJS
+    }
+
+    private var getAppliedJobResponse = PostJobResponse()
+
+    suspend fun jsApplyJob(jobId: String,userId: String): PostJobResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                getAppliedJobResponse = apiHelper.jsApplyJob(jobId ,userId)
+            }
+        } catch (_: Exception) {
+        }
+        return getAppliedJobResponse
+    }
+
 }

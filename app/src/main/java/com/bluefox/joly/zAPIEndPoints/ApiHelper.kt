@@ -3,8 +3,6 @@ package com.bluefox.joly.zAPIEndPoints
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
 import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
-import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyData
-import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
@@ -19,6 +17,8 @@ import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceData
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyData
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.SpOfferedServiceResponse
 
 
@@ -57,4 +57,8 @@ interface ApiHelper {
 
     suspend fun jpGetJobApplications(jobId: String): GetApplicationResponse
 
+
+    suspend fun jsGetAllJobs(userId: String) : GetPostedJobsResponse
+
+    suspend fun jsApplyJob(jobId: String,userId: String,): PostJobResponse
 }

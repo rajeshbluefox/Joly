@@ -5,7 +5,6 @@ import android.app.DatePickerDialog
 import android.content.Context
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
 import com.bluefox.joly.databinding.ActivityViewPostedJobBinding
-import com.bluefox.joly.databinding.FragmentPostJobBinding
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
 import com.bluefox.joly.zCommonFunctions.CallIntent

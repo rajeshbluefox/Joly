@@ -2,22 +2,17 @@ package com.bluefox.joly.jobModule.jobProviderModule
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.databinding.ActivityViewApplicationsBinding
-import com.bluefox.joly.databinding.ActivityViewPostedJobBinding
 import com.bluefox.joly.jobModule.apiFunctions.JPViewModel
 import com.bluefox.joly.jobModule.apiFunctions.JPapiFunctions
-import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
-import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.JpJobsAdapter
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
 import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.ViewApplicationAdapter
-import com.bluefox.joly.jobModule.jobProviderModule.supportFunctions.ViewPostedJobUI
+import com.bluefox.joly.zCommonFunctions.CallIntent
+import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -34,7 +29,18 @@ class ViewApplicationsActivity : AppCompatActivity() {
         binding = ActivityViewApplicationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        StatusBarUtils.transparentStatusBar(this)
+        StatusBarUtils.setTopPadding(resources,binding.appBarLt)
+
         initViews()
+        onClickListeners()
+    }
+
+    fun onClickListeners()
+    {
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     fun initViews() {
@@ -46,8 +52,12 @@ class ViewApplicationsActivity : AppCompatActivity() {
             lifecycleOwner = this,
             jpViewModel,
             onJobPostedResponse ={},
-            onGetPostedJobsResponse = {}
+            onGetPostedJobsResponse = {},
+            ::initViewApplicationsRV,
+            onGetAllJobs = {}
         )
+
+        jPapiFunctions.getJobApplications(SelJobDetails.postJobData.jobId.toString())
     }
 
     private fun initViewApplicationsRV(applicationsList: List<LoginData>) {
@@ -66,6 +76,7 @@ class ViewApplicationsActivity : AppCompatActivity() {
     }
 
     private fun onApplicationClicked(loginData: LoginData) {
-
+        SelJobDetails.applicantProfileData=loginData
+        CallIntent.gotoApplicantProfileActivity(this, false, this)
     }
 }

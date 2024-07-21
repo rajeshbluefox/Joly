@@ -55,7 +55,9 @@ class PostJobFragment : Fragment() {
             lifecycleOwner = this,
             jpViewModel,
             ::onJobPostedResponse,
-            onGetPostedJobsResponse = {}
+            onGetPostedJobsResponse = {},
+            onViewApplicationResponse = {},
+            onGetAllJobs = {}
         )
     }
 

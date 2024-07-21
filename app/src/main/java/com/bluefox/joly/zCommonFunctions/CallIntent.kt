@@ -11,6 +11,7 @@ import com.bluefox.joly.clientModule.viewJob.ViewWorkDetailsActivity
 import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
 import com.bluefox.joly.homeModule.NavigationActivity
 import com.bluefox.joly.jobModule.JobHomeActivity
+import com.bluefox.joly.jobModule.jobProviderModule.ApplicantProfileActivity
 import com.bluefox.joly.jobModule.jobProviderModule.ViewApplicationsActivity
 import com.bluefox.joly.jobModule.jobProviderModule.ViewPostedJobActivity
 import com.bluefox.joly.serviceProviderModule.AddServiceActivity
@@ -101,4 +102,13 @@ object CallIntent {
         context.startActivity(intent)
         if (killMe) activity.finish()
     }
+
+    fun gotoApplicantProfileActivity(context: Context,killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, ApplicantProfileActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+
 }

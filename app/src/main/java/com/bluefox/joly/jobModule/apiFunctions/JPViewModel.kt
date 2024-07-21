@@ -110,4 +110,22 @@ class JPViewModel @Inject constructor(
         return getUpdateJobApplicationsResponse
     }
 
+    private var getPostedJobsResponseJS = MutableLiveData<GetPostedJobsResponse>()
+
+    fun getAllJobs(userId: String) {
+        viewModelScope.launch {
+            getPostedJobsResponseJS.postValue(
+                jpRepository.getAllJobs(userId)
+            )
+        }
+    }
+
+    fun resetGetAllJobsResponse() {
+        getPostedJobsResponseJS = MutableLiveData<GetPostedJobsResponse>()
+    }
+
+    fun getAllJobsResponse(): LiveData<GetPostedJobsResponse> {
+        return getPostedJobsResponseJS
+    }
+
 }

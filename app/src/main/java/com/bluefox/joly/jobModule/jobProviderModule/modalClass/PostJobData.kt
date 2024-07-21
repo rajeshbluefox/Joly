@@ -20,7 +20,7 @@ data class PostJobData(
     var eligibility: String? = null,
     @SerializedName("DeadLinetoApply")
     var deadLineToApply: String? = null,
-    @SerializedName("Skills")
+    @SerializedName("SkillRequired")
     var skills: String? = null,
     @SerializedName("JobLocation")
     var jobLocation: String? = "hyd",
