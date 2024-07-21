@@ -61,7 +61,7 @@ class ViewWorksFragment : Fragment() {
 
     private fun initViews() {
         ssViewModel = ViewModelProvider(this)[SSViewModel::class.java]
-        viewJobsUI = ViewJobsUI(requireContext(), binding,::getWorkByCategory)
+        viewJobsUI = ViewJobsUI(requireContext(), binding, ::getWorkByCategory)
 
         sSapiFunctions = SSapiFunctions(
             requireContext(),
@@ -77,9 +77,11 @@ class ViewWorksFragment : Fragment() {
     }
 
     private fun callApis() {
+
         viewJobsUI.showPB()
 
         if (ServicesCatJob.isDataFetched) {
+            viewJobsUI.initCategoriesSpinner(ServicesCatJob.categoriesList)
             getSSWorks()
         } else {
             sSapiFunctions.getCategories()
@@ -105,23 +107,25 @@ class ViewWorksFragment : Fragment() {
     private fun getSSWorks() {
         if (SSProfileData.UserRole == 1)
             sSapiFunctions.getSSWorks(UserDetails.getUserMobileNo(requireContext()))
+        else{
+            getWorkByCategory(ServicesCatJob.categoriesList[0])
+        }
 
     }
 
-    private fun getWorkByCategory(categoryItem: CategoryItem)
-    {
+    private fun getWorkByCategory(categoryItem: CategoryItem) {
         sSapiFunctions.getSSWorks(categoryItem.categoryID.toString())
     }
 
-    fun onGetWorksResponse(worksList: List<PostWorkData>) {
+    private fun onGetWorksResponse(worksList: List<PostWorkData>) {
         viewJobsUI.hidePB()
 
         if (worksList.isEmpty()) {
             binding.emptyList.visibility = View.VISIBLE
-            binding.rvJobs.visibility= View.GONE
+            binding.rvJobs.visibility = View.GONE
         } else {
             binding.emptyList.visibility = View.GONE
-            binding.rvJobs.visibility= View.VISIBLE
+            binding.rvJobs.visibility = View.VISIBLE
             initJobsRv(worksList)
         }
     }

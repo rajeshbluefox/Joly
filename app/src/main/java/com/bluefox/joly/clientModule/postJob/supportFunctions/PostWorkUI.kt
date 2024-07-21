@@ -11,6 +11,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.CategoryItem
 import com.bluefox.joly.clientModule.postJob.modalClass.JobItem
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
+import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
 import com.bluefox.joly.databinding.FragmentPostWorkBinding
 import com.bluefox.joly.zSharedPreference.UserDetails
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
@@ -92,7 +93,7 @@ class PostWorkUI(
         postWorkData.jobId = SSSelectedData.jobItem.jobId!!.toInt()
         postWorkData.areaId = nArea.toInt()
         postWorkData.wageOffered = nWageOffered
-        postWorkData.phoneNumber=UserDetails.getUserMobileNo(mContext)
+        postWorkData.phoneNumber = UserDetails.getUserMobileNo(mContext)
 
         onWorkSubmitClicked.invoke(postWorkData)
 
@@ -135,12 +136,20 @@ class PostWorkUI(
 
 
                     SSSelectedData.categoryItem = categoryList[position]
+
+                    filterJobsByCatId(categoryList[position].categoryID!!)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     // Handle case when nothing is selected (optional)
                 }
             }
+    }
+
+    fun filterJobsByCatId(categoryId: Int) {
+        val filteredJobs =
+            ServicesCatJob.jobList.filter { it.categoryId == SSSelectedData.categoryItem.categoryID }
+        initJobsSpinner(filteredJobs)
     }
 
     fun initJobsSpinner(
@@ -151,8 +160,7 @@ class PostWorkUI(
         val newItem = JobItem(
             null,
             null,
-
-            )
+        )
 
         val newAcList = listOf(newItem) + jobList
         val adapter = JobsSpinnerAdapter(

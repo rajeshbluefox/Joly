@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.LogoutDialog
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
-import com.bluefox.joly.clientModule.profile.modalClass.SSProfileDetailsData
+import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.profile.supportFunctions.JPUI
 import com.bluefox.joly.clientModule.profile.supportFunctions.JSUI
 import com.bluefox.joly.clientModule.profile.supportFunctions.SPUI
@@ -61,6 +61,8 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
+        showPB(true)
+
         initViews()
 //        getKeyHeight(view)
     }
@@ -75,7 +77,7 @@ class ProfileFragment : Fragment() {
 
 
         when (SSProfileData.UserRole) {
-            1 ->{
+            1 -> {
                 binding.ltServiceSeeker.ltServiceSeeker.visibility = View.VISIBLE
 
                 ssui = SSUI(
@@ -84,12 +86,13 @@ class ProfileFragment : Fragment() {
                     binding,
                     ::onSubmitClicked,
                     ::onLogoutClicked
-                    )
+                )
 
                 Glide.with(this)
                     .load(SSProfileData.mLoginData.photo)
                     .fitCenter()
                     .into(binding.ltServiceSeeker.profilePic)
+                showPB(false)
             }
 
             2 -> {
@@ -108,10 +111,11 @@ class ProfileFragment : Fragment() {
                     .load(SSProfileData.mLoginData.photo)
                     .fitCenter()
                     .into(binding.ltServiceProvider.profilePic)
+                showPB(false)
 
             }
 
-            3 ->{
+            3 -> {
                 binding.ltJobProvider.ltJobProvider.visibility = View.VISIBLE
 
                 jpui = JPUI(
@@ -126,9 +130,10 @@ class ProfileFragment : Fragment() {
                     .load(SSProfileData.mLoginData.photo)
                     .fitCenter()
                     .into(binding.ltJobProvider.profilePic)
+                showPB(false)
             }
 
-            4 ->{
+            4 -> {
                 binding.ltJobSeeker.ltJobSeeker.visibility = View.VISIBLE
 
                 jsui = JSUI(
@@ -143,7 +148,7 @@ class ProfileFragment : Fragment() {
                     .load(SSProfileData.mLoginData.photo)
                     .fitCenter()
                     .into(binding.ltJobSeeker.profilePic)
-
+                showPB(false)
             }
         }
 
@@ -156,6 +161,14 @@ class ProfileFragment : Fragment() {
     private fun logoutLogic() {
         UserDetails.saveLoginStatus(requireContext(), false)
         CallIntent.gotoLogin(requireContext(), true, requireActivity())
+    }
+
+    private fun showPB(showStatus: Boolean) {
+        if (showStatus) {
+            binding.progressBar.visibility = View.VISIBLE
+        } else {
+            binding.progressBar.visibility = View.GONE
+        }
     }
 
 //    private fun getKeyHeight(view: View) {
@@ -207,8 +220,8 @@ class ProfileFragment : Fragment() {
 //    }
 
 
-    private fun onSubmitClicked(sSProfileDetailsData: SSProfileDetailsData) {
-        Log.e("test", "Name ${sSProfileDetailsData.name}")
+    private fun onSubmitClicked(ssRegistrationDetailsData: SSRegistrationDetailsData) {
+        Log.e("test", "Name ${ssRegistrationDetailsData.name}")
     }
 
 

@@ -57,15 +57,20 @@ class LoginAPIFunctions(
     {
         mLoginViewModel.getSSRegisterResponse().observe(mLifecycleOwner){
 
-            if(it.status==200)
-            {
-                onRegisterResponse.invoke()
-                UtilFunctions.showToast(mContext,"Registration Sucessfull")
+            when(it.status) {
+                200 -> {
+                    onRegisterResponse.invoke()
+                    UtilFunctions.showToast(mContext, "Registration Sucessfull")
+                }
 
-            }else{
-                UtilFunctions.showToast(mContext,"Wrong Password")
-                Log.e("Test","Login Error")
+                404 -> {
+                    UtilFunctions.showToast(mContext,"User doesn't exists")
+                }
+                else ->{
+                    UtilFunctions.showToast(mContext,"Wrong Password")
+                }
             }
+
         }
 
     }

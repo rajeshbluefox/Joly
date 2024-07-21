@@ -60,22 +60,11 @@ class MainActivity : AppCompatActivity() {
     private fun getUserLoginStatus() {
         Handler(Looper.getMainLooper()).postDelayed({
             if (UserDetails.getLoginStatus(this)) {
-//                SSProfileData.openFrom = 0
-//
-//                SSProfileData.UserRole = UserDetails.getUserRoleStatus(this)
-//
-//                var userRole = UserDetails.getUserRoleStatus(this)
-//
-//                if (userRole <= 2)
-//                    CallIntent.gotoHomeActivity(this, true, this)
-//                else
-//                    CallIntent.gotoJobHomeActivity(this, true, this)
-//
 
                 val loginData = LoginData()
                 loginData.phoneNumber = UserDetails.getUserMobileNo(this)
                 loginData.password = UserDetails.getUserPassword(this)
-                SSProfileData.UserRole= UserDetails.getUserRoleStatus(this)
+                SSProfileData.UserRole = UserDetails.getUserRoleStatus(this)
                 postValidate(loginData)
 
             } else {
@@ -104,12 +93,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onLoginResponse(loginData: LoginData) {
-        //Code after Login response is received
-        // SAVE THE USER details to Shared Preference
-//        UserDetails.saveLoginStatus(this, true)
-//
-//        UserDetails.saveUserMobileNo(this, loginData.phoneNumber!!)
-//        UserDetails.saveUserPassword(this, loginData.password!!)
 
         SSProfileData.openFrom = 1
         SSProfileData.mLoginData = loginData
@@ -117,10 +100,10 @@ class MainActivity : AppCompatActivity() {
         val userRole = UserDetails.getUserRoleStatus(this)
         SSProfileData.UserRole = userRole
 
-        if (userRole<=2) {
+        if (userRole <= 2) {
             CallIntent.gotoHomeActivity(this, true, this)
-        }else{
-            CallIntent.gotoJobHomeActivity(this,true,this)
+        } else {
+            CallIntent.gotoJobHomeActivity(this, true, this)
 
         }
 

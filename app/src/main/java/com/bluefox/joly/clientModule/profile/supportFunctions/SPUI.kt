@@ -17,7 +17,7 @@ class SPUI(
     val context: Context,
     val activity: Activity,
     private val binding: FragmentProfileBinding,
-    private val onSubmitClicked: (sSProfileDetailsData: SSProfileDetailsData) -> Unit,
+    private val onSubmitClicked: (ssRegistrationDetailsData: SSRegistrationDetailsData) -> Unit,
     private val logoutClicked: () -> Unit
 
 ) {

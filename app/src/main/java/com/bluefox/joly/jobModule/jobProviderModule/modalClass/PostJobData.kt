@@ -18,13 +18,13 @@ data class PostJobData(
     var jobDescription: String? = null,
     @SerializedName("Eligibility")
     var eligibility: String? = null,
-    @SerializedName("DeadLineToApply")
+    @SerializedName("DeadLinetoApply")
     var deadLineToApply: String? = null,
     @SerializedName("Skills")
     var skills: String? = null,
     @SerializedName("JobLocation")
     var jobLocation: String? = "hyd",
-    @SerializedName("PostedDatee")
+    @SerializedName("PostedDate")
     var postedDate: String? = "5 Apr",
 
 

@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class PostWorkData(
     @SerializedName("PhoneNumber")
     var phoneNumber: String? = null,
+    @SerializedName("SS_WorkId")
+    var workId: String? = null,
     @SerializedName("WorkName")
     var workName: String? = null,
     @SerializedName("Description")

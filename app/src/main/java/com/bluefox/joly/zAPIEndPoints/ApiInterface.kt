@@ -169,6 +169,13 @@ interface ApiInterface {
         @Field("CategoryIds") categoryIds: String
     ): GetWorkResponse
 
+    //TODO Implement API-Calling for this
+    @FormUrlEncoded
+    @POST("SS_CloseService.php")
+    suspend fun ssCloseWork(
+        @Field("WorkId") workId: String
+    ): SPTestimonyResponse
+
 
     //Testimonies
 
@@ -236,16 +243,53 @@ interface ApiInterface {
     ): GetPostedJobsResponse
 
 
+
     @FormUrlEncoded
-    @POST("JP_Update_PostedJob_ByJobId.php")
+    @POST("JobProvider/JP_CloseJob.php")
     suspend fun jp_UpdateJobStatus(
         @Field("JobId") jobId: String,
         @Field("JobStatus") jobStatus: String,
     ): PostJobResponse
 
     @FormUrlEncoded
-    @POST("jp_getPostedJobs_ByUserId.php")
+    @POST("JobProvider/SP_ViewApplications.php")
     suspend fun jp_getPostedApplications(
-        @Field("jobId") jobId: String
+        @Field("JobId") jobId: String
     ): GetApplicationResponse
+
+    //JobProvider
+//    //TODO Implement API-Calling for this
+//    @FormUrlEncoded
+//    @POST("JobProvider/JP_CloseJob.php")
+//    suspend fun jp_CloseJob(
+//        @Field("JobId") jobId: String,
+//        @Field("Status") status: String,
+//    ): PostJobResponse
+
+
+    //JobSeeker
+    //TODO Implement API-Calling for this
+    @FormUrlEncoded
+    @POST("JobSeeker/SS_ApplyJob.php")
+    suspend fun jsApplyJob(
+        @Field("JobId") jobId: String,
+        @Field("UserId") userId: String
+    ): PostJobResponse
+
+
+    //JobSeeker
+    //TODO Implement API_Calling for this
+    @GET("JobSeeker/JP_GetJobs.php")
+    suspend fun getAllJobs(): GetPostedJobsResponse
+
+    //TODO Implement API-Calling for this
+    @FormUrlEncoded
+    @POST("JobSeeker/JS_GetAppliedJobs.php")
+    suspend fun jsAppliedJobs(
+        @Field("UserId") userId: String
+    ): GetPostedJobsResponse
+
+
+
+
 }

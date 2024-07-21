@@ -51,6 +51,12 @@ class PostedJobsFragment : Fragment() {
         initViews()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        jPapiFunctions.getPostedJobs(SSProfileData.mLoginData.userId.toString())
+    }
+
     private fun initViews() {
         jpViewModel = ViewModelProvider(this)[JPViewModel::class.java]
 
@@ -61,11 +67,6 @@ class PostedJobsFragment : Fragment() {
             onJobPostedResponse = {},
             ::onJobsFetched
         )
-
-
-        //GetPostedJobs
-        jPapiFunctions.getPostedJobs(SSProfileData.mLoginData.userId.toString())
-
     }
 
     private fun onJobsFetched(jobsList: ArrayList<PostJobData>) {
@@ -75,7 +76,7 @@ class PostedJobsFragment : Fragment() {
 
     private fun initPostedJobs(worksList: List<PostJobData>) {
 
-        Log.e("Test","3")
+        Log.e("Test", "3")
 
         val jpJobsAdapter = JpJobsAdapter(requireContext(), worksList, ::onJobClicked)
         binding.rvJobs.apply {
@@ -90,7 +91,7 @@ class PostedJobsFragment : Fragment() {
 
     private fun onJobClicked(postJobData: PostJobData) {
         //Call ViewPostedJob
-        SelJobDetails.postJobData=postJobData
+        SelJobDetails.postJobData = postJobData
         //Call intent to ViewJob
         CallIntent.gotoViewPostedJobActivity(requireContext(), false, requireActivity())
     }

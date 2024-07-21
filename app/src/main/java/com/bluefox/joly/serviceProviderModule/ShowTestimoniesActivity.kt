@@ -36,6 +36,12 @@ class ShowTestimoniesActivity : AppCompatActivity() {
         onClickListeners()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        callAPis()
+    }
+
     private fun initViews() {
         sPViewModel = ViewModelProvider(this)[SPViewModel::class.java]
         sPAPIFunctions = SPAPIFunctions(
@@ -47,7 +53,7 @@ class ShowTestimoniesActivity : AppCompatActivity() {
             onServiceAddedResponse = {},
             ::onGetTestimonialsResponse)
 
-        callAPis()
+//        callAPis()
     }
 
     private fun callAPis()

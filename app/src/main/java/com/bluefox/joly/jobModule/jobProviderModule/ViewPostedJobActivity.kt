@@ -33,7 +33,7 @@ class ViewPostedJobActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initViews()
-
+        onClickListeners()
     }
 
     fun initViews() {
@@ -47,6 +47,12 @@ class ViewPostedJobActivity : AppCompatActivity() {
             onJobPostedResponse ={},
             onGetPostedJobsResponse = {}
         )
+    }
+
+    fun onClickListeners() {
+        binding.ivBack.setOnClickListener {
+            finish()
+        }
     }
 
     private fun onUpdateJobStatus(jobId: String, jobStatus: String) {

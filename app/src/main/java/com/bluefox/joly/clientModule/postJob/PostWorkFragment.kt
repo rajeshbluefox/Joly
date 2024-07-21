@@ -50,7 +50,7 @@ class PostWorkFragment : Fragment() {
 
     private lateinit var sSapiFunctions: SSapiFunctions
     private lateinit var ssViewModel: SSViewModel
-    private lateinit var loginViewModel : LoginViewModel
+    private lateinit var loginViewModel: LoginViewModel
 
 
     private lateinit var postWorkUI: PostWorkUI
@@ -68,6 +68,7 @@ class PostWorkFragment : Fragment() {
             throw RuntimeException("$context must implement TitleUpdater")
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -141,18 +142,18 @@ class PostWorkFragment : Fragment() {
             onGetWorksResponse = {}
         )
 
-        submittedDialog = SubmittedDialog(layoutInflater,requireContext())
+        submittedDialog = SubmittedDialog(layoutInflater, requireContext())
 
         callApis()
     }
 
     private fun callApis() {
 
-        if(ServicesCatJob.isDataFetched)
-        {
+        if (ServicesCatJob.isDataFetched) {
             postWorkUI.initCategoriesSpinner(ServicesCatJob.categoriesList)
-            postWorkUI.initJobsSpinner(ServicesCatJob.jobList)
-        }else{
+            postWorkUI.filterJobsByCatId(ServicesCatJob.categoriesList[0].categoryID!!)
+//            postWorkUI.initJobsSpinner(ServicesCatJob.jobList)
+        } else {
             postWorkUI.showPB()
             sSapiFunctions.getCategories()
         }
@@ -161,12 +162,17 @@ class PostWorkFragment : Fragment() {
 
     private fun jobsListResponse(jobsList: List<JobItem>) {
         ServicesCatJob.isDataFetched = true
+        ServicesCatJob.jobList = jobsList as ArrayList<JobItem>
 
-        postWorkUI.initJobsSpinner(jobsList)
+
+        postWorkUI.filterJobsByCatId(ServicesCatJob.categoriesList[0].categoryID!!)
+//        postWorkUI.initJobsSpinner(jobsList)
         postWorkUI.hidePB()
     }
 
     private fun categoriesListResponse(categoriesList: List<CategoryItem>) {
+        ServicesCatJob.categoriesList = categoriesList as ArrayList<CategoryItem>
+
         postWorkUI.initCategoriesSpinner(categoriesList)
 
         //Calling Jobs API
@@ -177,17 +183,16 @@ class PostWorkFragment : Fragment() {
     private fun postWorkDetails(postWorkData: PostWorkData) {
 //        SSSelectedData.imagePart=getImageFromByteArrayNew()
 //        SSSelectedData.parts.add(getImageFromByteArrayNew())
-        if(isPhoto1Set) {
+        if (isPhoto1Set) {
             loginViewModel.setCurrentFragment(0)
             submittedDialog.showLoading()
             sSapiFunctions.postWork(postWorkData)
-        }else{
-            UtilFunctions.showToast(requireContext(),"Select Image")
+        } else {
+            UtilFunctions.showToast(requireContext(), "Select Image")
         }
     }
 
-    private fun onWorkSubmitted()
-    {
+    private fun onWorkSubmitted() {
         SSSelectedData.reset()
         loginViewModel.setCurrentFragment(1)
         navigateToViewMyWorks()
@@ -284,18 +289,18 @@ class PostWorkFragment : Fragment() {
                 val photoItem = SSSelectedData.workPhotosUris[index]
 
                 when (index) {
-                    0 -> setPhoto(binding.photo1,binding.delPhoto1,photoItem)
-                    1 -> setPhoto(binding.photo2,binding.delPhoto2,photoItem)
-                    2 -> setPhoto(binding.photo3,binding.delPhoto3,photoItem)
-                    3 -> setPhoto(binding.photo4,binding.delPhoto4,photoItem)
+                    0 -> setPhoto(binding.photo1, binding.delPhoto1, photoItem)
+                    1 -> setPhoto(binding.photo2, binding.delPhoto2, photoItem)
+                    2 -> setPhoto(binding.photo3, binding.delPhoto3, photoItem)
+                    3 -> setPhoto(binding.photo4, binding.delPhoto4, photoItem)
                 }
             } else {
                 // No item at this index, call clearPhoto
                 when (index) {
-                    0 -> clearPhoto(binding.photo1, binding.delPhoto1,0)
-                    1 -> clearPhoto(binding.photo2, binding.delPhoto2,1)
-                    2 -> clearPhoto(binding.photo3, binding.delPhoto3,2)
-                    3 -> clearPhoto(binding.photo4, binding.delPhoto4,3)
+                    0 -> clearPhoto(binding.photo1, binding.delPhoto1, 0)
+                    1 -> clearPhoto(binding.photo2, binding.delPhoto2, 1)
+                    2 -> clearPhoto(binding.photo3, binding.delPhoto3, 2)
+                    3 -> clearPhoto(binding.photo4, binding.delPhoto4, 3)
                 }
             }
         }
@@ -303,22 +308,20 @@ class PostWorkFragment : Fragment() {
 
     }
 
-    private fun setPhoto(photoView: ImageView, delPhoto: ImageView, uri: Uri)
-    {
+    private fun setPhoto(photoView: ImageView, delPhoto: ImageView, uri: Uri) {
         photoView.setImageURI(uri)
-        delPhoto.visibility=View.VISIBLE
+        delPhoto.visibility = View.VISIBLE
     }
 
-    private fun clearPhoto(photoView: ImageView, delPhoto: ImageView, position: Int)
-    {
+    private fun clearPhoto(photoView: ImageView, delPhoto: ImageView, position: Int) {
         photoView.setImageURI(null)
-        delPhoto.visibility=View.GONE
+        delPhoto.visibility = View.GONE
 
         when (position) {
-            0 -> isPhoto1Set=false
-            1 -> isPhoto2Set=false
-            2 -> isPhoto3Set=false
-            3 -> isPhoto4Set=false
+            0 -> isPhoto1Set = false
+            1 -> isPhoto2Set = false
+            2 -> isPhoto3Set = false
+            3 -> isPhoto4Set = false
         }
     }
 
@@ -351,7 +354,10 @@ class PostWorkFragment : Fragment() {
         }
 
         val permissionsToRequest = permissions.filter {
-            ContextCompat.checkSelfPermission(requireContext(), it) != PackageManager.PERMISSION_GRANTED
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                it
+            ) != PackageManager.PERMISSION_GRANTED
         }.toTypedArray()
 
         if (permissionsToRequest.isNotEmpty()) {
@@ -451,7 +457,7 @@ class PostWorkFragment : Fragment() {
 
 
             if (imagePart != null) {
-                SSSelectedData.imagePart=imagePart
+                SSSelectedData.imagePart = imagePart
                 UtilFunctions.showToast(requireContext(), "Mtp")
 //                postImage(imagePart)
             }
@@ -459,7 +465,10 @@ class PostWorkFragment : Fragment() {
     }
 
     private fun createImageFileFromBitmap(bitmap: Bitmap): File? {
-        val file = File(requireContext().externalCacheDir, "${UtilFunctions.getCurrentDateTimeSeconds()}.jpg")
+        val file = File(
+            requireContext().externalCacheDir,
+            "${UtilFunctions.getCurrentDateTimeSeconds()}.jpg"
+        )
         try {
             val outputStream = FileOutputStream(file)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
@@ -487,7 +496,7 @@ class PostWorkFragment : Fragment() {
         return picturePath ?: ""
     }
 
-    private fun getImageFromByteArrayNew(imageUri: Uri,imagePath: String): MultipartBody.Part {
+    private fun getImageFromByteArrayNew(imageUri: Uri, imagePath: String): MultipartBody.Part {
         var bmp: Bitmap? = null
         try {
             bmp = MediaStore.Images.Media.getBitmap(requireContext().contentResolver, imageUri)
@@ -517,7 +526,6 @@ class PostWorkFragment : Fragment() {
 
         return MultipartBody.Part.createFormData("Photos[]", file.name, requestBody)
     }
-
 
 
 }
