@@ -23,6 +23,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="34">
         <activity
+            android:name=".jobModule.jobSeekerModule.viewJobs.ViewJobsJSActivity"
+            android:exported="false" />
+        <activity
             android:name=".jobModule.jobProviderModule.ApplicantProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.Joly" />
