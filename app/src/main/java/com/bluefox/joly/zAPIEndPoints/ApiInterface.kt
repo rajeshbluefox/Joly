@@ -257,18 +257,10 @@ interface ApiInterface {
         @Field("JobId") jobId: String
     ): GetApplicationResponse
 
-    //JobProvider
-//    //TODO Implement API-Calling for this
-//    @FormUrlEncoded
-//    @POST("JobProvider/JP_CloseJob.php")
-//    suspend fun jp_CloseJob(
-//        @Field("JobId") jobId: String,
-//        @Field("Status") status: String,
-//    ): PostJobResponse
+
 
 
     //JobSeeker
-    //TODO Implement API-Calling for this
     @FormUrlEncoded
     @POST("JobSeeker/SS_ApplyJob.php")
     suspend fun jsApplyJob(
@@ -278,18 +270,16 @@ interface ApiInterface {
 
 
     //JobSeeker
-    //TODO Implement API_Calling for this
-    @GET("JobSeeker/JP_GetJobs.php")
-    suspend fun getAllJobs(): GetPostedJobsResponse
+    @FormUrlEncoded
+    @POST("JobSeeker/JP_GetJobs.php")
+    suspend fun getAllJobs(
+        @Field("UserId") userId: String
+    ): GetPostedJobsResponse
 
-    //TODO Implement API-Calling for this
     @FormUrlEncoded
     @POST("JobSeeker/JS_GetAppliedJobs.php")
     suspend fun jsAppliedJobs(
         @Field("UserId") userId: String
     ): GetPostedJobsResponse
-
-
-
 
 }

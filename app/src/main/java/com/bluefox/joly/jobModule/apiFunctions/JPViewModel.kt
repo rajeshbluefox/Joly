@@ -78,7 +78,7 @@ class JPViewModel @Inject constructor(
     fun updateJobStatus(jobId: String, jobStatus: String) {
         viewModelScope.launch {
             getUpdateJobStatusResponse.postValue(
-                jpRepository.getUpdatedJobStatusResponse(jobId,jobStatus)
+                jpRepository.getUpdatedJobStatusResponse(jobId, jobStatus)
             )
         }
     }
@@ -126,6 +126,24 @@ class JPViewModel @Inject constructor(
 
     fun getAllJobsResponse(): LiveData<GetPostedJobsResponse> {
         return getPostedJobsResponseJS
+    }
+
+    private var getAppliedJobResponse = MutableLiveData<PostJobResponse>()
+
+    fun jsApplyJobs(jobId: String, userId: String) {
+        viewModelScope.launch {
+            getAppliedJobResponse.postValue(
+                jpRepository.jsApplyJob(jobId, userId)
+            )
+        }
+    }
+
+    fun resetJsApplyJobsResponse() {
+        getAppliedJobResponse = MutableLiveData<PostJobResponse>()
+    }
+
+    fun getJsApplyJobsResponse(): LiveData<PostJobResponse> {
+        return getAppliedJobResponse
     }
 
 }

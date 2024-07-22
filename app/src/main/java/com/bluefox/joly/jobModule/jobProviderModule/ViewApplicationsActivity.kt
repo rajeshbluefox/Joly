@@ -54,7 +54,8 @@ class ViewApplicationsActivity : AppCompatActivity() {
             onJobPostedResponse ={},
             onGetPostedJobsResponse = {},
             ::initViewApplicationsRV,
-            onGetAllJobs = {}
+            onGetAllJobs = {},
+            onApplyJobs = {}
         )
 
         jPapiFunctions.getJobApplications(SelJobDetails.postJobData.jobId.toString())

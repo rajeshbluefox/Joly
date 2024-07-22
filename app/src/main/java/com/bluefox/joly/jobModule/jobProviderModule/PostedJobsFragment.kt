@@ -65,7 +65,8 @@ class PostedJobsFragment : Fragment() {
             onJobPostedResponse = {},
             ::onJobsFetched,
             onViewApplicationResponse = {},
-            onGetAllJobs = {}
+            onGetAllJobs = {},
+            onApplyJobs = {}
         )
     }
 

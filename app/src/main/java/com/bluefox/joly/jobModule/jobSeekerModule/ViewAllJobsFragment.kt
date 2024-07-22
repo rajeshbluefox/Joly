@@ -66,7 +66,8 @@ class ViewAllJobsFragment : Fragment() {
             onJobPostedResponse = {},
             onGetPostedJobsResponse = {},
             onViewApplicationResponse = {},
-            ::onJobsFetched
+            ::onJobsFetched,
+            onApplyJobs = {}
         )
     }
 
@@ -94,6 +95,6 @@ class ViewAllJobsFragment : Fragment() {
         //Call ViewPostedJob
         SelJobDetails.postJobData = postJobData
         //Call intent to ViewJob
-        CallIntent.gotoViewPostedJobActivity(requireContext(), false, requireActivity())
+        CallIntent.gotoJSViewJobActivity(requireContext(), false, requireActivity())
     }
 }

@@ -27,5 +27,4 @@ data class PostJobData(
     @SerializedName("PostedDate")
     var postedDate: String? = "5 Apr",
 
-
 )

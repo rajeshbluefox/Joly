@@ -52,7 +52,8 @@ class ViewPostedJobActivity : AppCompatActivity() {
             onJobPostedResponse ={},
             onGetPostedJobsResponse = {},
             onViewApplicationResponse = {},
-            onGetAllJobs = {}
+            onGetAllJobs = {},
+            onApplyJobs = {}
         )
     }
 

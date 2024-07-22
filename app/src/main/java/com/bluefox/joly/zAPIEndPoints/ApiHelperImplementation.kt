@@ -36,16 +36,14 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
 
     override suspend fun validateLogin(loginData: LoginData): LoginResponse {
 
-        if(SSProfileData.UserRole==4)
-        {
+        if (SSProfileData.UserRole == 4) {
             return apiService.jsLogin(
                 loginData.phoneNumber!!,
                 loginData.password!!
             )
         }
 
-        if(SSProfileData.UserRole == 3)
-        {
+        if (SSProfileData.UserRole == 3) {
             return apiService.validateLoginJP(
                 loginData.phoneNumber!!,
                 loginData.password!!
@@ -119,8 +117,7 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
         }
 
 
-        if(SSProfileData.UserRole == 3)
-        {
+        if (SSProfileData.UserRole == 3) {
             return apiService.postRegisterJP(
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
@@ -129,8 +126,7 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.name.toString()
-                )
-                ,
+                ),
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.companyName.toString()
@@ -343,8 +339,8 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun getSSWorks(mobileNo: String): GetWorkResponse {
-        if(SSProfileData.UserRole==1)
-        return apiService.getSSWork(mobileNo)
+        if (SSProfileData.UserRole == 1)
+            return apiService.getSSWork(mobileNo)
 
         return apiService.getSSWorkByCategories(mobileNo)
     }
@@ -394,7 +390,7 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun jpUpdateJobStatus(jobId: String, jobStatus: String): PostJobResponse {
-        return apiService.jp_UpdateJobStatus(jobId,jobStatus)
+        return apiService.jp_UpdateJobStatus(jobId, jobStatus)
     }
 
     override suspend fun jpGetJobApplications(jobId: String): GetApplicationResponse {
@@ -402,13 +398,13 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun jsGetAllJobs(userId: String): GetPostedJobsResponse {
-        if(SelJobDetails.selFragmentJobSeeker==0)
-        return apiService.getAllJobs()
+        if (SelJobDetails.selFragmentJobSeeker == 0)
+            return apiService.getAllJobs(userId)
 
         return apiService.jsAppliedJobs(userId)
     }
 
-    override suspend fun jsApplyJob(jobId: String,userId: String): PostJobResponse {
+    override suspend fun jsApplyJob(jobId: String, userId: String): PostJobResponse {
         return apiService.jsApplyJob(jobId, userId)
     }
 

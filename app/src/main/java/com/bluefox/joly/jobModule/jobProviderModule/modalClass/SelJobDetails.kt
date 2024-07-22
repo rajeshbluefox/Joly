@@ -7,4 +7,7 @@ object SelJobDetails {
     var applicantProfileData = LoginData()
 
     var selFragmentJobSeeker = 0
+
+    var appliedJobs = ArrayList<PostJobData>()
+    var allJobs = ArrayList<PostJobData>()
 }

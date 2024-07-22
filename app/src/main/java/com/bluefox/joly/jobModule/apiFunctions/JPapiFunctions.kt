@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.PostJobData
+import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
 
 
@@ -16,6 +17,7 @@ class JPapiFunctions(
     private val onGetPostedJobsResponse: (postedJobsList: ArrayList<PostJobData>) -> Unit,
     private val onViewApplicationResponse: (applicationsList: ArrayList<LoginData>) -> Unit,
     private val onGetAllJobs: (postedJobsList: ArrayList<PostJobData>) -> Unit,
+    private val onApplyJobs: () -> Unit,
 ) {
 
     private var mContext: Context = context
@@ -88,8 +90,7 @@ class JPapiFunctions(
             if (it.status == 200) {
                 UtilFunctions.showToast(mContext, "Job Status Updated SuccessFully")
                 //TODO Impl Callback
-            }
-            else {
+            } else {
                 UtilFunctions.showToast(mContext, "Server Not Responding")
             }
         }
@@ -107,14 +108,13 @@ class JPapiFunctions(
     private fun getJobApplicationsObserver() {
         jpViewModel.getUpdateJobApplicationsResponse().observe(mLifecycleOwner) {
             if (it.code == 200) {
-                if(it.applicationsList.isNotEmpty())
-                onViewApplicationResponse.invoke(it.applicationsList)
-                else{
-                    UtilFunctions.showToast(mContext,"No Applications Received")
+                if (it.applicationsList.isNotEmpty())
+                    onViewApplicationResponse.invoke(it.applicationsList)
+                else {
+                    UtilFunctions.showToast(mContext, "No Applications Received")
                 }
 //                UtilFunctions.showToast(mContext, "Job Application SuccessFully")
-            }
-            else {
+            } else {
                 UtilFunctions.showToast(mContext, "Server Not Responding")
             }
         }
@@ -131,18 +131,34 @@ class JPapiFunctions(
     private fun getAllJobsObserver() {
         jpViewModel.getAllJobsResponse().observe(mLifecycleOwner) {
             if (it.code == 200) {
-                if(it.postedJobsList.isNotEmpty())
+                if (it.postedJobsList.isNotEmpty()) {
+
                     onGetAllJobs.invoke(it.postedJobsList)
-                else{
-                    UtilFunctions.showToast(mContext,"No Jobs")
+                } else {
+                    UtilFunctions.showToast(mContext, "No Jobs")
                 }
 
-            }
-            else {
+            } else {
                 UtilFunctions.showToast(mContext, "Server Not Responding")
             }
         }
+    }
 
+    fun jsApplyJobs(jobId: String, userId: String) {
+        jpViewModel.resetJsApplyJobsResponse()
+        jpViewModel.jsApplyJobs(jobId, userId)
+
+        getApplyJobsObserver()
+    }
+
+    private fun getApplyJobsObserver() {
+        jpViewModel.getJsApplyJobsResponse().observe(mLifecycleOwner) {
+            if (it.status == 200) {
+                onApplyJobs.invoke()
+            } else {
+                UtilFunctions.showToast(mContext, "Server Not Responding")
+            }
+        }
     }
 
 }
