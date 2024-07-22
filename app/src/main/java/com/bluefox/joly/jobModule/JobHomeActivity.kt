@@ -45,6 +45,12 @@ class JobHomeActivity : AppCompatActivity() {
     fun initViews()
     {
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
+        if(SSProfileData.UserRole==4)
+        {
+            binding.tvPostedWork.text="View Jobs"
+            binding.tvPostWork.text="Applied Jobs"
+        }
     }
 
     private fun getCurrentObserver() {

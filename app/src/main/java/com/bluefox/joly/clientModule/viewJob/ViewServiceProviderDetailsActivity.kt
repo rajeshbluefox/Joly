@@ -59,6 +59,7 @@ class ViewServiceProviderDetailsActivity : AppCompatActivity() {
     }
 
     private var serviceCategoryList = ArrayList<CategoryData>()
+
     private fun initServiceCategoryDataRV()
     {
         fillDummyList()
@@ -80,7 +81,6 @@ class ViewServiceProviderDetailsActivity : AppCompatActivity() {
 
     private fun onServiceProviderClick()
     {
-
 
     }
 }
