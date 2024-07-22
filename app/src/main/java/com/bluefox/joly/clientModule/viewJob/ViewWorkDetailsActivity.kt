@@ -3,9 +3,13 @@ package com.bluefox.joly.clientModule.viewJob
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
+import com.bluefox.joly.clientModule.postJob.apiFunctions.SSViewModel
+import com.bluefox.joly.clientModule.postJob.apiFunctions.SSapiFunctions
 import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
 import com.bluefox.joly.clientModule.viewJob.modalClass.SSSelected
+import com.bluefox.joly.clientModule.viewJob.supportFunctions.ViewJobsUI
 import com.bluefox.joly.databinding.ActivityViewJobDetailsBinding
 import com.bluefox.joly.zCommonFunctions.StatusBarUtils
 import com.bumptech.glide.Glide
@@ -17,6 +21,9 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityViewJobDetailsBinding
 
+    private lateinit var sSapiFunctions: SSapiFunctions
+    private lateinit var ssViewModel: SSViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityViewJobDetailsBinding.inflate(layoutInflater)
@@ -25,8 +32,25 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
         StatusBarUtils.transparentStatusBarWhite(this)
         StatusBarUtils.setTopPadding(resources,binding.appBarLt)
 
+        initViews()
         setDetails()
         onClickListeners()
+    }
+
+    private fun initViews() {
+        ssViewModel = ViewModelProvider(this)[SSViewModel::class.java]
+
+        sSapiFunctions = SSapiFunctions(
+            this,
+            this,
+            ssViewModel,
+            onCategoriesResponse={},
+            onJobsResponse={},
+            onWorkSubmitted = {},
+            onGetWorksResponse={},
+            ::onServiceClosed
+        )
+
     }
 
     private fun onClickListeners() {
@@ -35,9 +59,12 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
         }
 
         binding.btCloseService.setOnClickListener {
-            //TODO call CloseWorkAPI
+            sSapiFunctions.getSSCloseWork(SSSelected.workData.workId.toString())
+
         }
     }
+
+
 
     private fun setDetails() {
 //        binding.tvJobTitle.text=JobSelected.jobsData.jobName
@@ -97,6 +124,11 @@ class ViewWorkDetailsActivity : AppCompatActivity() {
         binding.imageSlider.setImageList(imageListAdapter)
         binding.imageSlider.setImageList(imageListAdapter, ScaleTypes.FIT) // for all images
 
+    }
+
+    fun onServiceClosed()
+    {
+        finish()
     }
 
 

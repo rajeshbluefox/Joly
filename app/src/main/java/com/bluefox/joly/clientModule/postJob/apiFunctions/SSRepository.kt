@@ -5,6 +5,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.zAPIEndPoints.ApiHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -59,6 +60,18 @@ class SSRepository @Inject constructor(
         } catch (_: Exception) {
         }
         return getWorkResponse
+    }
+
+    private var getCloseWorkResponse = SPTestimonyResponse()
+
+    suspend fun getCloseWork(workId: String): SPTestimonyResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                getCloseWorkResponse = apiHelper.ssCloseWork(workId)
+            }
+        } catch (_: Exception) {
+        }
+        return getCloseWorkResponse
     }
 
 }

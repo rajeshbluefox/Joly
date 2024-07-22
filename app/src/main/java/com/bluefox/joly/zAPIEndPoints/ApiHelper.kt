@@ -29,6 +29,10 @@ interface ApiHelper {
     suspend fun validateLogin(loginData: LoginData): LoginResponse
     suspend fun ssRegister(sSRegistrationDetailsData : SSRegistrationDetailsData): RegistrationResponse
 
+    suspend fun ssCloseWork(workId: String): SPTestimonyResponse
+
+
+
     //Testimonies
     suspend fun getSPTestimonies(mobileNo: String): GetTestimoniesResponse
 

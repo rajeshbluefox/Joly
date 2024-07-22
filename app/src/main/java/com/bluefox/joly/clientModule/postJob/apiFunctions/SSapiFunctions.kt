@@ -14,7 +14,8 @@ class SSapiFunctions(
     private val onCategoriesResponse: (categoriesList: List<CategoryItem>) -> Unit,
     private val onJobsResponse: (jobsList: List<JobItem>) -> Unit,
     private val onWorkSubmitted: () -> Unit,
-    private val onGetWorksResponse: (worksList: List<PostWorkData>) -> Unit
+    private val onGetWorksResponse: (worksList: List<PostWorkData>) -> Unit,
+    private val onServiceClosed: () -> Unit
     ) {
 
     private var mContext: Context
@@ -103,6 +104,25 @@ class SSapiFunctions(
             if(it.status==200)
             {
                 onGetWorksResponse.invoke(it.data as List<PostWorkData>)
+            }else{
+                UtilFunctions.showToast(mContext, "Invalid Response")
+            }
+        }
+    }
+
+
+    fun getSSCloseWork(workId: String) {
+        mssViewModel.resetGetSCloseWorkResponse()
+        mssViewModel.getSSCloseWork(workId)
+        getSSlCloseWorkObserver()
+    }
+
+    private fun getSSlCloseWorkObserver() {
+        mssViewModel.getSSCloseWorkResponse().observe(mLifecycleOwner) {
+
+            if(it.status==200)
+            {
+                onServiceClosed.invoke()
             }else{
                 UtilFunctions.showToast(mContext, "Invalid Response")
             }

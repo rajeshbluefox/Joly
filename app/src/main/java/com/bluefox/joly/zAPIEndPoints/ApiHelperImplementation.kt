@@ -292,6 +292,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
         )
     }
 
+    override suspend fun ssCloseWork(workId: String): SPTestimonyResponse {
+        return apiService.ssCloseWork(workId)
+    }
+
     override suspend fun getSPTestimonies(mobileNo: String): GetTestimoniesResponse {
         return apiService.getSPTestimonies(mobileNo)
     }

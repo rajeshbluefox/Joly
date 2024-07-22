@@ -70,7 +70,8 @@ class ViewWorksFragment : Fragment() {
             ::categoriesListResponse,
             ::jobsListResponse,
             onWorkSubmitted = {},
-            ::onGetWorksResponse
+            ::onGetWorksResponse,
+            onServiceClosed = {}
         )
 
         callApis()

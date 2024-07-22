@@ -139,7 +139,8 @@ class PostWorkFragment : Fragment() {
             ::categoriesListResponse,
             ::jobsListResponse,
             ::onWorkSubmitted,
-            onGetWorksResponse = {}
+            onGetWorksResponse = {},
+            onServiceClosed = {}
         )
 
         submittedDialog = SubmittedDialog(layoutInflater, requireContext())

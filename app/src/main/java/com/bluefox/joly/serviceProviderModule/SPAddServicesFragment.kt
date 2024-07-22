@@ -88,7 +88,8 @@ class SPAddServicesFragment : Fragment() {
             ::categoriesListResponse,
             ::jobsListResponse,
             onWorkSubmitted = {},
-            onGetWorksResponse = {}
+            onGetWorksResponse = {},
+            onServiceClosed = {}
         )
 
         spapiFunctions = SPAPIFunctions(
