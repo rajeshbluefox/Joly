@@ -20,6 +20,7 @@ import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.login.supportFunctions.RegisterActivityUI
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
+import com.bluefox.joly.clientModule.postJob.supportFunctions.TermsDialog
 import com.bluefox.joly.databinding.ActivityRegisterBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zCommonFunctions.ImageCropperHandler
@@ -56,6 +57,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var loginAPIFunctions: LoginAPIFunctions
 
     private var isImageSelected = false
+
+    private lateinit var termsDialog: TermsDialog
 
     //Image Picker
     private val imageCropperHandler = ImageCropperHandler(
@@ -144,6 +147,12 @@ class RegisterActivity : AppCompatActivity() {
                 binding.tvAppBarTitle.text="Service Provider"
                 binding.ltServiceProvider.visibility = View.VISIBLE
             }
+            3 -> {
+                binding.tvAppBarTitle.text="Job Provider"
+            }
+            4 -> {
+                binding.tvAppBarTitle.text="Job Seeker"
+            }
         }
 
     }
@@ -153,6 +162,8 @@ class RegisterActivity : AppCompatActivity() {
 
         registerActivityUI = RegisterActivityUI(this, binding,::onSubmitClicked)
         loginAPIFunctions = LoginAPIFunctions(this,this,loginViewModel, onLoginResponse = {},::onRegisterResponse )
+
+        termsDialog = TermsDialog(layoutInflater, this)
 
     }
 
@@ -167,6 +178,11 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.profilePic.setOnClickListener {
             requestCameraAndStoragePermissions()
+        }
+
+        binding.btTNC.setOnClickListener {
+            val useRole = UserDetails.getUserRoleStatus(this)
+            termsDialog.openTNCDialog(useRole)
         }
     }
 
@@ -233,7 +249,11 @@ class RegisterActivity : AppCompatActivity() {
     private fun onSubmitClicked(sSRegistrationDetailsData : SSRegistrationDetailsData)
     {
 
-        loginAPIFunctions.ssRegister(sSRegistrationDetailsData)
+        if(isImageSelected) {
+            loginAPIFunctions.ssRegister(sSRegistrationDetailsData)
+        }else{
+            UtilFunctions.showToast(this,"Please select a photo")
+        }
 
         Log.e("test","Name ${sSRegistrationDetailsData.name}")
     }

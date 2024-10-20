@@ -27,6 +27,7 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater {
 
     private lateinit var loginViewModel: LoginViewModel
     private lateinit var loginAPIFunctions: LoginAPIFunctions
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
@@ -153,8 +154,16 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater {
             .commit()
     }
 
-    override fun updateTitle(newTitle: String) {
+    override fun updateTitle(newTitle: String,fragment: Int) {
         binding.tvAppBarTitle.text = newTitle
+
+        when(fragment)
+        {
+            1 -> {
+                fillViewServices()
+            }
+        }
+
     }
 
     private fun onChangeBackGround(mSelectedItem: Int) {
@@ -162,52 +171,52 @@ class HomeActivity : AppCompatActivity(), HomeTitleUpdater {
             1 -> {
                 binding.myJobBT.setBackgroundResource(R.drawable.navi_bar_selected_bg)
                 binding.icPostedWork.setImageResource(R.drawable.ic_posted_work_colored)
-                val textColor1 = ContextCompat.getColor(this, R.color.navi_bar_text)
+                val textColor1 = ContextCompat.getColor(this, R.color.bttm_nav_sel_text_color)
                 binding.tvPostedWork.setTextColor(textColor1)
 
                 binding.postJobBT.background = null
                 binding.icPostWork.setImageResource(R.drawable.ic_post_work)
-                val textColor2 = ContextCompat.getColor(this, R.color.black)
+                val textColor2 = ContextCompat.getColor(this, R.color.bttm_nav_text_color)
                 binding.tvPostWork.setTextColor(textColor2)
 
                 binding.profileBT.background = null
                 binding.icProfile.setImageResource(R.drawable.ic_profile)
-                val textColor3 = ContextCompat.getColor(this, R.color.black)
-                binding.tvPostedWork.setTextColor(textColor3)
+                val textColor3 = ContextCompat.getColor(this, R.color.bttm_nav_text_color)
+                binding.tvProfile.setTextColor(textColor3)
             }
 
             2 -> {
                 binding.myJobBT.background = null
                 binding.icPostedWork.setImageResource(R.drawable.ic_posted_work)
-                val textColor1 = ContextCompat.getColor(this, R.color.black)
+                val textColor1 = ContextCompat.getColor(this, R.color.bttm_nav_text_color)
                 binding.tvPostedWork.setTextColor(textColor1)
 
                 binding.postJobBT.setBackgroundResource(R.drawable.navi_bar_selected_bg)
                 binding.icPostWork.setImageResource(R.drawable.ic_post_work_colored)
-                val textColor2 = ContextCompat.getColor(this, R.color.navi_bar_text)
+                val textColor2 = ContextCompat.getColor(this, R.color.bttm_nav_sel_text_color)
                 binding.tvPostWork.setTextColor(textColor2)
 
                 binding.profileBT.background = null
                 binding.icProfile.setImageResource(R.drawable.ic_profile)
-                val textColor3 = ContextCompat.getColor(this, R.color.black)
-                binding.tvPostedWork.setTextColor(textColor3)
+                val textColor3 = ContextCompat.getColor(this, R.color.bttm_nav_text_color)
+                binding.tvProfile.setTextColor(textColor3)
             }
 
             3 -> {
                 binding.myJobBT.background = null
                 binding.icPostedWork.setImageResource(R.drawable.ic_posted_work)
-                val textColor1 = ContextCompat.getColor(this, R.color.black)
+                val textColor1 = ContextCompat.getColor(this, R.color.bttm_nav_text_color)
                 binding.tvPostedWork.setTextColor(textColor1)
 
                 binding.postJobBT.background = null
                 binding.icPostWork.setImageResource(R.drawable.ic_post_work)
-                val textColor2 = ContextCompat.getColor(this, R.color.black)
+                val textColor2 = ContextCompat.getColor(this, R.color.bttm_nav_text_color)
                 binding.tvPostWork.setTextColor(textColor2)
 
                 binding.profileBT.setBackgroundResource(R.drawable.navi_bar_selected_bg)
                 binding.icProfile.setImageResource(R.drawable.ic_profile_colored)
-                val textColor3 = ContextCompat.getColor(this, R.color.navi_bar_text)
-                binding.tvPostedWork.setTextColor(textColor3)
+                val textColor3 = ContextCompat.getColor(this, R.color.bttm_nav_sel_text_color)
+                binding.tvProfile.setTextColor(textColor3)
             }
         }
 

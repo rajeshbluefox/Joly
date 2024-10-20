@@ -7,6 +7,8 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.CheckFBStatusResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.GetServiceProvidersResponse
 import com.bluefox.joly.dummy.GetThemesResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetApplicationResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetPostedJobsResponse
@@ -64,9 +66,8 @@ interface ApiInterface {
     suspend fun getJobs(): GetJobsResponse
 
 
-
     @Multipart
-    @POST("service_seeker_inser.php")
+    @POST("SS_PostWork_WithAudio.php")
     suspend fun postSSWork(
         @Part("phone_number") phoneNumber: RequestBody,
         @Part("WorkName") WorkName: RequestBody,
@@ -74,7 +75,27 @@ interface ApiInterface {
         @Part("CategoryID") CategoryID: RequestBody,
         @Part("JobTypeID") JobTypeID: RequestBody,
         @Part("AreaID") AreaID: RequestBody,
+        @Part("District") district: RequestBody,
+        @Part("City") city: RequestBody,
         @Part("Wage") Wage: RequestBody,
+        @Part("DeadLineTime") deadLineTime: RequestBody,
+        @Part audio: MultipartBody.Part,
+        @Part photos: List<MultipartBody.Part>
+    ): PostWorkResponse
+
+    @Multipart
+    @POST("SS_PostWork_NoAudio.php")
+    suspend fun postSSWorkNoAudio(
+        @Part("phone_number") phoneNumber: RequestBody,
+        @Part("WorkName") WorkName: RequestBody,
+        @Part("Description") WorkDescription: RequestBody,
+        @Part("CategoryID") CategoryID: RequestBody,
+        @Part("JobTypeID") JobTypeID: RequestBody,
+        @Part("AreaID") AreaID: RequestBody,
+        @Part("District") district: RequestBody,
+        @Part("City") city: RequestBody,
+        @Part("Wage") Wage: RequestBody,
+        @Part("DeadLineTime") deadLineTime: RequestBody,
         @Part photos: List<MultipartBody.Part>
     ): PostWorkResponse
 
@@ -85,6 +106,7 @@ interface ApiInterface {
     @POST("SS_Register.php")
     suspend fun postRegisterSS(
         @Part("MobileNo") mobileNo: RequestBody,
+        @Part("AlternativeNumber") alternativeNumber: RequestBody,
         @Part("Name") name: RequestBody,
         @Part("Age") age: RequestBody,
         @Part("Gender") gender: RequestBody,
@@ -96,10 +118,12 @@ interface ApiInterface {
         @Part photos: MultipartBody.Part
     ): RegistrationResponse
 
+
     @Multipart
     @POST("service_provider_insert.php")
     suspend fun postRegisterSP(
         @Part("MobileNumber") mobileNo: RequestBody,
+        @Part("AlternativeNumber") alternativeNumber: RequestBody,
         @Part("CompanyName") name: RequestBody,
         @Part("Age") age: RequestBody,
         @Part("Gender") gender: RequestBody,
@@ -113,6 +137,7 @@ interface ApiInterface {
         @Part("Qualification") qualification: RequestBody,
         @Part("PreviousExperience") previousExperience: RequestBody,
         @Part("Description") description: RequestBody,
+        @Part("WorkingHours") workingHours: RequestBody,
         @Part("PortfolioLink") portfolioLink: RequestBody,
         @Part photos: MultipartBody.Part
     ): RegistrationResponse
@@ -136,6 +161,9 @@ interface ApiInterface {
         @Part("Password") password: RequestBody,
         @Part("CompanyDescription") companyDescription: RequestBody,
         @Part("CompanyWebsiteLink") companyWebsiteLink: RequestBody,
+        @Part("Contact") contactNumber: RequestBody,
+        @Part("Mail") companyMail: RequestBody,
+        @Part("GSTNO") companyGSTNo: RequestBody,
         @Part photos: MultipartBody.Part
     ): RegistrationResponse
 
@@ -153,6 +181,7 @@ interface ApiInterface {
         @Part("Country") country: RequestBody,
         @Part("Qualification") qualification: RequestBody,
         @Part("Skills") skills: RequestBody,
+        @Part("PastExperience") pastExperience: RequestBody,
         @Part photo: MultipartBody.Part
     ): RegistrationResponse
 
@@ -171,10 +200,19 @@ interface ApiInterface {
 
     //TODO Implement API-Calling for this
     @FormUrlEncoded
-    @POST("SS_CloseService.php")
+    @POST("ServiceSeeker/SS_CloseService.php")
     suspend fun ssCloseWork(
-        @Field("WorkId") workId: String
+        @Field("WorkId") workId: String,
+        @Field("ClosingFeedback") closingFeedback: Int
     ): SPTestimonyResponse
+
+    @FormUrlEncoded
+    @POST("ServiceSeeker/check_FBStatus.php")
+    suspend fun checkFBStatus(
+        @Field("ServiceProviderId") serviceProviderId: Int,
+        @Field("FeedbackProviderId") feedbackProviderId: Int,
+        @Field("WorkId") workId: Int,
+    ): CheckFBStatusResponse
 
 
     //Testimonies
@@ -186,12 +224,16 @@ interface ApiInterface {
     ): GetTestimoniesResponse
 
     @FormUrlEncoded
-    @POST("ServiceProvider_Testimonials_insert.php")
+    @POST("ServiceSeeker/rate_SP.php")
     suspend fun postSPTestimony(
         @Field("CustomerName") customerName: String,
         @Field("PhoneNumber") phoneNumber: String,
         @Field("Testimony") testimony: String,
-        @Field("Status") status: String
+        @Field("Status") status: String,
+        @Field("ServiceProviderId") serviceProviderId: Int,
+        @Field("Rating") rating: Int,
+        @Field("FeedbackProviderId") feedbackProviderId: Int,
+        @Field("WorkId") workid: Int
     ): SPTestimonyResponse
 
     @FormUrlEncoded
@@ -210,6 +252,12 @@ interface ApiInterface {
         @Field("PhoneNumber") phoneNumber: String
     ): SpOfferedServiceResponse
 
+    @FormUrlEncoded
+    @POST("ServiceSeeker/get_SP_byCategoryId.php")
+    suspend fun getServiceProviders(
+        @Field("CategoryId") categoryId: Int
+    ): GetServiceProvidersResponse
+
     //Job Provider
 
     @FormUrlEncoded
@@ -221,7 +269,9 @@ interface ApiInterface {
         @Field("JobDescription") jobDescription: String,
         @Field("Eligibility") eligibility: String,
         @Field("DeadLinetoApply") deadLineToApply: String,
-        @Field("SkillRequired") skillRequired: String
+        @Field("SkillRequired") skillRequired: String,
+        @Field("City") city: String,
+        @Field("District") district: String
     ): PostJobResponse
 
     @FormUrlEncoded
@@ -243,7 +293,6 @@ interface ApiInterface {
     ): GetPostedJobsResponse
 
 
-
     @FormUrlEncoded
     @POST("JobProvider/JP_CloseJob.php")
     suspend fun jp_UpdateJobStatus(
@@ -256,8 +305,6 @@ interface ApiInterface {
     suspend fun jp_getPostedApplications(
         @Field("JobId") jobId: String
     ): GetApplicationResponse
-
-
 
 
     //JobSeeker

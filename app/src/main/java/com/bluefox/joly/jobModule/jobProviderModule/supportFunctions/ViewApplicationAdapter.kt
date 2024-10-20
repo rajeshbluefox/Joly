@@ -35,7 +35,7 @@ class ViewApplicationAdapter(
 
         holder.binding.tvNameValue.text = applicationItem.name
         holder.binding.tvQualificationValue.text = applicationItem.qualification
-
+        holder.binding.tvPhoneNumberValue.text=applicationItem.phoneNumber
 
 //        holder.binding.cardJobItem.setOnClickListener {
 //            onJobClicked.invoke(jobItem)

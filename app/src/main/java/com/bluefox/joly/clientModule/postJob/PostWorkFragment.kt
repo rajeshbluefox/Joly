@@ -6,19 +6,28 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.arthenica.mobileffmpeg.Config
+import com.arthenica.mobileffmpeg.FFmpeg
 import com.bluefox.joly.R
 import com.bluefox.joly.clientModule.login.apiFunctions.LoginViewModel
 import com.bluefox.joly.clientModule.postJob.apiFunctions.SSViewModel
@@ -31,6 +40,7 @@ import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
 import com.bluefox.joly.clientModule.postJob.supportFunctions.PostWorkUI
 import com.bluefox.joly.clientModule.postJob.supportFunctions.SubmittedDialog
+import com.bluefox.joly.clientModule.postJob.supportFunctions.TermsDialog
 import com.bluefox.joly.clientModule.viewJob.ViewWorksFragment
 import com.bluefox.joly.databinding.FragmentPostWorkBinding
 import com.familylocation.mobiletracker.zCommonFuntions.UtilFunctions
@@ -38,6 +48,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -52,11 +64,9 @@ class PostWorkFragment : Fragment() {
     private lateinit var ssViewModel: SSViewModel
     private lateinit var loginViewModel: LoginViewModel
 
-
     private lateinit var postWorkUI: PostWorkUI
 
     private lateinit var submittedDialog: SubmittedDialog
-
 
     private var titleUpdater: HomeTitleUpdater? = null
 
@@ -89,6 +99,7 @@ class PostWorkFragment : Fragment() {
 
         initViews()
         onClickListeners()
+        onClick()
 
     }
 
@@ -126,12 +137,16 @@ class PostWorkFragment : Fragment() {
         }
     }
 
+    private lateinit var termsDialog: TermsDialog
+
     private fun initViews() {
         ssViewModel = ViewModelProvider(this)[SSViewModel::class.java]
         loginViewModel = ViewModelProvider(this)[LoginViewModel::class.java]
 
+        termsDialog = TermsDialog(layoutInflater, requireContext())
 
-        postWorkUI = PostWorkUI(requireContext(), binding, ::postWorkDetails)
+
+        postWorkUI = PostWorkUI(requireContext(), binding, ::postWorkDetails, ::openTCDialog)
         sSapiFunctions = SSapiFunctions(
             requireContext(),
             viewLifecycleOwner,
@@ -148,11 +163,15 @@ class PostWorkFragment : Fragment() {
         callApis()
     }
 
+    private fun openTCDialog() {
+        termsDialog.openTNCDialog(1)
+    }
+
     private fun callApis() {
 
         if (ServicesCatJob.isDataFetched) {
             postWorkUI.initCategoriesSpinner(ServicesCatJob.categoriesList)
-            postWorkUI.filterJobsByCatId(ServicesCatJob.categoriesList[0].categoryID!!)
+//            postWorkUI.filterJobsByCatId(ServicesCatJob.categoriesList[0].categoryID!!)
 //            postWorkUI.initJobsSpinner(ServicesCatJob.jobList)
         } else {
             postWorkUI.showPB()
@@ -184,6 +203,13 @@ class PostWorkFragment : Fragment() {
     private fun postWorkDetails(postWorkData: PostWorkData) {
 //        SSSelectedData.imagePart=getImageFromByteArrayNew()
 //        SSSelectedData.parts.add(getImageFromByteArrayNew())
+        if (outputFilePath.isNotEmpty()) {
+            postWorkData.isAudioAttached=true
+            makeAudioMultiPart()
+        }
+        else
+            postWorkData.isAudioAttached=false
+
         if (isPhoto1Set) {
             loginViewModel.setCurrentFragment(0)
             submittedDialog.showLoading()
@@ -193,16 +219,25 @@ class PostWorkFragment : Fragment() {
         }
     }
 
+    private fun setDefaultAudioValue() {
+        // Use MultipartBody.Part with an empty body and a placeholder name
+        val emptyRequestBody = "".toRequestBody("text/plain".toMediaTypeOrNull())
+        SSSelectedData.auido =
+            MultipartBody.Part.createFormData("AudioFile", "default_value", emptyRequestBody)
+
+    }
+
     private fun onWorkSubmitted() {
         SSSelectedData.reset()
-        loginViewModel.setCurrentFragment(1)
-        navigateToViewMyWorks()
+//        loginViewModel.setCurrentFragment(1)
+//        navigateToViewMyWorks()
+        titleUpdater?.updateTitle("Posted Works",1)
         submittedDialog.showSubmitted()
 //        UtilFunctions.showToast(requireContext(),"Work Submitted Successfully")
     }
 
     private fun navigateToViewMyWorks() {
-        titleUpdater?.updateTitle("Posted Works")
+        titleUpdater?.updateTitle("Posted Works",1)
 
         parentFragmentManager.beginTransaction()
             .replace(R.id.containerFragment, ViewWorksFragment())
@@ -222,7 +257,7 @@ class PostWorkFragment : Fragment() {
     lateinit var photo4Uri: Uri
 
 
-    fun onImageSet(imagePart: MultipartBody.Part) {
+    private fun onImageSet(imagePart: MultipartBody.Part) {
         if (!isPhoto1Set) {
             binding.photo1.setImageURI(imageUri)
 //            photo1Uri = uri
@@ -379,6 +414,28 @@ class PostWorkFragment : Fragment() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
+        when (requestCode) {
+            CAMERA_AND_STORAGE_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
+                    // Both permissions are granted
+                    intentChooser()
+                } else {
+                    UtilFunctions.showToast(requireContext(), "Permission not granted")
+                }
+            }
+
+            REQUEST_PERMISSION_CODE -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(requireContext(), "Permissions Granted", Toast.LENGTH_SHORT)
+                        .show()
+                } else {
+                    Toast.makeText(requireContext(), "Permissions Denied", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+        }
+
+        /*
         if (requestCode == CAMERA_AND_STORAGE_PERMISSION_REQUEST_CODE) {
             if (grantResults.all { it == PackageManager.PERMISSION_GRANTED }) {
                 // Both permissions are granted
@@ -390,6 +447,14 @@ class PostWorkFragment : Fragment() {
                 // Handle the case where permissions are not granted
             }
         }
+
+        if (requestCode == REQUEST_PERMISSION_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(requireContext(), "Permissions Granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Permissions Denied", Toast.LENGTH_SHORT).show()
+            }
+        }*/
     }
 
     private fun intentChooser() {
@@ -526,6 +591,301 @@ class PostWorkFragment : Fragment() {
         val file = File(imagePath)
 
         return MultipartBody.Part.createFormData("Photos[]", file.name, requestBody)
+    }
+
+    // Record Audio Code
+
+    private var mediaRecorder: MediaRecorder? = null
+    private var mediaPlayer: MediaPlayer? = null
+    private var outputFilePath: String = ""
+
+    private val REQUEST_PERMISSION_CODE = 1000
+
+
+    private var handler = Handler()
+    private val updateWaveformProgress = object : Runnable {
+        override fun run() {
+            mediaPlayer?.let {
+
+                // Get current position of the audio
+                val currentPosition = mediaPlayer?.currentPosition ?: 0
+                val percentage = (currentPosition.toFloat() / it.duration.toFloat()) * 100
+                Log.e(
+                    "Test",
+                    "Progress : ${currentPosition.toFloat()} /${it.duration} = $percentage"
+                )
+                binding.audioTrackIndicator.progress = percentage
+                // Continue updating every 100ms
+                handler.postDelayed(this, 100)
+            }
+        }
+    }
+
+    private var startTime = 0L
+    private val timerHandler = Handler(Looper.getMainLooper())
+    private lateinit var timerRunnable: Runnable
+    var outputMp3FilePath = ""
+
+
+    private fun makeAudioMultiPart() {
+//        val outputMp3FilePath = "${requireContext().externalCacheDir?.absolutePath}/audiorecord.mp3"
+
+        val file = File(outputMp3FilePath)
+        val requestFile = file.asRequestBody("audio/*".toMediaTypeOrNull())
+        val audioPart = MultipartBody.Part.createFormData("AudioFile", file.name, requestFile)
+
+        SSSelectedData.auido = audioPart
+
+    }
+
+    private fun onClick() {
+
+        binding.btRecord.setOnClickListener {
+
+            if (checkPermissions()) {
+                startRecording()
+            } else {
+                requestPermissions()
+            }
+
+        }
+
+        binding.btPlay.setOnClickListener {
+            playRecording()
+        }
+
+        binding.btDelete.setOnClickListener {
+            deleteRecording()
+        }
+
+    }
+
+    private fun startTimer() {
+        timerRunnable = object : Runnable {
+            override fun run() {
+                val elapsedTime = (System.currentTimeMillis() - startTime) / 1000 // in seconds
+                val minutes = elapsedTime / 60
+                val seconds = elapsedTime % 60
+
+                val formattedTime = String.format("%02d:%02d", minutes, seconds) // MM:SS format
+                binding.recordingStatus.text = "$formattedTime"
+
+                timerHandler.postDelayed(this, 1000) // Update every second
+            }
+        }
+        timerHandler.post(timerRunnable)
+    }
+
+
+    // Check for permissions
+    private fun checkPermissions(): Boolean {
+        val permissionRecordAudio =
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECORD_AUDIO)
+        val permissionStorage = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        return permissionRecordAudio == PackageManager.PERMISSION_GRANTED &&
+                permissionStorage == PackageManager.PERMISSION_GRANTED
+    }
+
+    // Request permissions
+    private fun requestPermissions() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            REQUEST_PERMISSION_CODE
+        )
+    }
+
+    private fun startRecording() {
+        outputFilePath = "${requireContext().externalCacheDir?.absolutePath}/audiorecord.3gp"
+
+        // Release the MediaPlayer if it's active to prevent conflicts
+        mediaPlayer?.release()
+        mediaPlayer = null
+
+        mediaRecorder = MediaRecorder().apply {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            setOutputFile(outputFilePath)
+
+            try {
+                prepare()
+                start()
+//                handler.post(updateWaveform)
+                Log.e("Test", "Recording Started")
+
+                // Show the recording status text and the indicator
+                binding.recordingStatus.visibility = View.VISIBLE
+                binding.recordingIndicator.visibility = View.VISIBLE
+                startTime = System.currentTimeMillis()
+                startTimer()
+
+                // Start blinking animation
+                val blinkAnimation = AnimationUtils.loadAnimation(requireContext(), R.anim.blink)
+                binding.recordingIndicator.startAnimation(blinkAnimation)
+            } catch (e: Exception) {
+                Log.e("Test", "Recording : ${e.message}")
+            }
+        }
+
+        binding.btRecord.setImageResource(R.drawable.baseline_stop_circle_36)
+        binding.btRecord.setOnClickListener { stopRecording() }
+    }
+
+    private fun stopRecording() {
+        mediaRecorder?.apply {
+            stop()
+            release()
+        }
+        mediaRecorder = null
+        binding.audioTrackIndicator.progress = 0F
+
+        // Stop the timer and hide the recording status and indicator
+        timerHandler.removeCallbacks(timerRunnable)
+        binding.recordingStatus.visibility = View.GONE
+        binding.recordingIndicator.visibility = View.GONE
+
+        // Stop blinking animation
+        binding.recordingIndicator.clearAnimation()
+
+        // Define output MP3 file path
+        outputMp3FilePath = "${requireContext().externalCacheDir?.absolutePath}/audiorecord.mp3"
+        // Convert the recorded .3gp audio to .mp3
+        convertToMp3(outputFilePath, outputMp3FilePath)
+
+        binding.btRecord.setImageResource(R.drawable.baseline_mic_36)
+        binding.btRecord.setOnClickListener { startRecording() }
+
+        //Set the track indicator
+
+    }
+
+    private fun convertToMp3(inputFilePath: String, outputFilePath: String) {
+        val command = arrayOf(
+            "-y",                 // Add this to overwrite the output file if it exists
+            "-i", inputFilePath,
+            "-vn",
+            "-ar", "44100",
+            "-ac", "2",
+            "-b:a", "192k",
+            outputFilePath
+        )
+
+        FFmpeg.executeAsync(command) { executionId, returnCode ->
+            if (returnCode == Config.RETURN_CODE_SUCCESS) {
+                Log.e("FFmpeg", "Conversion successful")
+                setTheTrack()
+            } else {
+                Log.e("FFmpeg", "Conversion failed with returnCode: $returnCode")
+            }
+        }
+    }
+
+    private fun setTheTrack() {
+        postWorkUI.setAudioAttached(true)
+        binding.audioLt.visibility = View.VISIBLE
+        binding.audioTrackIndicator.setSampleFrom(outputMp3FilePath) // Load waveform
+
+        binding.btPlay.setOnClickListener { playRecording() }
+
+    }
+
+    private var isPaused = false
+    private var currentPosition = 0
+
+    private fun playRecording() {
+        Log.e("Test", "play clicked")
+
+        if (isPaused) {
+            Log.e("Test", "Playing from Pause")
+
+            // Resume playback from where it was paused
+            mediaPlayer?.seekTo(currentPosition)
+            mediaPlayer?.start()
+
+            binding.btPlay.setImageResource(R.drawable.baseline_pause_circle_36)
+            handler.post(updateWaveformProgress) // Continue updating waveform
+            isPaused = false
+        } else {
+            Log.e("Test", "Playing audio")
+            // Release the MediaPlayer if it's active to prevent conflicts
+            mediaPlayer?.release()
+            mediaPlayer = null
+
+            // Start playing from the beginning
+            mediaPlayer = MediaPlayer().apply {
+                setDataSource(outputMp3FilePath)
+                prepare()
+                start()
+
+                binding.btPlay.setImageResource(R.drawable.baseline_pause_circle_36)
+
+                // Start updating the waveform progress
+                handler.post(updateWaveformProgress)
+
+                setOnCompletionListener {
+                    // Reset the button text and progress when the playback is completed
+                    binding.btPlay.setImageResource(R.drawable.baseline_play_circle_filled_36)
+                    handler.removeCallbacks(updateWaveformProgress)
+                    binding.audioTrackIndicator.progress = 0F
+                    isPaused = false
+                }
+            }
+
+            binding.btPlay.setOnClickListener { pauseRecording() }
+
+        }
+
+    }
+
+    private fun pauseRecording() {
+        mediaPlayer?.pause()
+        currentPosition = mediaPlayer?.currentPosition ?: 0 // Save the current position
+        isPaused = true
+
+        Log.e("Test", "Recording Paused")
+        binding.btPlay.setImageResource(R.drawable.baseline_play_circle_filled_36)
+        binding.btPlay.setOnClickListener { playRecording() }
+    }
+
+    private fun deleteRecording() {
+        postWorkUI.setAudioAttached(false)
+
+        val file = File(outputMp3FilePath)
+        if (file.exists()) {
+            val deleted = file.delete()
+            if (deleted) {
+                Toast.makeText(requireContext(), "Recording deleted", Toast.LENGTH_SHORT).show()
+
+                binding.audioLt.visibility = View.GONE
+
+                mediaPlayer?.release() // Release the media player
+                mediaPlayer = null
+
+                isPaused = false
+                currentPosition = 0
+                startTime = 0L
+
+                outputFilePath=""
+                outputMp3FilePath=""
+
+            } else {
+                Toast.makeText(requireContext(), "Failed to delete recording", Toast.LENGTH_SHORT)
+                    .show()
+            }
+        } else {
+            Toast.makeText(requireContext(), "No recording found", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+
+        mediaRecorder?.release()
+        mediaPlayer?.release()
     }
 
 

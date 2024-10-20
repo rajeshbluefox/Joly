@@ -9,6 +9,9 @@ import com.bluefox.joly.clientModule.login.RegisterActivity
 import com.bluefox.joly.clientModule.profile.ProfileImageActivity
 import com.bluefox.joly.clientModule.viewJob.ViewWorkDetailsActivity
 import com.bluefox.joly.clientModule.viewJob.ViewServiceProviderDetailsActivity
+import com.bluefox.joly.clientModule.viewServices.ViewSPDetailsActivity
+import com.bluefox.joly.clientModule.viewServices.ViewServiceProvidersActivity
+import com.bluefox.joly.clientModule.viewServices.WebPageActivity
 import com.bluefox.joly.homeModule.NavigationActivity
 import com.bluefox.joly.jobModule.JobHomeActivity
 import com.bluefox.joly.jobModule.jobProviderModule.ApplicantProfileActivity
@@ -118,5 +121,25 @@ object CallIntent {
         if (killMe) activity.finish()
     }
 
+    fun gotoViewServiceProvidersActivity(context: Context,killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, ViewServiceProvidersActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoViewSPDetailsActivity(context: Context,killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, ViewSPDetailsActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
+
+    fun gotoViewWebPageActivity(context: Context,killMe: Boolean, activity: Activity)
+    {
+        val intent = Intent(context, WebPageActivity::class.java)
+        context.startActivity(intent)
+        if (killMe) activity.finish()
+    }
 
 }

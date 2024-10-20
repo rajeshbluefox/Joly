@@ -59,6 +59,11 @@ class SSUI(
             etPincode.setText(profileData.pincode)
             etAddress.setText(profileData.address)
 
+            if(profileData.alternativeNumber=="E")
+                etAlternativeNumber.setText("No Number")
+            else
+                etAlternativeNumber.setText(profileData.alternativeNumber)
+
             val genderValue = SSProfileData.mLoginData.gender?.toInt()
 
             when (genderValue) {
@@ -118,6 +123,7 @@ class SSUI(
     private fun disableAllEditTexts() {
         binding.ltServiceSeeker.apply {
             disableET(etName)
+            disableET(etAlternativeNumber)
             disableET(etAadharNumber)
             disableET(etDOB)
             disableET(etLocation)

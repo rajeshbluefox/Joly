@@ -29,6 +29,17 @@ object UserDetails {
         return sharedPref.getBoolean(Constants.LOGIN_STATUS, false)
     }
 
+    fun saveUserId(context: Context, value: Int) {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val editor = sharedPref.edit()
+        editor.putInt(Constants.USER_ID, value).apply()
+    }
+
+    fun getUserId(context: Context): Int {
+        val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        return sharedPref.getInt(Constants.USER_ID, 0)
+    }
+
     fun saveUserMobileNo(context: Context, value: String) {
         val sharedPref = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
         val editor = sharedPref.edit()

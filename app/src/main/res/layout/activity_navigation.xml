@@ -3,228 +3,467 @@
 <layout>
 
 
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".homeModule.NavigationActivity">
-
-    <LinearLayout
-        android:id="@+id/ltService"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/mainLt"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/ltJobs"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        android:layout_height="match_parent"
+        tools:context=".homeModule.NavigationActivity">
 
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btServiceSeeker"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/dp_6"
-        android:layout_marginStart="@dimen/dp_12"
-        android:layout_marginEnd="@dimen/dp_6"
-        app:cardBackgroundColor="@color/cardColor1"
-        app:layout_constraintVertical_chainStyle="spread"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btServiceProvider">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/dp_12">
-
-        <ImageView
-            android:layout_width="@dimen/dp_75"
-            android:layout_height="@dimen/dp_75"
-            android:src="@drawable/userssm"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Service Seeker"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:text="Post your works \nand get them done"/>
-
-    </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btServiceProvider"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/dp_6"
-        android:layout_marginStart="@dimen/dp_6"
-        android:layout_marginEnd="@dimen/dp_12"
-        app:cardBackgroundColor="@color/cardColor1"
-        app:layout_constraintBottom_toTopOf="@id/btJobProvider"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btServiceSeeker">
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:padding="@dimen/dp_12">
-
-        <ImageView
-            android:layout_width="@dimen/dp_75"
-            android:layout_height="@dimen/dp_75"
-            android:src="@drawable/userssm"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Service Provider"
-            android:textSize="@dimen/sp_18"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:text="Post Services you offer \nand find works"/>
-
-    </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/ltJobs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        app:layout_constraintTop_toBottomOf="@id/ltService"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btJobProvider"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/dp_6"
-        android:layout_marginStart="@dimen/dp_12"
-        android:layout_marginEnd="@dimen/dp_6"
-        app:cardBackgroundColor="@color/cardColor1"
-        app:layout_constraintBottom_toTopOf="@id/btJobSeeker"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btServiceProvider">
-
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="visible"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/dp_12">
-
-            <ImageView
-                android:layout_width="@dimen/dp_75"
-                android:layout_height="@dimen/dp_75"
-                android:src="@drawable/userssm"/>
+            android:layout_height="match_parent"
+            android:padding="@dimen/dp_16">
 
             <TextView
+                android:id="@+id/tvWelcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Job Provider"
-                android:textSize="@dimen/sp_18"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
+                android:text="Welcome to Joly"
+                android:textColor="@color/black_v1"
+                android:textSize="@dimen/sp_22"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:id="@+id/tvSelect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
+                android:text="Select your interest ..."
                 android:textColor="@color/black"
-                android:text="Post Jobs you offer \nand Find Employees"/>
+                android:textSize="@dimen/sp_28"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvWelcome" />
 
-        </LinearLayout>
+         <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/ltRoleDetails"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginTop="@dimen/dp_18"
+             android:background="@drawable/audio_bg"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintTop_toBottomOf="@id/tvSelect">
+
+             <ImageView
+                 android:id="@+id/ivRoleIcon"
+                 android:layout_width="@dimen/dp_96"
+                 android:layout_height="@dimen/dp_96"
+                 android:src="@drawable/iv_service_filled"
+                 app:layout_constraintTop_toTopOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"/>
+
+             <TextView
+                 android:id="@+id/tvRoleTitle"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Services"
+                 style="@style/TitleTextStyle"
+                 android:layout_marginTop="@dimen/dp_12"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/ivRoleIcon"/>
+
+             <TextView
+                 android:id="@+id/tvRoleDescription"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:layout_marginTop="@dimen/dp_12"
+                 android:justificationMode="inter_word"
+                 android:text="@string/service_description"
+                 style="@style/BodyTextStyle"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toBottomOf="@id/tvRoleTitle"/>
+
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/btService"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_12"
+                android:background="@drawable/nav_b1_bg"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/btJob">
+
+                <ImageView
+                    android:id="@+id/btServiceImage"
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:src="@drawable/iv_service_white"/>
+
+                <TextView
+                    android:id="@+id/btServiceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Services"
+                    android:textColor="@color/white"
+                    style="@style/ButtonTextStyleMedium"
+                    android:layout_marginStart="@dimen/dp_12"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/btJob"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dp_10"
+                android:layout_marginBottom="@dimen/dp_42"
+                android:background="@drawable/nav_b2_bg"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintBottom_toTopOf="@id/btNext"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <ImageView
+                    android:id="@+id/btJobImage"
+                    android:layout_width="@dimen/dp_28"
+                    android:layout_height="@dimen/dp_28"
+                    android:src="@drawable/iv_job_filled"/>
+
+                <TextView
+                    android:id="@+id/btJobText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jobs"
+                    android:textColor="@color/app_bar_c1"
+                    style="@style/ButtonTextStyleMedium"
+                    android:layout_marginStart="@dimen/dp_12"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/btProvider"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_12"
+                android:layout_marginEnd="@dimen/dp_6"
+                android:background="@drawable/nav_b3_bg"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginBottom="@dimen/dp_42"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btSeeker"
+                app:layout_constraintBottom_toTopOf="@id/btNext">
+
+                <ImageView
+                    android:id="@+id/btProviderImage"
+                    android:layout_width="@dimen/dp_36"
+                    android:layout_height="@dimen/dp_36"
+                    android:src="@drawable/ic_post_work_colored"/>
+
+                <TextView
+                    android:id="@+id/btProviderText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Job Provider"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:textColor="@color/app_bar_c1"
+                    style="@style/ButtonTextStyleMedium"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/btSeeker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/dp_12"
+                android:layout_marginStart="@dimen/dp_6"
+                android:background="@drawable/nav_b4_bg"
+                android:layout_marginTop="@dimen/dp_12"
+                android:layout_marginBottom="@dimen/dp_42"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/btProvider"
+                app:layout_constraintBottom_toTopOf="@id/btNext">
+
+                <ImageView
+                    android:id="@+id/btSeekerImage"
+                    android:layout_width="@dimen/dp_36"
+                    android:layout_height="@dimen/dp_36"
+                    android:src="@drawable/ic_post_work"/>
+
+                <TextView
+                    android:id="@+id/btSeekerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Job Seeker"
+                    android:textColor="@color/white"
+                    android:layout_marginTop="@dimen/dp_8"
+                    style="@style/ButtonTextStyleMedium"/>
+
+
+            </LinearLayout>
 
 
 
-    </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:id="@+id/btNext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_12"
+                android:background="@drawable/nav_b1_bg"
+                android:gravity="center_horizontal|center_vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/btJobSeeker"
-        android:layout_width="0dp"
-        android:layout_weight="1"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/dp_6"
-        android:layout_marginEnd="@dimen/dp_12"
-        android:layout_marginStart="@dimen/dp_6"
-        app:cardBackgroundColor="@color/cardColor1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btJobProvider">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:textColor="@color/white"
+                    style="@style/ButtonTextStyleMedium" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_6"
+                    android:src="@drawable/baseline_arrow_forward_24"/>
 
 
-        <LinearLayout
+            </LinearLayout>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="@dimen/dp_12">
+            android:layout_height="match_parent">
 
-            <ImageView
-                android:layout_width="@dimen/dp_75"
-                android:layout_height="@dimen/dp_75"
-                android:src="@drawable/userssm"/>
-
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/ltService"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Job Seeker"
-                android:textSize="@dimen/sp_18"
-                android:textColor="@color/black"
-                android:textStyle="bold"/>
+                app:layout_constraintBottom_toTopOf="@id/ltJobs"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:layout_width="wrap_content"
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btServiceSeeker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/cardColor1"
+                    app:cardCornerRadius="@dimen/dp_6"
+                    app:layout_constraintBottom_toTopOf="@id/btServiceProvider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_chainStyle="spread">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_12">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_75"
+                            android:layout_height="@dimen/dp_75"
+                            android:src="@drawable/userssm" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Service Seeker"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Post your works \nand get them done"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btServiceProvider"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_6"
+                    android:layout_marginEnd="@dimen/dp_12"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/cardColor1"
+                    app:cardCornerRadius="@dimen/dp_6"
+                    app:layout_constraintBottom_toTopOf="@id/btJobProvider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btServiceSeeker">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_12">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_75"
+                            android:layout_height="@dimen/dp_75"
+                            android:src="@drawable/userssm" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Service Provider"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Post Services you offer \nand find works"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ltJobs"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:textColor="@color/black"
-                android:text="Find Jobs \nand Apply"/>
+                android:gravity="center_vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ltService">
 
-        </LinearLayout>
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btJobProvider"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_12"
+                    android:layout_marginEnd="@dimen/dp_6"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/cardColor1"
+                    app:cardCornerRadius="@dimen/dp_6"
+                    app:layout_constraintBottom_toTopOf="@id/btJobSeeker"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btServiceProvider">
 
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_12">
 
-    </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:layout_width="@dimen/dp_75"
+                            android:layout_height="@dimen/dp_75"
+                            android:src="@drawable/userssm" />
 
-    </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Job Provider"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Post Jobs you offer \nand Find Employees"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
 
 
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btJobSeeker"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/dp_6"
+                    android:layout_marginEnd="@dimen/dp_12"
+                    android:layout_weight="1"
+                    app:cardBackgroundColor="@color/cardColor1"
+                    app:cardCornerRadius="@dimen/dp_6"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/btJobProvider">
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="@dimen/dp_12">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp_75"
+                            android:layout_height="@dimen/dp_75"
+                            android:src="@drawable/userssm" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Job Seeker"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/sp_18"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Find Jobs \nand Apply"
+                            android:textAlignment="center"
+                            android:textColor="@color/black" />
+
+                    </LinearLayout>
+
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

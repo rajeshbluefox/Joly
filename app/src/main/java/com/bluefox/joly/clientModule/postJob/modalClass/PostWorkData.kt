@@ -7,6 +7,8 @@ import com.google.gson.annotations.SerializedName
 data class PostWorkData(
     @SerializedName("PhoneNumber")
     var phoneNumber: String? = null,
+    @SerializedName("AlternativeNumber")
+    var alternativeNumber: String? = null,
     @SerializedName("SS_WorkId")
     var workId: String? = null,
     @SerializedName("WorkName")
@@ -23,10 +25,26 @@ data class PostWorkData(
     var areaId: Int? = null,
     @SerializedName("Wage")
     var wageOffered: String? = null,
+    @SerializedName("District")
+    var district: String? = null,
+    @SerializedName("City")
+    var city: String? = null,
     @SerializedName("Name")
     var name: String? = null,
+    @SerializedName("status")
+    var status: Int = 1,
+    @SerializedName("RatingAdded")
+    var ratingAdded: Int = 1,
+    @SerializedName("ClosingFeedback")
+    var closingFeedback: Int = 1,
+    @SerializedName("DeadLineTime")
+    var deadlineTime: String? = null,
+    @SerializedName("AudioDescription")
+    var audioDescription: String? = null,
     @SerializedName("Photo")
     var profilePhoto: String? = null,
     @SerializedName("Photos")
     val data: List<WorkPhotoData?>? = null,
+    @SerializedName("IsAudioAttached")
+    var isAudioAttached : Boolean = false
 )

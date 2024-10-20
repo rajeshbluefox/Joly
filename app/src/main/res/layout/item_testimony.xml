@@ -42,38 +42,58 @@
             app:layout_constraintStart_toEndOf="@+id/profileImage"
             app:layout_constraintTop_toTopOf="@+id/profileImage" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tvDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:layout_marginEnd="@dimen/dp_6"
+            android:text="Sep 30"
+            android:textColor="#06286B"
+            android:textSize="@dimen/sp_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tvJobTitle"
+            app:layout_constraintBottom_toBottomOf="@id/tvJobTitle"/>
+
+
+        <LinearLayout
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="@dimen/dp_3"
             app:layout_constraintTop_toBottomOf="@id/tvJobTitle"
             app:layout_constraintStart_toEndOf="@id/profileImage">
 
             <ImageView
+                android:id="@+id/star1"
                 android:layout_width="@dimen/dp_18"
                 android:layout_height="@dimen/dp_18"
                 android:src="@drawable/ic_star"
                 android:layout_marginEnd="@dimen/dp_4"/>
 
             <ImageView
+                android:id="@+id/star2"
                 android:layout_width="@dimen/dp_18"
                 android:layout_height="@dimen/dp_18"
                 android:src="@drawable/ic_star"
                 android:layout_marginEnd="@dimen/dp_4"/>
 
             <ImageView
+                android:id="@+id/star3"
                 android:layout_width="@dimen/dp_18"
                 android:layout_height="@dimen/dp_18"
                 android:src="@drawable/ic_star"
                 android:layout_marginEnd="@dimen/dp_4"/>
 
             <ImageView
+                android:id="@+id/star4"
                 android:layout_width="@dimen/dp_18"
                 android:layout_height="@dimen/dp_18"
                 android:src="@drawable/ic_star"
                 android:layout_marginEnd="@dimen/dp_4"/>
 
             <ImageView
+                android:id="@+id/star5"
                 android:layout_width="@dimen/dp_18"
                 android:layout_height="@dimen/dp_18"
                 android:src="@drawable/ic_star"/>
@@ -89,7 +109,6 @@
             android:text="Company Location"
             android:textColor="#06286B"
             android:textSize="@dimen/sp_14"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profileImage"
             app:layout_constraintEnd_toEndOf="parent"

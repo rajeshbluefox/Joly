@@ -2,4 +2,29 @@
     <string name="app_name">Joly</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="service_description">
+        A domain service offers assistance with common household and outdoor tasks like painting, tree cutting, and cleaning. These services connect homeowners or businesses with professionals who handle these tasks efficiently. The platform ensures easy communication, allowing service seekers to post jobs and providers to offer their expertise directly.
+    </string>
+
+    <string name="job_description">
+        A domain job service provides a platform where companies can post job openings and job seekers can browse and apply for available positions. Whether its full-time, part-time, or freelance work, this service helps bridge the gap between employers and candidates. Job seekers can easily find positions matching their skills and qualifications, while employers can quickly fill vacancies with the right talent. The platform simplifies job applications, making it easy for both parties to connect and proceed with the hiring process.
+    </string>
+
+    <string name="ss_description">
+        The Service Seeker is someone who posts tasks or jobs they need help with, such as home cleaning, tree trimming, painting, or other manual labor. They describe the service, provide details like location, and list their contact information so that Service Providers can reach out directly. The Service Seeker has full control over what tasks they need and can choose the best provider based on availability and pricing.
+    </string>
+
+    <string name="sp_description">
+        A Service Provider is responsible for offering solutions to posted jobs. Whether they are a professional or a skilled individual, they browse posted tasks, contact the Service Seeker, and provide quotes for the work. The Service Provider must ensure the work is completed to the satisfaction of the Service Seeker, and the app facilitates communication but doesnt handle payments or guarantees.
+    </string>
+
+    <string name="js_description">
+        The Job Seeker role is designed for individuals looking for employment opportunities. They can browse through job listings provided by various companies, find positions suited to their skills and qualifications, and apply for them directly through the app. The Job Seeker must submit their resumes and relevant documents and can communicate with the Job Provider for further steps.
+    </string>
+
+    <string name="jp_description">
+        Job Providers are companies or employers that post job openings for various roles. They specify job requirements, qualifications, location, and deadlines for applications. Job Providers use the platform to reach a broader audience of potential candidates and manage incoming applications.
+    </string>
+
 </resources>

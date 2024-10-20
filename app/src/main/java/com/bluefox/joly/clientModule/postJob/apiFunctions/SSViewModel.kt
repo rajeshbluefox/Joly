@@ -9,6 +9,8 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.CheckFBStatusResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.GetServiceProvidersResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -94,10 +96,10 @@ class SSViewModel @Inject constructor(
 
     private var getCloseWorkResponse = MutableLiveData<SPTestimonyResponse>()
 
-    fun getSSCloseWork(workId: String) {
+    fun getSSCloseWork(workId: String,closingFeedback: Int) {
         viewModelScope.launch {
             getCloseWorkResponse.postValue(
-                ssRepository.getCloseWork(workId)
+                ssRepository.getCloseWork(workId,closingFeedback)
             )
         }
     }
@@ -108,5 +110,41 @@ class SSViewModel @Inject constructor(
 
     fun getSSCloseWorkResponse(): LiveData<SPTestimonyResponse> {
         return getCloseWorkResponse
+    }
+
+    private var checkFBStatus = MutableLiveData<CheckFBStatusResponse>()
+
+    fun checkFBStatus(spId: Int, fpId: Int) {
+        viewModelScope.launch {
+            checkFBStatus.postValue(
+                ssRepository.checkFbStatus(spId, fpId)
+            )
+        }
+    }
+
+    fun resetCheckFBStatusResponse() {
+        checkFBStatus = MutableLiveData<CheckFBStatusResponse>()
+    }
+
+    fun checkFBStatusResponse(): LiveData<CheckFBStatusResponse> {
+        return checkFBStatus
+    }
+
+    private var getServiceProvidersResponse = MutableLiveData<GetServiceProvidersResponse>()
+
+    fun getServiceProviders(categoryId: Int) {
+        viewModelScope.launch {
+            getServiceProvidersResponse.postValue(
+                ssRepository.getServiceProvidersResponse(categoryId)
+            )
+        }
+    }
+
+    fun resetGetServiceProviders() {
+        getServiceProvidersResponse = MutableLiveData<GetServiceProvidersResponse>()
+    }
+
+    fun getServiceProvidersResponse(): LiveData<GetServiceProvidersResponse> {
+        return getServiceProvidersResponse
     }
 }

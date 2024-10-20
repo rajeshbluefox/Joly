@@ -111,9 +111,9 @@ class SSapiFunctions(
     }
 
 
-    fun getSSCloseWork(workId: String) {
+    fun getSSCloseWork(workId: String,closingFeedback: Int) {
         mssViewModel.resetGetSCloseWorkResponse()
-        mssViewModel.getSSCloseWork(workId)
+        mssViewModel.getSSCloseWork(workId,closingFeedback)
         getSSlCloseWorkObserver()
     }
 

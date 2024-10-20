@@ -132,28 +132,29 @@ class AddServiceActivity : AppCompatActivity() {
 
     private fun checkValues() {
         val nMinPrice = binding.etMinPrice.text.toString()
-        val nMaxPrice = binding.etMaxPrice.text.toString()
+//        val nMaxPrice = binding.etMaxPrice.text.toString()
 
         if (nMinPrice.isEmpty()) {
             UtilFunctions.showToast(this, "Enter Minimum Price")
             return
         }
 
-        if (nMaxPrice.isEmpty()) {
-            UtilFunctions.showToast(this, "Enter Maximum Price")
-            return
-        }
+//        if (nMaxPrice.isEmpty()) {
+//            UtilFunctions.showToast(this, "Enter Maximum Price")
+//            return
+//        }
 
-        if (AddServicesSelectedJobs.selectedJobsList.isEmpty()) {
-            UtilFunctions.showToast(this, "Select Jobs")
-            return
-        }
+//        if (AddServicesSelectedJobs.selectedJobsList.isEmpty()) {
+//            UtilFunctions.showToast(this, "Select Jobs")
+//            return
+//        }
 
         val addServiceData = AddServiceData()
         addServiceData.phoneNumber = UserDetails.getUserMobileNo(this)
         addServiceData.categoryId = AddServicesSelectedJobs.categoryId.toString()
-        addServiceData.jobId = AddServicesSelectedJobs.selectedJobsList.toString()
-        addServiceData.priceRange = "$nMinPrice - $nMaxPrice"
+//        addServiceData.jobId = AddServicesSelectedJobs.selectedJobsList.toString()
+        addServiceData.jobId = "0"
+        addServiceData.priceRange = "$nMinPrice"
         addServiceData.status = "1"
 
         sPAPIFunctions.addService(addServiceData)
@@ -191,9 +192,10 @@ class AddServiceActivity : AppCompatActivity() {
                 ) {
 
                     SSSelectedData.categoryItem = categoryList[position]
+                    AddServicesSelectedJobs.categoryId = SSSelectedData.categoryItem.categoryID!!
 
-                    if(AddServicesSelectedJobs.selectedPage==1)
-                        filterJob(SSSelectedData.categoryItem.categoryID!!)
+//                    if(AddServicesSelectedJobs.selectedPage==1)
+//                        filterJob(SSSelectedData.categoryItem.categoryID!!)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -203,7 +205,6 @@ class AddServiceActivity : AppCompatActivity() {
     }
 
     fun filterJob(categoryId: Int) {
-        AddServicesSelectedJobs.categoryId = categoryId
 
         val jobList = ServicesCatJob.jobList
         val filteredList = jobList.filter { it.categoryId == categoryId }
@@ -266,6 +267,7 @@ class AddServiceActivity : AppCompatActivity() {
         }
 
         //Setting Jobs
+        /*
         val jobIdList = stringToIntList(AddServicesSelectedJobs.selService.jobId!!)
         Log.e("Test","Jobs - $jobIdList")
 
@@ -279,6 +281,8 @@ class AddServiceActivity : AppCompatActivity() {
         Log.e("Test","JobsFiltered - $jobsList")
 
         initJobAdapter(jobsList)
+
+         */
 
     }
 

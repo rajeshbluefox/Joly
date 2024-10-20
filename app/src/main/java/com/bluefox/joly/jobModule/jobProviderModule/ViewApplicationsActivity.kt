@@ -2,6 +2,7 @@ package com.bluefox.joly.jobModule.jobProviderModule
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -64,6 +65,14 @@ class ViewApplicationsActivity : AppCompatActivity() {
     private fun initViewApplicationsRV(applicationsList: List<LoginData>) {
 
         Log.e("Test","3")
+
+        if (applicationsList.isEmpty()) {
+            binding.emptyContent.visibility = View.VISIBLE
+            binding.rvViewApplication.visibility = View.GONE
+        } else {
+            binding.emptyContent.visibility = View.GONE
+            binding.rvViewApplication.visibility = View.VISIBLE
+        }
 
         val viewApplicationAdapter = ViewApplicationAdapter(this, applicationsList, ::onApplicationClicked)
         binding.rvViewApplication.apply {

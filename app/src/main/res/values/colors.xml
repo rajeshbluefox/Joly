@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="lite_black">#333333</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
@@ -13,7 +14,18 @@
 
     <color name="red">#FF0000</color>
 
+    <color name="blue">#0045CE</color>
+
+    <color name="black_v1">#9E8A7171</color>
+
     <color name="navi_bar_text">#1B66A3</color>
+
+    <color name="default_chip_color">#3F51B5</color>  <!-- Default background color -->
+    <color name="selected_chip_color">#FF9800</color> <!-- Background color for selected chip -->
+
+    <color name="bttm_nav_text_color">#FFFFFF</color>
+    <color name="bttm_nav_sel_text_color">#1B66A3</color>
+
 
 
 

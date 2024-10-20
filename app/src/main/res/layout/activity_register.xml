@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="2dp"
                     android:layout_marginTop="8dp"
-                    android:text="Phone Number"
+                    android:text="Phone Number (Will be used to login)"
                     app:layout_constraintStart_toStartOf="@+id/etPhoneNumber"
                     app:layout_constraintTop_toBottomOf="@+id/etUserName" />
 
@@ -118,9 +118,36 @@
                     android:inputType="number"
                     android:lines="1"
                     android:maxLines="1"
+                    android:maxLength="10"
                     app:layout_constraintEnd_toEndOf="@+id/etUserName"
                     app:layout_constraintStart_toStartOf="@+id/etUserName"
                     app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber" />
+
+                <TextView
+                    android:id="@+id/tvAlternativeNum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginTop="8dp"
+                    android:text="Alternative Number (Optional)"
+                    app:layout_constraintStart_toStartOf="@+id/etPhoneNumber"
+                    app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
+
+                <EditText
+                    android:id="@+id/etAlternativeNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/et_bg_1"
+                    android:hint="Alternative Number"
+                    android:imeOptions="actionGo"
+                    android:inputType="number"
+                    android:lines="1"
+                    android:maxLines="1"
+                    app:layout_constraintEnd_toEndOf="@+id/etUserName"
+                    app:layout_constraintStart_toStartOf="@+id/etUserName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAlternativeNum" />
+
 
                 <TextView
                     android:id="@+id/tvAadharNum"
@@ -130,7 +157,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Aadhar Number"
                     app:layout_constraintStart_toStartOf="@+id/etAadharNum"
-                    app:layout_constraintTop_toBottomOf="@+id/etPhoneNumber" />
+                    app:layout_constraintTop_toBottomOf="@+id/etAlternativeNumber" />
 
                 <EditText
                     android:id="@+id/etAadharNum"
@@ -389,6 +416,9 @@
                         android:layout_marginTop="8dp"
                         android:text="Description" />
 
+
+
+
                     <EditText
                         android:id="@+id/etDescription"
                         android:layout_width="match_parent"
@@ -399,7 +429,28 @@
                         android:gravity="top"
                         android:imeOptions="actionGo"
                         android:lines="2"
-                        android:maxLines="2"/>
+                        android:maxLines="2"
+                        android:maxLength="300"/>
+
+                    <TextView
+                        android:id="@+id/tvWorkingHours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="WorkingHours" />
+
+                    <EditText
+                        android:id="@+id/etWorkingHours"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Example - 9 AM to 5 PM"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:maxLength="20"/>
 
                     <TextView
                         android:id="@+id/tvWebLink"
@@ -452,6 +503,44 @@
                         android:maxLines="1"/>
 
                     <TextView
+                        android:id="@+id/tvCompanContact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Company Contact Number" />
+
+                    <EditText
+                        android:id="@+id/etCompanyContact"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Contact Number"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                    <TextView
+                        android:id="@+id/tvCompanMail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Company Mail" />
+
+                    <EditText
+                        android:id="@+id/etCompanyMail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Company Mail"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                    <TextView
                         android:id="@+id/tvCompanyLocation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -466,6 +555,25 @@
                         android:layout_marginTop="4dp"
                         android:background="@drawable/et_bg_1"
                         android:hint="Enter Company Location"
+                        android:imeOptions="actionGo"
+                        android:lines="1"
+                        android:maxLines="1"/>
+
+                    <TextView
+                        android:id="@+id/tvCompanyGSTNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Company GSTNo" />
+
+                    <EditText
+                        android:id="@+id/etCompanyGSTNO"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Enter Company GSTNO"
                         android:imeOptions="actionGo"
                         android:lines="1"
                         android:maxLines="1"/>
@@ -560,6 +668,7 @@
                         android:maxLines="1" />
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/tvCountry"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -568,6 +677,7 @@
                         android:text="Country" />
 
                     <EditText
+                        android:visibility="gone"
                         android:id="@+id/etCountry"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -577,6 +687,28 @@
                         android:imeOptions="actionGo"
                         android:lines="1"
                         android:maxLines="1" />
+
+                    <TextView
+                        android:id="@+id/tvPastExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Past Experience" />
+
+                    <EditText
+                        android:id="@+id/etPastExperienceJS"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="start|top"
+                        android:background="@drawable/et_bg_1"
+                        android:hint="Past Experience"
+                        android:imeOptions="actionGo"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:maxLength="200"/>
+
 
                     <TextView
                         android:id="@+id/tvQualification"
@@ -619,12 +751,39 @@
                 </LinearLayout>
 
 
+                <LinearLayout
+                    android:id="@+id/tcLt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_22"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/ltJobSeeker">
+
+                    <CheckBox
+                        android:id="@+id/cbAgree"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="I agree to the"/>
+
+                    <TextView
+                        android:id="@+id/btTNC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" Terms and Conditions"
+                        android:textColor="@color/blue"/>
+
+                </LinearLayout>
+
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btSubmit"
                     android:layout_width="@dimen/dp_250"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
                     android:background="@drawable/button_two"
                     android:text="Submit"
                     android:textColor="@color/white"
@@ -632,7 +791,7 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/ltJobSeeker" />
+                    app:layout_constraintTop_toBottomOf="@+id/tcLt" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"

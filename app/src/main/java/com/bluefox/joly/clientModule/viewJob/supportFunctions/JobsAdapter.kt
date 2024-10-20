@@ -65,17 +65,15 @@ class JobsAdapter(
 
         //Setting JobType
         val jobItemName = ServicesCatJob.jobList.find { it.jobId == jobItem.jobId }
-        holder.binding.tvJob.text=jobItemName?.jobName
+        holder.binding.tvJob.text="${jobItem.city}, ${jobItem.district}"
 
         //Set Date
-        holder.binding.tvDate.text=UtilFunctions.formatDate(jobItem.workPostedDate!!)
+        holder.binding.tvDate.text=UtilFunctions.formatDate2(jobItem.workPostedDate!!)
 
         holder.binding.cardJobItem.setOnClickListener {
 //            JobSelected.jobsData=jobItem
             onJobClicked.invoke(jobItem)
         }
-
-
 
     }
 

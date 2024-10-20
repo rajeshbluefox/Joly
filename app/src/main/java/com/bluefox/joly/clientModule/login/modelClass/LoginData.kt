@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName
 data class LoginData(
     @SerializedName("MobileNo")
     var mobileNo: String? = null,
+    @SerializedName("AlternativeNumber")
+    var alternativeNumber: String? = null,
     @SerializedName("PhoneNumber")
     var phoneNumber: String? = null,
     @SerializedName("Password")
@@ -47,8 +49,24 @@ data class LoginData(
     val portfolioLink: String? = null,
     @SerializedName("Description")
     val description: String? = null,
+    @SerializedName("WorkingHours")
+    val workingHours: String? = null,
     @SerializedName("CompanyDescription")
     val companyDescription: String? = null,
     @SerializedName("CompanyWebsiteLink")
-    val companyWebsiteLink: String? = null
-)
+    val companyWebsiteLink: String? = null,
+    @SerializedName("CompanyContactNumber")
+    val companyContactNumber: String? = null,
+    @SerializedName("CompanyMail")
+    val companyMail: String? = null,
+    @SerializedName("CompanyGSTNo")
+    val companyGSTNo: String? = null,
+    @SerializedName("CurrentRating")
+    val currentRating: Double = 0.0,
+    @SerializedName("NoOfRating")
+    val noOfRatings: Int = 0,
+    @SerializedName("PastExperience")
+    val pastExperience: String? = null,
+
+
+    )

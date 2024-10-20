@@ -111,7 +111,8 @@ class JPapiFunctions(
                 if (it.applicationsList.isNotEmpty())
                     onViewApplicationResponse.invoke(it.applicationsList)
                 else {
-                    UtilFunctions.showToast(mContext, "No Applications Received")
+                    onViewApplicationResponse.invoke(it.applicationsList)
+//                    UtilFunctions.showToast(mContext, "No Applications Received")
                 }
 //                UtilFunctions.showToast(mContext, "Job Application SuccessFully")
             } else {
@@ -135,7 +136,9 @@ class JPapiFunctions(
 
                     onGetAllJobs.invoke(it.postedJobsList)
                 } else {
-                    UtilFunctions.showToast(mContext, "No Jobs")
+                    onGetAllJobs.invoke(it.postedJobsList)
+
+//                    UtilFunctions.showToast(mContext, "No Jobs")
                 }
 
             } else {

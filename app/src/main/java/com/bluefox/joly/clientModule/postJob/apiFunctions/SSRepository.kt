@@ -5,6 +5,8 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.CheckFBStatusResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.GetServiceProvidersResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.zAPIEndPoints.ApiHelper
 import kotlinx.coroutines.Dispatchers
@@ -64,14 +66,37 @@ class SSRepository @Inject constructor(
 
     private var getCloseWorkResponse = SPTestimonyResponse()
 
-    suspend fun getCloseWork(workId: String): SPTestimonyResponse {
+    suspend fun getCloseWork(workId: String,closingFeedback: Int): SPTestimonyResponse {
         try {
             withContext(Dispatchers.IO) {
-                getCloseWorkResponse = apiHelper.ssCloseWork(workId)
+                getCloseWorkResponse = apiHelper.ssCloseWork(workId,closingFeedback)
             }
         } catch (_: Exception) {
         }
         return getCloseWorkResponse
     }
 
+    private var checkFBResponse  = CheckFBStatusResponse()
+
+    suspend fun checkFbStatus(spId: Int,fpId: Int): CheckFBStatusResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                checkFBResponse = apiHelper.ssCheckFBStatus(spId, fpId)
+            }
+        } catch (_: Exception) {
+        }
+        return checkFBResponse
+    }
+
+    private var getServiceProvidersResponse  = GetServiceProvidersResponse()
+
+    suspend fun getServiceProvidersResponse(categoryId: Int): GetServiceProvidersResponse {
+        try {
+            withContext(Dispatchers.IO) {
+                getServiceProvidersResponse = apiHelper.getServiceProviders(categoryId)
+            }
+        } catch (_: Exception) {
+        }
+        return getServiceProvidersResponse
+    }
 }

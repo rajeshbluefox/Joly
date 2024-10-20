@@ -9,6 +9,8 @@ import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.CheckFBStatusResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.GetServiceProvidersResponse
 import com.bluefox.joly.dummy.GetThemesResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetApplicationResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetPostedJobsResponse
@@ -29,8 +31,11 @@ interface ApiHelper {
     suspend fun validateLogin(loginData: LoginData): LoginResponse
     suspend fun ssRegister(sSRegistrationDetailsData : SSRegistrationDetailsData): RegistrationResponse
 
-    suspend fun ssCloseWork(workId: String): SPTestimonyResponse
+    suspend fun ssCloseWork(workId: String,closingFeedback: Int): SPTestimonyResponse
 
+    suspend fun ssCheckFBStatus(spId: Int, fpId: Int): CheckFBStatusResponse
+
+    suspend fun getServiceProviders(categoryId: Int): GetServiceProvidersResponse
 
 
     //Testimonies
@@ -65,4 +70,6 @@ interface ApiHelper {
     suspend fun jsGetAllJobs(userId: String) : GetPostedJobsResponse
 
     suspend fun jsApplyJob(jobId: String,userId: String,): PostJobResponse
+
+
 }

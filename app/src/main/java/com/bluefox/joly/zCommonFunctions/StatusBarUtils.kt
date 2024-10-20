@@ -80,4 +80,13 @@ object StatusBarUtils {
         params.topMargin = marginTopInPixels
         view.layoutParams = params
     }
+
+    fun setBottomMargin(resources: Resources, view: View) {
+        // Assuming tabLayout is your TabLayout instance
+        val params = view.layoutParams as LinearLayout.LayoutParams
+        val marginTopInPixels =
+            resources.getDimensionPixelSize(getStatusBarHeight(resources)) // Adjust this according to your needs
+        params.bottomMargin = marginTopInPixels
+        view.layoutParams = params
+    }
 }

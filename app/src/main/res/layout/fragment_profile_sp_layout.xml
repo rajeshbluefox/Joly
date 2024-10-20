@@ -65,7 +65,7 @@
                     android:layout_height="@dimen/dp_24"
                     android:layout_marginEnd="@dimen/dp_12"
                     android:src="@drawable/ic_edit_new"
-                    android:visibility="visible"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/ivLogout"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -107,6 +107,23 @@
                     android:layout_height="wrap_content"
                     android:text="XYZ Solutions" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ltAlternativeNumber"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="12dp"
+                android:hint="Alternative Number">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAlternativeNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="9123456789" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ltAadharNumber"
@@ -324,6 +341,23 @@
                     android:layout_height="wrap_content"
                     android:text="Enter Description" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/ltWorkingHours"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_16"
+                android:layout_marginTop="12dp"
+                android:hint="Working Hours">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etWorkingHours"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Enter Working Hours" />
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btSubmit"

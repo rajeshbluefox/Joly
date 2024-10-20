@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/dp_100"
+    android:layout_height="@dimen/dp_50"
+    android:background="@drawable/gradient1"
+    android:layout_marginEnd="@dimen/dp_6"
+    android:id="@+id/background">
+
+    <ImageView
+        android:id="@+id/ivCheck"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="center"
+        android:src="@drawable/baseline_check_circle_24"
+        android:background="#90000000"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

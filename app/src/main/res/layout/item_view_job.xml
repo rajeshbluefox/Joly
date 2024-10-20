@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_4"
-        android:layout_marginTop="@dimen/dp_6"
+        android:layout_marginBottom="@dimen/dp_6"
         app:cardBackgroundColor="@color/cardColor1"
         app:cardCornerRadius="@dimen/dp_8"
         app:layout_constraintEnd_toEndOf="parent"
@@ -70,7 +70,7 @@
                 android:id="@+id/tvCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/dp_2"
                 android:text="Company Name"
                 android:textColor="#06286B"
                 android:textSize="@dimen/sp_14"
@@ -80,15 +80,18 @@
 
             <TextView
                 android:id="@+id/tvJob"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="@dimen/dp_2"
                 android:text="Company Location"
                 android:textColor="#06286B"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintStart_toStartOf="@+id/tvCategory"
-                app:layout_constraintTop_toBottomOf="@id/tvCategory" />
+                app:layout_constraintTop_toBottomOf="@id/tvCategory"
+                app:layout_constraintEnd_toEndOf="parent"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

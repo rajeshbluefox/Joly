@@ -34,7 +34,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/filterLt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_12"
                 android:layout_marginTop="@dimen/dp_8"
-                android:text="Select Category"
+                android:text="Filter Jobs"
                 android:textColor="@color/black_to_white"
                 android:textSize="@dimen/sp_14"
                 android:textStyle="bold"
@@ -56,14 +56,43 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Spinner
+                android:visibility="gone"
                 android:id="@+id/spSelectCategory"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="42dp"
-                android:layout_marginHorizontal="@dimen/dp_12"
-                android:layout_marginTop="6dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="@dimen/dp_6"
                 android:background="@drawable/bg_spinner"
                 app:layout_constraintStart_toStartOf="@+id/tvSelCategory"
-                app:layout_constraintTop_toBottomOf="@+id/tvSelCategory" />
+                app:layout_constraintTop_toBottomOf="@+id/tvSelCategory"
+                app:layout_constraintEnd_toStartOf="@id/btFilter"/>
+
+            <EditText
+                android:id="@+id/search_bar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dp_6"
+                android:layout_marginTop="@dimen/dp_4"
+                android:background="@drawable/search_background"
+                android:cursorVisible="false"
+                android:drawableStart="@drawable/ic_baseline_search_24"
+                android:drawablePadding="@dimen/dp_10"
+                android:hint="Search Job ..."
+                android:singleLine="true"
+                app:layout_constraintStart_toStartOf="@+id/tvSelCategory"
+                app:layout_constraintTop_toBottomOf="@+id/tvSelCategory"
+                app:layout_constraintEnd_toStartOf="@id/btFilter"/>
+
+
+            <ImageView
+                android:id="@+id/btFilter"
+                android:layout_width="@dimen/dp_26"
+                android:layout_height="@dimen/dp_26"
+                android:src="@drawable/filter"
+                android:layout_marginEnd="@dimen/dp_6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/search_bar"
+                app:layout_constraintBottom_toBottomOf="@id/search_bar"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,6 +134,33 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/anim_loading" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/emptyContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/empty"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Jobs Found"
+                android:textStyle="bold"
+                android:textColor="@color/black_to_white"
+                android:textSize="@dimen/sp_22"/>
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -36,9 +36,11 @@ class JpJobsAdapter(
         val jobItem = jobsList[position]
 
         holder.binding.tvJobTitle.text = jobItem.jobName
-        holder.binding.tvCompanyLocation.text = jobItem.jobLocation
-        holder.binding.tvDate.text=UtilFunctions.formatDate2(jobItem.postedDate!!)
-        holder.binding.tvDeadLineToApplyValue.text = UtilFunctions.formatDate2(jobItem.deadLineToApply!!)
+        holder.binding.tvCompanyLocation.text = "${jobItem.city}, ${jobItem.district}"
+        holder.binding.tvDate.text=jobItem.postedDate
+//            UtilFunctions.formatDate3(jobItem.postedDate!!)
+        holder.binding.tvDeadLineToApplyValue.text = jobItem.deadLineToApply
+//            UtilFunctions.formatDate2(jobItem.deadLineToApply!!)
 
         holder.binding.cardJobItem.setOnClickListener {
             onJobClicked.invoke(jobItem)

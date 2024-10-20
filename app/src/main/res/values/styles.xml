@@ -1,7 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="CurvedDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/dialog_background</item>
+    </style>
+
+
+    <!-- Base Text Style for common attributes -->
+    <style name="BaseTextStyle">
+        <item name="android:textColor">#333333</item> <!-- Default text color -->
+    </style>
+
+    <!-- Title Style large (Large and Bold) -->
+    <style name="TitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#000000</item> <!-- Black color for title -->
+    </style>
+
+    <style name="TitleMediumTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#000000</item> <!-- Black color for title -->
+    </style>
+
+    <!-- Subtitle Style (Medium and Italic) -->
+    <style name="SubtitleTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textColor">#666666</item> <!-- Dark gray for subtitle -->
+    </style>
+
+    <!-- Caption Style (Small) -->
+    <style name="CaptionTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">#888888</item> <!-- Lighter gray for captions -->
+    </style>
+
+    <!-- Body Text Style (Regular Text) -->
+    <style name="BodyTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <!-- Button Text Style (Bold and Centered) -->
+    <style name="ButtonTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item> <!-- White color for button text -->
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ButtonTextStyleMedium" parent="BaseTextStyle">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item> <!-- White color for button text -->
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ButtonTextStyleSmall" parent="BaseTextStyle">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#FFFFFF</item> <!-- White color for button text -->
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- Overline Style (Very Small and Uppercase) -->
+    <style name="OverlineTextStyle" parent="BaseTextStyle">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.1</item> <!-- Slight letter spacing -->
+        <item name="android:textColor">#BBBBBB</item> <!-- Light gray for overline -->
+    </style>
+
+    <style name="CustomRatingBar" parent="Widget.AppCompat.RatingBar">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:progressTint">@color/red</item>
+        <item name="android:stepSize">0.2</item>
+        <item name="android:numStars">5</item>
     </style>
 
 </resources>

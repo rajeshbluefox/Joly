@@ -120,6 +120,9 @@ dependencies {
 
     implementation("de.hdodenhof:circleimageview:3.1.0")
 
+    implementation("com.github.massoudss:waveformSeekBar:5.0.2")
+    implementation("com.github.lincollincol:amplituda:2.2.2") // or newer version
 
+    implementation("com.arthenica:mobile-ffmpeg-full:4.4")
 
 }

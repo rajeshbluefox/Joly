@@ -8,6 +8,8 @@ class SSRegistrationDetailsData(
     var name: String? = null,
     @field:SerializedName("PhoneNumber")
     var phoneNumber: String? = null,
+    @field:SerializedName("AlternativeNumber")
+    var alternativeNumber: String? = null,
     @field:SerializedName("AadharNumber")
     var aadharNumber: String? = null,
     @field:SerializedName("DateOfBirth")
@@ -42,11 +44,19 @@ class SSRegistrationDetailsData(
     var portfolioLink: String? = null,
     @SerializedName("Description")
     var description: String? = null,
+    @SerializedName("WorkingHours")
+    var workingHours: String? = null,
 
     @SerializedName("CompanyName")
     var companyName: String? = null,
     @SerializedName("CompanyLocation")
-    var companyLocation: String? = null
+    var companyLocation: String? = null,
+    @SerializedName("CompanyContact")
+    var companyContact: String? = null,
+    @SerializedName("CompanyMail")
+    var companyMail: String? = null,
+    @SerializedName("CompanyGSTNO")
+    var companyGSTNO: String? = null
 
 
 )

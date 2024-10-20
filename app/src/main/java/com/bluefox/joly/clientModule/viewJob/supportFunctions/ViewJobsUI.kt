@@ -91,4 +91,11 @@ class ViewJobsUI(
             }
     }
 
+    fun onClickListeners()
+    {
+        mBinding.btFilter.setOnClickListener {
+        }
+
+    }
+
 }

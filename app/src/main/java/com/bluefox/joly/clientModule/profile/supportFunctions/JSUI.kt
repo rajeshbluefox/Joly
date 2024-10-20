@@ -58,6 +58,7 @@ class JSUI(
             etCity.setText(profileData.city)
             etState.setText(profileData.state)
             etCountry.setText(profileData.country)
+            etPastExperience.setText(profileData.pastExperience)
             etQualification.setText(profileData.qualification)
             etSkills.setText(profileData.skills)
 
@@ -135,6 +136,7 @@ class JSUI(
             disableET(etCountry)
             disableET(etQualification)
             disableET(etSkills)
+            disableET(etPastExperience)
             rgGender.isEnabled = false
             rbMale.isEnabled = false
             rbFemale.isEnabled = false
@@ -153,6 +155,7 @@ class JSUI(
             enableET(etCountry)
             enableET(etQualification)
             enableET(etSkills)
+            enableET(etPastExperience)
             rgGender.isEnabled = true
             rbMale.isEnabled = true
             rbFemale.isEnabled = true

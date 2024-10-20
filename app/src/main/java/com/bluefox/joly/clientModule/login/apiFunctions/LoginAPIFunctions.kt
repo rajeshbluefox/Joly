@@ -62,9 +62,14 @@ class LoginAPIFunctions(
                     onRegisterResponse.invoke()
                     UtilFunctions.showToast(mContext, "Registration Sucessfull")
                 }
-
+                409 ->{
+                    UtilFunctions.showToast(mContext,"MobileNo Already Exists")
+                }
                 404 -> {
                     UtilFunctions.showToast(mContext,"User doesn't exists")
+                }
+                195 -> {
+                    UtilFunctions.showToast(mContext,"Something Went Wrong")
                 }
                 else ->{
                     UtilFunctions.showToast(mContext,"Wrong Password")

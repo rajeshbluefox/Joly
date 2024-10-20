@@ -52,8 +52,10 @@ class JPUI(
         binding.ltJobProvider.apply {
             tvMobileNumber.text = profileData.phoneNumber
             etName.setText(profileData.name)
-            etAadharNumber.setText(profileData.aadharNumber)
-            etDOB.setText(profileData.age)
+            ltAadharNumber.visibility=View.GONE
+//            etAadharNumber.setText(profileData.aadharNumber)
+            ltDOB.visibility=View.GONE
+//            etDOB.setText(profileData.age)
             etAddress.setText(profileData.address)
             etCity.setText(profileData.city)
             etState.setText(profileData.state)
@@ -62,14 +64,19 @@ class JPUI(
             etCompanyName.setText(profileData.companyName)
             etCompanyDescription.setText(profileData.companyDescription)
             etCompanyWebsite.setText(profileData.companyWebsiteLink)
+            etCompanyContact.setText(profileData.companyContactNumber)
+            etCompanyMail.setText(profileData.companyMail)
+            etCompanyGSTNO.setText(profileData.companyGSTNo)
 
-            val genderValue = SSProfileData.mLoginData.gender?.toInt()
-
-            when (genderValue) {
-                1 -> rbFemale.isChecked = true
-                2 -> rbMale.isChecked = true
-                0 -> rbOther.isChecked = true
-            }
+            tvGender.visibility=View.GONE
+            rgGender.visibility=View.GONE
+//            val genderValue = SSProfileData.mLoginData.gender?.toInt()
+//
+//            when (genderValue) {
+//                1 -> rbFemale.isChecked = true
+//                2 -> rbMale.isChecked = true
+//                0 -> rbOther.isChecked = true
+//            }
         }
     }
 
@@ -142,8 +149,8 @@ class JPUI(
     private fun disableAllEditTexts() {
         binding.ltJobProvider.apply {
             disableET(etName)
-            disableET(etAadharNumber)
-            disableET(etDOB)
+//            disableET(etAadharNumber)
+//            disableET(etDOB)
             disableET(etAddress)
             disableET(etCity)
             disableET(etState)
@@ -152,10 +159,14 @@ class JPUI(
             disableET(etCompanyName)
             disableET(etCompanyDescription)
             disableET(etCompanyWebsite)
-            rgGender.isEnabled = false
-            rbMale.isEnabled = false
-            rbFemale.isEnabled = false
-            rbOther.isEnabled = false
+            disableET(etCompanyContact)
+            disableET(etCompanyMail)
+            disableET(etCompanyGSTNO)
+
+//            rgGender.isEnabled = false
+//            rbMale.isEnabled = false
+//            rbFemale.isEnabled = false
+//            rbOther.isEnabled = false
             btSubmit.visibility = View.GONE
         }
     }
@@ -163,8 +174,8 @@ class JPUI(
     private fun enableAllEditTexts() {
         binding.ltJobProvider.apply {
             enableET(etName)
-            enableET(etAadharNumber)
-            enableET(etDOB)
+//            enableET(etAadharNumber)
+//            enableET(etDOB)
             enableET(etAddress)
             enableET(etCity)
             enableET(etState)
@@ -173,10 +184,13 @@ class JPUI(
             enableET(etCompanyName)
             enableET(etCompanyDescription)
             enableET(etCompanyWebsite)
-            rgGender.isEnabled = true
-            rbMale.isEnabled = true
-            rbFemale.isEnabled = true
-            rbOther.isEnabled = true
+            enableET(etCompanyContact)
+            enableET(etCompanyMail)
+            enableET(etCompanyGSTNO)
+//            rgGender.isEnabled = true
+//            rbMale.isEnabled = true
+//            rbFemale.isEnabled = true
+//            rbOther.isEnabled = true
             btSubmit.visibility = View.VISIBLE
         }
     }

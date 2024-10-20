@@ -55,6 +55,7 @@ class SPUI(
 
         binding.ltServiceProvider.apply {
             tvMobileNumber.text = profileData.phoneNumber
+
             etCompany.setText(profileData.companyName)
             etAadharNumber.setText(profileData.aadharNumber)
             etDOB.setText(profileData.age)
@@ -67,6 +68,12 @@ class SPUI(
             etPreviousExperience.setText(profileData.previousExperience)
             etPortfolioLink.setText(profileData.portfolioLink)
             etDescription.setText(profileData.description)
+            etWorkingHours.setText(profileData.workingHours)
+
+            if(profileData.alternativeNumber=="E")
+                etAlternativeNumber.setText("No Number")
+            else
+                etAlternativeNumber.setText(profileData.alternativeNumber)
 
             val genderValue = SSProfileData.mLoginData.gender?.toInt()
 
@@ -154,6 +161,7 @@ class SPUI(
     private fun disableAllEditTexts() {
         binding.ltServiceProvider.apply {
             disableET(etCompany)
+            disableET(etAlternativeNumber)
             disableET(etAadharNumber)
             disableET(etDOB)
             disableET(etCity)
@@ -165,6 +173,8 @@ class SPUI(
             disableET(etPreviousExperience)
             disableET(etPortfolioLink)
             disableET(etDescription)
+            disableET(etWorkingHours)
+
             rgGender.isEnabled = false
             rbMale.isEnabled = false
             rbFemale.isEnabled = false

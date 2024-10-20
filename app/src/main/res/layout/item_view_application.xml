@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:text="Name "
                 android:textColor="#06286B"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,10 +39,10 @@
                 android:layout_height="wrap_content"
                 android:text=": "
                 android:textColor="#06286B"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@id/tvName"
-                app:layout_constraintStart_toEndOf="@+id/tvQualification"
+                app:layout_constraintStart_toEndOf="@+id/tvPhoneNumber"
                 app:layout_constraintTop_toTopOf="@+id/tvName" />
 
             <TextView
@@ -52,10 +52,47 @@
                 android:layout_marginStart="4dp"
                 android:text="Rajesh"
                 android:textColor="#06286B"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_16"
                 app:layout_constraintBottom_toBottomOf="@id/col1"
                 app:layout_constraintStart_toEndOf="@+id/col1"
                 app:layout_constraintTop_toTopOf="@+id/col1" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="PhoneNumber "
+                android:textColor="#06286B"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/tvName"
+                app:layout_constraintTop_toBottomOf="@id/tvName" />
+
+            <TextView
+                android:id="@+id/col3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=": "
+                android:textColor="#06286B"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tvPhoneNumber"
+                app:layout_constraintStart_toEndOf="@+id/tvPhoneNumber"
+                app:layout_constraintTop_toTopOf="@+id/tvPhoneNumber" />
+
+            <TextView
+                android:id="@+id/tvPhoneNumberValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:text="912345678"
+                android:textColor="#06286B"
+                android:textSize="@dimen/sp_16"
+                app:layout_constraintBottom_toBottomOf="@+id/col3"
+                app:layout_constraintStart_toEndOf="@+id/col3"
+                app:layout_constraintTop_toTopOf="@+id/col3" />
+
 
             <TextView
                 android:id="@+id/tvQualification"
@@ -64,10 +101,10 @@
                 android:layout_marginTop="4dp"
                 android:text="Qualification "
                 android:textColor="#06286B"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/tvName"
-                app:layout_constraintTop_toBottomOf="@id/tvName" />
+                app:layout_constraintTop_toBottomOf="@id/tvPhoneNumber" />
 
             <TextView
                 android:id="@+id/col2"
@@ -75,23 +112,35 @@
                 android:layout_height="wrap_content"
                 android:text=": "
                 android:textColor="#06286B"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_16"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/tvQualification"
-                app:layout_constraintStart_toEndOf="@+id/tvQualification"
+                app:layout_constraintStart_toEndOf="@+id/tvPhoneNumber"
                 app:layout_constraintTop_toTopOf="@+id/tvQualification" />
 
             <TextView
                 android:id="@+id/tvQualificationValue"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:text="B.tech"
                 android:textColor="#06286B"
-                android:textSize="@dimen/sp_18"
+                android:textSize="@dimen/sp_16"
+                android:maxLines="1"
+                android:ellipsize="end"
                 app:layout_constraintBottom_toBottomOf="@+id/col2"
                 app:layout_constraintStart_toEndOf="@+id/col2"
-                app:layout_constraintTop_toTopOf="@+id/col2" />
+                app:layout_constraintTop_toTopOf="@+id/col2"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="@dimen/dp_64"
+                android:layout_height="@dimen/dp_64"
+                android:src="@drawable/job_applicant"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

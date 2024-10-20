@@ -49,12 +49,12 @@
             android:id="@+id/btMyTestimonials"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dp_12"
             android:layout_marginHorizontal="@dimen/dp_12"
+            android:layout_marginTop="@dimen/dp_12"
             app:cardCornerRadius="@dimen/dp_10"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/appBarLt"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/appBarLt">
 
 
             <LinearLayout
@@ -64,7 +64,8 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingHorizontal="@dimen/dp_12"
-                android:paddingVertical="@dimen/dp_6">
+                android:paddingVertical="@dimen/dp_6"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="@dimen/dp_64"
@@ -87,27 +88,141 @@
 
         </androidx.cardview.widget.CardView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/totalRatingCV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dp_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLt">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/totalRatingLt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/dp_6">
+
+                <TextView
+                    android:id="@+id/title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Rating"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:id="@+id/starLt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_3"
+                    android:visibility="visible"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/title2">
+
+                    <ImageView
+                        android:id="@+id/star1"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:src="@drawable/ic_star" />
+
+                    <ImageView
+                        android:id="@+id/star2"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:src="@drawable/ic_star" />
+
+                    <ImageView
+                        android:id="@+id/star3"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:src="@drawable/ic_star" />
+
+                    <ImageView
+                        android:id="@+id/star4"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:layout_marginEnd="@dimen/dp_4"
+                        android:src="@drawable/ic_star" />
+
+                    <ImageView
+                        android:id="@+id/star5"
+                        android:layout_width="@dimen/dp_36"
+                        android:layout_height="@dimen/dp_36"
+                        android:src="@drawable/ic_star" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/totalRatingCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="63 Ratings"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@id/starLt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/starLt" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_12"
-            android:text="Your Testimonials"
+            android:text="Your Ratings"
             android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/btMyTestimonials" />
+            app:layout_constraintTop_toBottomOf="@id/totalRatingCV" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvTestimonies"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp_12"
             android:layout_marginTop="@dimen/dp_6"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/title1" />
+
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/emptyContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:layout_constraintTop_toBottomOf="@id/title1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/empty"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No Ratings Found"
+                android:textStyle="bold"
+                android:textColor="@color/black_to_white"
+                android:textSize="@dimen/sp_22"/>
+
+        </LinearLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

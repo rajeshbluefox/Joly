@@ -26,5 +26,9 @@ data class PostJobData(
     var jobLocation: String? = "hyd",
     @SerializedName("PostedDate")
     var postedDate: String? = "5 Apr",
+    @SerializedName("District")
+    var district: String? = null,
+    @SerializedName("City")
+    var city: String? = null
 
 )

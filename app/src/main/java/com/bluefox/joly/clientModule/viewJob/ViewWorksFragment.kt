@@ -1,6 +1,7 @@
 package com.bluefox.joly.clientModule.viewJob
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,11 +19,14 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.ServicesCatJob
 import com.bluefox.joly.clientModule.viewJob.modalClass.JobsData
 import com.bluefox.joly.clientModule.viewJob.modalClass.SSSelected
+import com.bluefox.joly.clientModule.viewJob.supportFunctions.DialogFilter
 import com.bluefox.joly.clientModule.viewJob.supportFunctions.JobsAdapter
 import com.bluefox.joly.clientModule.viewJob.supportFunctions.ViewJobsUI
 import com.bluefox.joly.databinding.FragmentViewJobsBinding
 import com.bluefox.joly.zCommonFunctions.CallIntent
 import com.bluefox.joly.zSharedPreference.UserDetails
+import com.denzcoskun.imageslider.constants.ScaleTypes
+import com.denzcoskun.imageslider.models.SlideModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,6 +40,7 @@ class ViewWorksFragment : Fragment() {
 
     private lateinit var viewJobsUI: ViewJobsUI
 
+    private lateinit var dialogFilter: DialogFilter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,9 +64,19 @@ class ViewWorksFragment : Fragment() {
         initViews()
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        callApis()
+        onClickListeners()
+        loadSLideShowImages()
+    }
+
     private fun initViews() {
         ssViewModel = ViewModelProvider(this)[SSViewModel::class.java]
         viewJobsUI = ViewJobsUI(requireContext(), binding, ::getWorkByCategory)
+
+        dialogFilter = DialogFilter(layoutInflater, requireContext(), ::onFilterSelected)
 
         sSapiFunctions = SSapiFunctions(
             requireContext(),
@@ -74,7 +89,7 @@ class ViewWorksFragment : Fragment() {
             onServiceClosed = {}
         )
 
-        callApis()
+//        callApis()
     }
 
     private fun callApis() {
@@ -108,7 +123,7 @@ class ViewWorksFragment : Fragment() {
     private fun getSSWorks() {
         if (SSProfileData.UserRole == 1)
             sSapiFunctions.getSSWorks(UserDetails.getUserMobileNo(requireContext()))
-        else{
+        else {
             getWorkByCategory(ServicesCatJob.categoriesList[0])
         }
 
@@ -118,24 +133,59 @@ class ViewWorksFragment : Fragment() {
         sSapiFunctions.getSSWorks(categoryItem.categoryID.toString())
     }
 
+    private var allWorkList = ArrayList<PostWorkData>()
+
     private fun onGetWorksResponse(worksList: List<PostWorkData>) {
         viewJobsUI.hidePB()
+        allWorkList = worksList as ArrayList<PostWorkData>
 
-        if (worksList.isEmpty()) {
-            binding.emptyList.visibility = View.VISIBLE
-            binding.rvJobs.visibility = View.GONE
+        if (districtSelected.isNotEmpty()) {
+            onFilterSelected(citySelected, districtSelected)
         } else {
-            binding.emptyList.visibility = View.GONE
-            binding.rvJobs.visibility = View.VISIBLE
             initJobsRv(worksList)
         }
+
+//        if (worksList.isEmpty()) {
+//            binding.emptyContent.visibility=View.VISIBLE
+//            binding.rvJobs.visibility = View.GONE
+//        } else {
+//            binding.emptyContent.visibility=View.GONE
+//            binding.rvJobs.visibility = View.VISIBLE
+//            allWorkList = worksList as ArrayList<PostWorkData>
+//            initJobsRv(worksList)
+//        }
     }
 
+    private fun loadSLideShowImages() {
+        val imageListAdapter = ArrayList<SlideModel>() // Create image list
+
+//        val imagesList = SSSelected.workData.data!!
+//
+//        for (image in imagesList) {
+//            imageListAdapter.add(SlideModel(image!!.url))
+//        }
+
+        imageListAdapter.add(SlideModel("https://img.freepik.com/free-vector/abstract-sale-banner-offer-discount-business-background-free-vector_1340-22443.jpg"))
+        imageListAdapter.add(SlideModel("https://img.freepik.com/premium-vector/big-sale-banner-template_255749-91.jpg"))
+        imageListAdapter.add(SlideModel("https://img.freepik.com/premium-vector/limited-time-offer-sale-banner-sale-banner-promotion-template-design_535749-358.jpg"))
+
+
+        binding.imageSlider.setImageList(imageListAdapter)
+        binding.imageSlider.setImageList(imageListAdapter, ScaleTypes.FIT) // for all images
+
+    }
 
     private var jobsList = ArrayList<JobsData>()
 
     private fun initJobsRv(worksList: List<PostWorkData>) {
-//        fillDummyList()
+
+        if (worksList.isEmpty()) {
+            binding.emptyContent.visibility = View.VISIBLE
+            binding.rvJobs.visibility = View.GONE
+        } else {
+            binding.emptyContent.visibility = View.GONE
+            binding.rvJobs.visibility = View.VISIBLE
+        }
 
         val jobsAdapter = JobsAdapter(requireContext(), worksList, ::onJobClicked)
         binding.rvJobs.apply {
@@ -153,5 +203,50 @@ class ViewWorksFragment : Fragment() {
         CallIntent.gotoViewJobDetails(requireContext(), false, requireActivity())
     }
 
+    fun onClickListeners() {
+        binding.btFilter.setOnClickListener {
+            dialogFilter.showFilterDialog()
+        }
+    }
+
+    private var citySelected = ""
+    private var districtSelected = ""
+
+    private fun onFilterSelected(city: String, district: String) {
+        Log.e("Test", "SelectedDistrict : $district , SelectedCity : $city")
+
+        citySelected = city
+        districtSelected = district
+
+        if (district == "All Districts") {
+            binding.btFilter.setImageResource(R.drawable.filter)
+            initJobsRv(allWorkList)
+        } else {
+            binding.btFilter.setImageResource(R.drawable.filter_applied)
+            filterList(city, district)
+        }
+    }
+
+    private var filteredWorkList = ArrayList<PostWorkData>()
+
+    private fun filterList(city: String, district: String) {
+        filteredWorkList.clear()
+
+        if (city == "All Cities") {
+            for (workItem in allWorkList) {
+                if (workItem.district == district) {
+                    filteredWorkList.add(workItem)
+                }
+            }
+        } else {
+            for (work in allWorkList) {
+                if (work.city == city && work.district == district) {
+                    filteredWorkList.add(work)
+                }
+            }
+        }
+
+        initJobsRv(filteredWorkList)
+    }
 
 }

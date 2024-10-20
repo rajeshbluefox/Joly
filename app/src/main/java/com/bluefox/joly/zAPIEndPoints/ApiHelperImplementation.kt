@@ -4,8 +4,6 @@ import com.bluefox.joly.clientModule.login.modelClass.LoginData
 import com.bluefox.joly.clientModule.login.modelClass.LoginResponse
 import com.bluefox.joly.clientModule.login.modelClass.RegistrationResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSProfileData
-import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyData
-import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.clientModule.login.modelClass.SSRegistrationDetailsData
 import com.bluefox.joly.clientModule.postJob.modalClass.GetCategoriesResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.GetJobsResponse
@@ -13,6 +11,9 @@ import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkData
 import com.bluefox.joly.clientModule.postJob.modalClass.PostWorkResponse
 import com.bluefox.joly.clientModule.postJob.modalClass.SSSelectedData
 import com.bluefox.joly.clientModule.viewJob.modalClass.GetWorkResponse
+import com.bluefox.joly.clientModule.viewJob.modalClass.SSSelected
+import com.bluefox.joly.clientModule.viewServices.modelClass.CheckFBStatusResponse
+import com.bluefox.joly.clientModule.viewServices.modelClass.GetServiceProvidersResponse
 import com.bluefox.joly.dummy.GetThemesResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetApplicationResponse
 import com.bluefox.joly.jobModule.jobProviderModule.modalClass.GetPostedJobsResponse
@@ -22,6 +23,8 @@ import com.bluefox.joly.jobModule.jobProviderModule.modalClass.SelJobDetails
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceData
 import com.bluefox.joly.serviceProviderModule.modelClass.AddServiceResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.GetTestimoniesResponse
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyData
+import com.bluefox.joly.serviceProviderModule.modelClass.SPTestimonyResponse
 import com.bluefox.joly.serviceProviderModule.modelClass.SpOfferedServiceResponse
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
@@ -112,6 +115,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                     "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.skills.toString()
                 ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.previousExperience.toString()
+                ),
                 SSSelectedData.registerPhoto!!
             )
         }
@@ -179,6 +186,18 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                     "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.portfolioLink.toString()
                 ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.companyContact.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.companyMail.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.companyGSTNO.toString()
+                ),
                 SSSelectedData.registerPhoto!!
 
             )
@@ -190,6 +209,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
                     sSRegistrationDetailsData.phoneNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    sSRegistrationDetailsData.alternativeNumber.toString()
                 ),
                 RequestBody.create(
                     "text/plain".toMediaTypeOrNull(),
@@ -231,6 +254,10 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
                 sSRegistrationDetailsData.phoneNumber.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.alternativeNumber.toString()
             ),
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
@@ -286,14 +313,26 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
             ),
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
+                sSRegistrationDetailsData.workingHours.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
                 sSRegistrationDetailsData.portfolioLink.toString()
             ),
             SSSelectedData.registerPhoto!!
         )
     }
 
-    override suspend fun ssCloseWork(workId: String): SPTestimonyResponse {
-        return apiService.ssCloseWork(workId)
+    override suspend fun ssCloseWork(workId: String,closingFeedback: Int): SPTestimonyResponse {
+        return apiService.ssCloseWork(workId,closingFeedback)
+    }
+
+    override suspend fun ssCheckFBStatus(spId: Int, fpId: Int): CheckFBStatusResponse {
+        return apiService.checkFBStatus(spId, fpId,SSSelected.workData.workId!!.toInt())
+    }
+
+    override suspend fun getServiceProviders(categoryId: Int): GetServiceProvidersResponse {
+        return apiService.getServiceProviders(categoryId)
     }
 
     override suspend fun getSPTestimonies(mobileNo: String): GetTestimoniesResponse {
@@ -305,7 +344,11 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
             spTestimonyData.customerName!!,
             spTestimonyData.phoneNumber!!,
             spTestimonyData.testimony!!,
-            spTestimonyData.status!!
+            spTestimonyData.status!!,
+            spTestimonyData.serviceProviderId,
+            spTestimonyData.rating,
+            spTestimonyData.feedbackProviderId,
+            SSSelected.workData.workId!!.toInt()
         )
     }
 
@@ -318,12 +361,56 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
     }
 
     override suspend fun postWorkData(postWorkData: PostWorkData): PostWorkResponse {
-        return apiService.postSSWork(
+        if (postWorkData.isAudioAttached)
+            return apiService.postSSWork(
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.phoneNumber.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.workName.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.workDescription.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.categoryId.toString()
+                ),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.jobId.toString()),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.areaId.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.district.toString()
+                ),
+                RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.city.toString()),
+
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.wageOffered.toString()
+                ),
+                RequestBody.create(
+                    "text/plain".toMediaTypeOrNull(),
+                    postWorkData.deadlineTime.toString()
+                ),
+                SSSelectedData.auido!!,
+                SSSelectedData.parts
+            )
+
+        return apiService.postSSWorkNoAudio(
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
                 postWorkData.phoneNumber.toString()
             ),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.workName.toString()),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                postWorkData.workName.toString()
+            ),
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
                 postWorkData.workDescription.toString()
@@ -333,10 +420,23 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
                 postWorkData.categoryId.toString()
             ),
             RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.jobId.toString()),
-            RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.areaId.toString()),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                postWorkData.areaId.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                postWorkData.district.toString()
+            ),
+            RequestBody.create("text/plain".toMediaTypeOrNull(), postWorkData.city.toString()),
+
             RequestBody.create(
                 "text/plain".toMediaTypeOrNull(),
                 postWorkData.wageOffered.toString()
+            ),
+            RequestBody.create(
+                "text/plain".toMediaTypeOrNull(),
+                postWorkData.deadlineTime.toString()
             ),
             SSSelectedData.parts
         )
@@ -373,7 +473,9 @@ class ApiHelperImplementation @Inject constructor(private val apiService: ApiInt
             postJobData.jobDescription!!,
             postJobData.eligibility!!,
             postJobData.deadLineToApply!!,
-            postJobData.skills!!
+            postJobData.skills!!,
+            postJobData.city!!,
+            postJobData.district!!
         )
     }
 
